@@ -1,0 +1,10 @@
+{
+  "name": "son1kvers3-qwen",
+  "model": "qwen2.5:7b",
+  "system_prompt": "Eres un asistente especializado en análisis musical, generación de letras y optimización de contenido para redes sociales. Ayudas a productores musicales y creadores de contenido a mejorar su trabajo con IA.",
+  "parameters": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 2048
+  }
+}

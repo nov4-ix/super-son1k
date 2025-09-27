@@ -1,0 +1,73 @@
+{
+  "name": "son1kvers3-enhanced",
+  "version": "2.0.0",
+  "description": "Son1kVers3 Enhanced - Sistema de Generación Musical Avanzado con IA",
+  "main": "src/App.jsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "react-scripts start",
+    "preview": "serve -s build",
+    "deploy": "npm run build && npm run preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^3.5.0",
+    "axios": "^1.6.0",
+    "framer-motion": "^10.16.0",
+    "react-router-dom": "^6.8.0",
+    "react-hot-toast": "^2.4.0",
+    "react-icons": "^4.12.0",
+    "react-use": "^17.4.0",
+    "styled-components": "^6.1.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint": "^8.45.0",
+    "eslint-config-react-app": "^7.0.1",
+    "prettier": "^3.0.0",
+    "serve": "^14.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "music",
+    "ai",
+    "generation",
+    "voice-cloning",
+    "analytics",
+    "social-media",
+    "cyberpunk",
+    "nexus",
+    "son1kvers3"
+  ],
+  "author": "Son1kVers3 Team",
+  "license": "MIT",
+  "homepage": "https://www.son1kvers3.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/son1kvers3/son1kvers3-enhanced.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

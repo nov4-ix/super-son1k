@@ -1,0 +1,509 @@
+/* 🎛️ DAW Editor Styles - Estilos para Editor de Música Profesional */
+
+.daw-editor {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header con controles principales */
+.daw-header {
+  background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-bottom: 2px solid #00ff00;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 255, 0, 0.3);
+}
+
+.daw-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.play-button, .stop-button, .record-button {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.play-button:hover, .stop-button:hover, .record-button:hover {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  box-shadow: 0 6px 12px rgba(0, 255, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.play-button.playing {
+  background: linear-gradient(145deg, #00ff00, #00cc00);
+  color: #000;
+  animation: pulse 1s infinite;
+}
+
+.record-button.recording {
+  background: linear-gradient(145deg, #ff0000, #cc0000);
+  color: #fff;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.daw-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bpm-control input {
+  background: #1a1a1a;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: 5px 10px;
+  border-radius: 4px;
+  width: 60px;
+  text-align: center;
+}
+
+.time-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00ff00;
+  background: #1a1a1a;
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: 1px solid #00ff00;
+  min-width: 80px;
+  text-align: center;
+}
+
+.daw-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn, .export-btn {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover, .export-btn:hover {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+/* Área de pistas */
+.tracks-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tracks-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.track {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.track:hover {
+  border-color: #00ff00;
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2);
+}
+
+.track.selected {
+  border-color: #00ff00;
+  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+  box-shadow: 0 6px 12px rgba(0, 255, 0, 0.3);
+}
+
+.track-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.track-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.mute-btn, .solo-btn {
+  background: #333;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.mute-btn:hover, .solo-btn:hover {
+  background: #444;
+  border-color: #00ff00;
+}
+
+.mute-btn.muted {
+  background: #ff4444;
+  border-color: #ff0000;
+  color: #fff;
+}
+
+.solo-btn.solo {
+  background: #44ff44;
+  border-color: #00ff00;
+  color: #000;
+}
+
+.track-name input {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #00ff00;
+  padding: 5px 10px;
+  border-radius: 4px;
+  min-width: 120px;
+}
+
+.track-volume, .track-pan {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.track-volume input, .track-pan input {
+  flex: 1;
+  height: 20px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.track-volume input::-webkit-slider-thumb,
+.track-pan input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.track-volume span, .track-pan span {
+  font-size: 12px;
+  color: #ccc;
+  min-width: 35px;
+  text-align: center;
+}
+
+.delete-track-btn {
+  background: #ff4444;
+  border: 1px solid #ff0000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.delete-track-btn:hover {
+  background: #ff6666;
+  box-shadow: 0 2px 4px rgba(255, 0, 0, 0.3);
+}
+
+.track-clips {
+  position: relative;
+  height: 40px;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.clip {
+  position: absolute;
+  top: 2px;
+  height: 36px;
+  background: linear-gradient(145deg, #00ff00, #00cc00);
+  border: 1px solid #00aa00;
+  border-radius: 4px;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.clip:hover {
+  background: linear-gradient(145deg, #00ff44, #00ff00);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+.clip-name {
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Timeline */
+.timeline {
+  height: 60px;
+  background: #1a1a1a;
+  border-top: 2px solid #00ff00;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-ruler {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.timeline-marker {
+  flex: 1;
+  border-left: 1px solid #333;
+  position: relative;
+  height: 100%;
+}
+
+.timeline-marker span {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 10px;
+  color: #ccc;
+}
+
+.playhead {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #ff0000;
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.8);
+}
+
+/* Panel de efectos */
+.effects-panel {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  border-top: 2px solid #00ff00;
+  padding: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.effects-panel h3 {
+  margin: 0 0 15px 0;
+  color: #00ff00;
+  font-size: 16px;
+}
+
+.effect-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.effect-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.effect-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.effect-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #00ff00;
+}
+
+.effect-group input[type="range"] {
+  width: 100%;
+  height: 20px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.effect-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.master-volume {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: #0a0a0a;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.master-volume label {
+  color: #00ff00;
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.master-volume input {
+  flex: 1;
+  height: 20px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.master-volume input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones de acción */
+.daw-actions-bottom {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  border-top: 2px solid #00ff00;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.add-track-btn, .export-btn, .save-btn {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.add-track-btn:hover, .export-btn:hover, .save-btn:hover {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  box-shadow: 0 6px 12px rgba(0, 255, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar personalizado */
+.tracks-list::-webkit-scrollbar,
+.effects-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tracks-list::-webkit-scrollbar-track,
+.effects-panel::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.tracks-list::-webkit-scrollbar-thumb,
+.effects-panel::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+.tracks-list::-webkit-scrollbar-thumb:hover,
+.effects-panel::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .daw-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .daw-controls, .daw-info, .daw-actions {
+    justify-content: center;
+  }
+  
+  .track-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .effect-controls {
+    grid-template-columns: 1fr;
+  }
+  
+  .daw-actions-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+}

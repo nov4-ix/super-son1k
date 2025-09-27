@@ -1,0 +1,79 @@
+/**
+ * 🎵 Son1kVers3 Enhanced - Estilos Globales
+ * Estilos base para la aplicación
+ */
+
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000000;
+  color: #00ff00;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ffff;
+}
+
+/* Selección de texto */
+::selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+::-moz-selection {
+  background: #00ff00;
+  color: #000000;
+}
+
+/* Efectos de partículas de fondo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: background-pulse 10s infinite alternate;
+}
+
+@keyframes background-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
