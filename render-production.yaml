@@ -1,0 +1,65 @@
+services:
+  - type: web
+    name: son1kvers3-backend
+    env: python
+    buildCommand: pip install -r backend/requirements-simple.txt
+    startCommand: cd backend && python3 main.py
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.12
+      - key: JWT_SECRET_KEY
+        value: son1kvers3_enhanced_production_secret_key_2024
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 60
+      - key: DATABASE_URL
+        value: sqlite:///./son1kvers3.db
+      - key: OLLAMA_BASE_URL
+        value: http://localhost:11434
+      - key: OLLAMA_MODEL
+        value: qwen2.5:7b
+      - key: SOVITS_MODEL_PATH
+        value: ./models/sovits/
+      - key: BARK_MODEL_PATH
+        value: ./models/bark/
+      - key: VOICE_CLONING_ENABLED
+        value: true
+      - key: NOVA_POST_ENABLED
+        value: true
+      - key: SOCIAL_MEDIA_ANALYSIS
+        value: true
+      - key: GHOST_STUDIO_ENABLED
+        value: true
+      - key: AUDIO_ANALYSIS_ENABLED
+        value: true
+      - key: ANALYTICS_ENABLED
+        value: true
+      - key: METRICS_COLLECTION
+        value: true
+      - key: DAW_EDITOR_ENABLED
+        value: true
+      - key: AUDIO_EXPORT_ENABLED
+        value: true
+      - key: CORS_ORIGINS
+        value: https://son1kvers3.com,https://www.son1kvers3.com,https://son1kvers3-enhanced.vercel.app
+      - key: ALLOWED_HOSTS
+        value: son1kvers3.com,www.son1kvers3.com,son1kvers3-enhanced.vercel.app
+      - key: UPLOAD_DIR
+        value: ./uploads/
+      - key: OUTPUT_DIR
+        value: ./output/
+      - key: LOGS_DIR
+        value: ./logs/
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 8000
+      - key: DEBUG
+        value: false
+      - key: HEALTH_CHECK_ENABLED
+        value: true
+      - key: METRICS_ENABLED
+        value: true

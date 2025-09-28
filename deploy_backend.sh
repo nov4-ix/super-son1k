@@ -28,3 +28,7 @@ echo "JWT_SECRET_KEY=tu_secreto_aqui"
 echo "DATABASE_URL=sqlite:///./son1kvers3.db"
 echo ""
 echo "✅ Backend listo para deploy!"
+
+
+
+

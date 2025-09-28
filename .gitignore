@@ -145,3 +145,8 @@ downloads/
 # Build outputs
 build/
 dist/
+
+
+.vercel
+
+

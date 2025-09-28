@@ -136,3 +136,7 @@ echo "  vercel domains add son1kvers3.com - Configurar dominio"
 echo ""
 
 show_success "¡Deploy a producción completado exitosamente! 🚀"
+
+
+
+

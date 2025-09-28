@@ -1,0 +1,32 @@
+# Registros DNS para Son1kVers3 Enhanced v2.0 (SIN CONFLICTOS)
+# Configurar en IONOS DNS Manager
+
+# Frontend Enhanced (Vercel)
+Tipo: CNAME
+Nombre: enhanced
+Valor: cname.vercel-dns.com
+TTL: 300
+
+# Frontend V2 (Vercel)
+Tipo: CNAME
+Nombre: v2
+Valor: cname.vercel-dns.com
+TTL: 300
+
+# Backend API (Railway/Heroku/Render) - CAMBIADO PARA EVITAR CONFLICTO
+Tipo: CNAME
+Nombre: backend-api
+Valor: [URL_DEL_BACKEND_DESPLEGADO]
+TTL: 300
+
+# Backend Alternativo
+Tipo: CNAME
+Nombre: server
+Valor: [URL_DEL_BACKEND_DESPLEGADO]
+TTL: 300
+
+# Backend Alternativo 2
+Tipo: CNAME
+Nombre: app
+Valor: [URL_DEL_BACKEND_DESPLEGADO]
+TTL: 300

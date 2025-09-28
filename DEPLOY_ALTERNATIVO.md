@@ -210,3 +210,7 @@ ollama serve
 ---
 
 **¡Sistema listo para deploy! 🚀**
+
+
+
+

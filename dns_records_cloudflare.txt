@@ -1,0 +1,30 @@
+# Registros DNS para Son1kVers3 Enhanced v2.0
+# Configurar en Cloudflare DNS
+
+# Frontend Enhanced (Vercel)
+Tipo: CNAME
+Nombre: enhanced
+Contenido: cname.vercel-dns.com
+Proxy: Desactivado
+TTL: Auto
+
+# Frontend V2 (Vercel)
+Tipo: CNAME
+Nombre: v2
+Contenido: cname.vercel-dns.com
+Proxy: Desactivado
+TTL: Auto
+
+# Backend API (Railway/Heroku/Render)
+Tipo: CNAME
+Nombre: api
+Contenido: [URL_DEL_BACKEND_DESPLEGADO]
+Proxy: Desactivado
+TTL: Auto
+
+# Backend Alternativo
+Tipo: CNAME
+Nombre: backend
+Contenido: [URL_DEL_BACKEND_DESPLEGADO]
+Proxy: Desactivado
+TTL: Auto
