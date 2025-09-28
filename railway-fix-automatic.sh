@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# 🚀 Corrección Automática del Backend en Railway
+echo "🚀 Iniciando corrección automática del backend en Railway..."
+
+# Configurar variables de entorno críticas
+echo "⚙️ Configurando variables de entorno críticas..."
+
+# Crear archivo de configuración para Railway
+cat > railway-config-fix.json << 'EOF'
 {
   "build": {
     "builder": "nixpacks",
@@ -31,3 +41,33 @@
     "RAILWAY_ENVIRONMENT": "production"
   }
 }
+EOF
+
+# Crear ZIP con configuración corregida
+echo "📦 Creando ZIP con configuración corregida..."
+zip -r son1kvers3-backend-railway-CORRECTED.zip backend/ railway-config-fix.json
+
+# Copiar a Downloads
+cp son1kvers3-backend-railway-CORRECTED.zip ~/Downloads/
+
+echo "✅ Archivos de corrección creados:"
+echo "  📦 son1kvers3-backend-railway-CORRECTED.zip - Backend corregido"
+echo "  ⚙️ railway-config-fix.json - Configuración optimizada"
+echo ""
+echo "🔧 VARIABLES CRÍTICAS PARA RAILWAY:"
+echo "  HOST=0.0.0.0"
+echo "  PORT=8000"
+echo "  PYTHONPATH=/app/backend"
+echo "  PYTHON_VERSION=3.12"
+echo ""
+echo "🚀 COMANDO DE INICIO CORREGIDO:"
+echo "  cd backend && python3 -m uvicorn main:app --host 0.0.0.0 --port \$PORT"
+echo ""
+echo "📋 INSTRUCCIONES:"
+echo "1. Ve a https://railway.app"
+echo "2. Encuentra el proyecto 'ir'"
+echo "3. Sube son1kvers3-backend-railway-CORRECTED.zip"
+echo "4. Configura las variables de entorno"
+echo "5. Deploy"
+echo ""
+echo "✅ ¡Backend listo para corrección!"
