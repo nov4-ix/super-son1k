@@ -40,6 +40,13 @@ app.add_middleware(
 # Incluir routers
 app.include_router(community_router)
 
+# Importar e incluir nuevos sistemas
+from waves_integration import waves_router
+from store_system import store_router
+
+app.include_router(waves_router)
+app.include_router(store_router)
+
 # Importar el procesador del CODEX
 from codex_processor import init_codex_processor
 
