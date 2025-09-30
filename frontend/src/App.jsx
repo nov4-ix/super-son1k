@@ -1,11 +1,16 @@
 /**
  * 🎵 Son1kVers3 Enhanced - Aplicación Principal
- * Integración completa de todas las funcionalidades avanzadas
+ * Router principal para los diferentes modos de la aplicación
  */
 
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import './mobile-optimization.css';
+
+// Importar los diferentes modos
+import LandingPage from './LandingPage';
+import ClassicApp from './ClassicApp';
+import NexusApp from './NexusApp';
 
 // Importar servicios
 import WebAudioGenerator from './services/WebAudioGenerator';
@@ -39,6 +44,7 @@ import ProfessionalDAW from './components/ProfessionalDAW';
 import AlbumArtGenerator from './components/AlbumArtGenerator';
 
 function App() {
+  const [currentMode, setCurrentMode] = useState('landing'); // 'landing', 'classic', 'nexus'
   const [currentView, setCurrentView] = useState('nexus');
   const [services, setServices] = useState({});
   const [isInitialized, setIsInitialized] = useState(false);
@@ -54,6 +60,18 @@ function App() {
     analytics: false,
     stealth: false
   });
+
+  // Detectar el modo basado en la URL
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/classic') {
+      setCurrentMode('classic');
+    } else if (path === '/nexus') {
+      setCurrentMode('nexus');
+    } else {
+      setCurrentMode('landing');
+    }
+  }, []);
 
   useEffect(() => {
     initializeServices();
@@ -156,7 +174,20 @@ function App() {
     }
   };
 
-  const renderCurrentView = () => {
+  const renderCurrentMode = () => {
+    switch (currentMode) {
+      case 'landing':
+        return <LandingPage />;
+      case 'classic':
+        return <ClassicApp />;
+      case 'nexus':
+        return renderNexusMode();
+      default:
+        return <LandingPage />;
+    }
+  };
+
+  const renderNexusMode = () => {
     switch (currentView) {
       case 'nexus':
         return <NexusInterface />;
@@ -202,7 +233,8 @@ function App() {
     }
   };
 
-  if (!isInitialized) {
+  // Solo mostrar loading para modo nexus (que necesita inicialización completa)
+  if (currentMode === 'nexus' && !isInitialized) {
     return (
       <div className="app-loading">
         <div className="loading-container">
@@ -214,6 +246,12 @@ function App() {
     );
   }
 
+  // Para landing y classic, renderizar directamente
+  if (currentMode === 'landing' || currentMode === 'classic') {
+    return renderCurrentMode();
+  }
+
+  // Modo Nexus con interfaz completa
   return (
     <div className="app">
       {/* Header con navegación */}
@@ -315,7 +353,7 @@ function App() {
 
       {/* Contenido principal */}
       <main className="app-main">
-        {renderCurrentView()}
+        {renderNexusMode()}
         
         {/* Mensaje de resistencia en todas las vistas */}
         <ResistanceMessage />
