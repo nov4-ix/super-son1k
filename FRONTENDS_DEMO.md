@@ -19,25 +19,31 @@
 2. **PC**: Presionar ↑↑↓↓←→←→BA (código Konami) + Click en logo → Efecto Matrix → Redirección a `/nexus`
 3. **Móvil**: Tocar el logo 5 veces rápidamente → Efecto Matrix → Redirección a `/nexus`
 
-### 🎵 **2. Frontend Clásico (/classic)**
+### 🎵 **2. Frontend Clásico MEJORADO (/classic)**
 **URL**: `/classic`
 
-**Características**:
-- ✅ Interfaz simple y directa
-- ✅ Solo herramientas esenciales:
-  - Generador de Música
-  - Clonador de Voz  
-  - Analytics
-- ✅ Diseño minimalista
-- ✅ Enfoque en funcionalidad
-- ✅ Botón para cambiar a modo Nexus
-- ✅ Sin lore complejo
+**Características MEJORADAS**:
+- ✅ **Interfaz vintage cyberpunk** con diseño analógico
+- ✅ **Controles de expresión** con knobs realistas
+- ✅ **Visualizador de audio** en tiempo real
+- ✅ **Sistema de navegación** por secciones:
+  - 🏠 **Historia** - Página de bienvenida
+  - 🎵 **Generación** - Ghost Studio
+  - 📁 **Archivo** - Gestión de tracks
+  - 🏛️ **Santuario** - Espacio de reflexión
+- ✅ **Panel vintage** con tornillos y efectos de desgaste
+- ✅ **Botones de consola** con colores temáticos
+- ✅ **Sidebar con información del sistema**
+- ✅ **Reproducción y descarga** de tracks
+- ✅ **Efectos visuales** y animaciones vintage
 
-**Componentes**:
-- `ClassicHeader` - Header simple
-- `ClassicMusicGenerator` - Generador básico
-- `ClassicVoiceCloner` - Clonador básico
-- `ClassicAnalytics` - Analytics simple
+**Componentes MEJORADOS**:
+- `EnhancedClassicApp` - Aplicación principal renovada
+- `VintagePanel` - Paneles con efectos vintage
+- `KnobControls` - Controles analógicos
+- `AudioVisualizer` - Visualizador de audio
+- `ConsoleButtons` - Botones estilo consola
+- `TrackManager` - Gestión de tracks
 
 ### 🎮 **3. Frontend Inmersivo/Nexus (/nexus)**
 **URL**: `/nexus`
@@ -96,30 +102,28 @@ Herramientas Musicales con IA
 💡 Tip: Los usuarios avanzados pueden encontrar un modo especial...
 ```
 
-### **Frontend Clásico**
+### **Frontend Clásico MEJORADO**
 ```
-🎵 Son1kVers3 Classic                    [Usuario] [Salir]
+🎵 SON1KVERS3 - LA RESISTENCIA          [Usuario] [Salir]
 
 ┌─────────────────────────────────────────────────────────┐
-│ Herramientas                                            │
-│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐        │
-│ │🎵 Generador │ │🎤 Clonador  │ │📊 Analytics │        │
-│ │de Música    │ │de Voz       │ │             │        │
-│ └─────────────┘ └─────────────┘ └─────────────┘        │
+│ [🏠 Historia] [🎵 Generación] [📁 Archivo] [🏛️ Santuario] │
+├─────────────────────────────────────────────────────────┤
 │                                                         │
-│ ¿Quieres la experiencia completa?                       │
-│ [🎮 Modo Nexus]                                         │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│ 🎵 Generador de Música                                  │
+│  EXPRESSION CONTROLS                                    │
+│  ┌─────────┬─────────┬─────────┐                       │
+│  │  ◐ 75%  │  ◐ 60%  │  ◐ 80%  │                       │
+│  │EXPRESSION│ RAREZA  │ GARAGE  │                       │
+│  └─────────┴─────────┴─────────┘                       │
 │                                                         │
-│ Describe tu música:                                     │
-│ [Una canción alegre de rock...]                        │
+│  🎵 GHOST STUDIO                                        │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ [GENERAR MÚSICA] [REPRODUCIR] [DESCARGAR]      │   │
+│  └─────────────────────────────────────────────────┘   │
 │                                                         │
-│ Duración: [30 segundos ▼] Tempo: [120] Estilo: [Rock▼] │
+│  📊 Sistema: ● NOV4-IX ● Resistencia AI ● Storage     │
+│  🎧 Visualizador: ▁▃▅▇█▅▃▁                             │
 │                                                         │
-│ [🎵 Generar Música]                                     │
 └─────────────────────────────────────────────────────────┘
 ```
 
