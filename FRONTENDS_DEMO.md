@@ -14,11 +14,10 @@
 - ✅ Demo de música generada
 - ✅ Información de características principales
 
-**Easter Egg**:
-1. Presionar: ↑↑↓↓←→←→BA (código Konami)
-2. Hacer click en el logo
-3. Se activa el efecto Matrix
-4. Redirección automática a `/nexus`
+**Easter Eggs** (3 métodos):
+1. **PC**: Presionar `Ctrl+Alt+H` → Efecto Matrix → Redirección a `/nexus`
+2. **PC**: Presionar ↑↑↓↓←→←→BA (código Konami) + Click en logo → Efecto Matrix → Redirección a `/nexus`
+3. **Móvil**: Tocar el logo 5 veces rápidamente → Efecto Matrix → Redirección a `/nexus`
 
 ### 🎵 **2. Frontend Clásico (/classic)**
 **URL**: `/classic`
@@ -70,9 +69,12 @@
 
 ### **Usuario Avanzado**
 1. Visita `www.son1kvers3.com` → **Landing Page**
-2. Descubre el easter egg → **Efecto Matrix**
-3. Es transportado a → **Frontend Inmersivo/Nexus**
-4. Experimenta el universo completo de Son1kVers3
+2. Usa cualquiera de los easter eggs:
+   - **PC**: `Ctrl+Alt+H` o código Konami + click
+   - **Móvil**: 5 toques rápidos en el logo
+3. Se activa → **Efecto Matrix**
+4. Es transportado a → **Frontend Inmersivo/Nexus**
+5. Experimenta el universo completo de Son1kVers3
 
 ## 🎨 **DISEÑO VISUAL**
 
@@ -163,8 +165,10 @@ Herramientas Musicales con IA
 - ✅ Transición de 3 segundos
 - ✅ Redirección automática
 
-### **Easter Egg Konami**
-- ✅ Detección de secuencia: ↑↑↓↓←→←→BA
+### **Easter Eggs (3 métodos)**
+- ✅ **PC**: Atajo `Ctrl+Alt+H` directo
+- ✅ **PC**: Detección de secuencia Konami: ↑↑↓↓←→←→BA + click
+- ✅ **Móvil**: Contador de toques (5 toques en 1 segundo)
 - ✅ Indicador de progreso visual
 - ✅ Activación del logo con glow verde
 - ✅ Mensajes guiados para el usuario

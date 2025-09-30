@@ -10,6 +10,8 @@ const LandingPage = () => {
   const [easterEggProgress, setEasterEggProgress] = useState(0);
   const [showMatrixTransition, setShowMatrixTransition] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [logoClickCount, setLogoClickCount] = useState(0);
+  const [lastClickTime, setLastClickTime] = useState(0);
 
   // Secuencia de easter egg: Konami Code + click en logo
   const konamiCode = [
@@ -21,6 +23,21 @@ const LandingPage = () => {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
+      // Verificar atajo Ctrl+Alt+H
+      if (event.ctrlKey && event.altKey && event.code === 'KeyH') {
+        event.preventDefault();
+        setEasterEggProgress(100);
+        setTimeout(() => {
+          setShowMatrixTransition(true);
+          setIsTransitioning(true);
+          setTimeout(() => {
+            window.location.href = '/nexus';
+          }, 3000);
+        }, 500);
+        return;
+      }
+
+      // Código Konami
       setCurrentSequence(prev => {
         const newSequence = [...prev, event.code];
         
@@ -47,6 +64,32 @@ const LandingPage = () => {
   }, []);
 
   const handleLogoClick = () => {
+    const currentTime = Date.now();
+    
+    // Para móviles: múltiples toques rápidos (5 toques en 3 segundos)
+    if (currentTime - lastClickTime < 1000) {
+      setLogoClickCount(prev => {
+        const newCount = prev + 1;
+        if (newCount >= 5) {
+          setEasterEggProgress(100);
+          setTimeout(() => {
+            setShowMatrixTransition(true);
+            setIsTransitioning(true);
+            setTimeout(() => {
+              window.location.href = '/nexus';
+            }, 3000);
+          }, 500);
+          return 0;
+        }
+        return newCount;
+      });
+    } else {
+      setLogoClickCount(1);
+    }
+    
+    setLastClickTime(currentTime);
+    
+    // Para PC: click después del código Konami
     if (easterEggProgress === 50) {
       setEasterEggProgress(100);
       setTimeout(() => {
@@ -114,6 +157,13 @@ const LandingPage = () => {
                   {easterEggProgress === 50 && "¡Código Konami detectado! Ahora haz clic en el logo..."}
                   {easterEggProgress === 100 && "¡Easter egg activado! Entrando al Nexus..."}
                 </p>
+              </div>
+            )}
+            
+            {/* Click counter para móviles */}
+            {logoClickCount > 0 && logoClickCount < 5 && (
+              <div className="click-counter">
+                <p>Toques: {logoClickCount}/5</p>
               </div>
             )}
           </div>
@@ -202,6 +252,11 @@ const LandingPage = () => {
           <div className="easter-egg-hint">
             <p>
               💡 <em>Tip: Los usuarios avanzados pueden encontrar un modo especial...</em>
+            </p>
+            <p className="easter-egg-methods">
+              <small>
+                💻 PC: Ctrl+Alt+H | 🎮 Konami Code + Click | 📱 Móvil: 5 toques en logo
+              </small>
             </p>
           </div>
         </footer>
