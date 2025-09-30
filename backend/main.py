@@ -12,6 +12,13 @@ import os
 import logging
 from datetime import datetime
 
+# Ejecutar startup script
+try:
+    from startup import main as startup_main
+    startup_main()
+except Exception as e:
+    print(f"Warning: Startup script failed: {e}")
+
 # Importar endpoints de comunidad
 from community_endpoints import router as community_router
 
@@ -150,13 +157,21 @@ async def detailed_health_check():
             health_status["status"] = "degraded"
     
     # Verificar memoria y recursos
-    import psutil
-    memory = psutil.virtual_memory()
-    health_status["performance"] = {
-        "memory_usage_percent": memory.percent,
-        "memory_available_gb": round(memory.available / (1024**3), 2),
-        "cpu_count": psutil.cpu_count()
-    }
+    try:
+        import psutil
+        memory = psutil.virtual_memory()
+        health_status["performance"] = {
+            "memory_usage_percent": memory.percent,
+            "memory_available_gb": round(memory.available / (1024**3), 2),
+            "cpu_count": psutil.cpu_count()
+        }
+    except ImportError:
+        health_status["performance"] = {
+            "memory_usage_percent": "unavailable",
+            "memory_available_gb": "unavailable",
+            "cpu_count": "unavailable",
+            "note": "psutil not available"
+        }
     
     return health_status
 

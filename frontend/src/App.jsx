@@ -197,8 +197,6 @@ function App() {
         return <CommunityHub />;
       case 'admin':
         return <AdminDashboard onClose={() => setCurrentView('nexus')} isAuthenticated={user?.role === 'admin'} />;
-      case 'nexus':
-        return <NexusInterface />;
       default:
         return <NexusInterface />;
     }

@@ -54,8 +54,10 @@ class ShareRequest(BaseModel):
 
 # Base de datos
 def get_db_connection():
-    # Usar directorio temporal en Vercel
-    db_path = os.getenv("DATABASE_PATH", "community.db")
+    # Usar directorio temporal en Vercel o directorio local
+    db_path = os.getenv("DATABASE_PATH", "./community.db")
+    # Asegurar que el directorio existe
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
