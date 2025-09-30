@@ -5,11 +5,15 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import './NexusInterface.css';
+import NexusLocations from './NexusLocations';
+import CyberpunkTerminal from './CyberpunkTerminal';
 
 const NexusInterface = () => {
     const [isActive, setIsActive] = useState(false);
     const [currentMode, setCurrentMode] = useState('music');
     const [matrixEffect, setMatrixEffect] = useState(true);
+    const [currentLocation, setCurrentLocation] = useState('resistance_street');
+    const [showTerminal, setShowTerminal] = useState(false);
     const [cyberpunkMode, setCyberpunkMode] = useState(true);
     const [easterEggs, setEasterEggs] = useState([]);
     const [immersiveLevel, setImmersiveLevel] = useState(1);
@@ -365,6 +369,14 @@ const NexusInterface = () => {
                         >
                             🚀
                         </button>
+                        
+                        <button
+                            className="nexus-control-btn"
+                            onClick={() => setShowTerminal(true)}
+                            title="Open Terminal"
+                        >
+                            💻
+                        </button>
                     </div>
                 </header>
                 
@@ -383,6 +395,18 @@ const NexusInterface = () => {
                 
                 {/* Contenido principal */}
                 <main className="nexus-main-content">
+                    {/* Nexus Locations */}
+                    <NexusLocations 
+                        currentLocation={currentLocation}
+                        onLocationChange={setCurrentLocation}
+                    />
+
+                    {/* Cyberpunk Terminal */}
+                    <CyberpunkTerminal 
+                        isVisible={showTerminal}
+                        onClose={() => setShowTerminal(false)}
+                    />
+
                     {currentMode === 'music' && (
                         <div className="nexus-music-interface">
                             <h2>🎵 Music Generation Nexus</h2>

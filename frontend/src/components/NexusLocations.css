@@ -1,0 +1,644 @@
+/* 🗺️ Nexus Locations Styles */
+
+.nexus-locations-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
+}
+
+/* Location Selector */
+.location-selector {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.location-btn {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.location-btn:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.location-btn.active {
+  background: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+/* Location Viewer */
+.location-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nexus-location {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.nexus-location.active {
+  opacity: 1;
+}
+
+.location-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Resistance Street */
+.resistance_street .location-background {
+  background: 
+    linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #000000 100%),
+    radial-gradient(circle at 30% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+}
+
+.orator-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.orator-avatar {
+  width: 200px;
+  height: 300px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  animation: orator-pulse 3s ease-in-out infinite;
+}
+
+@keyframes orator-pulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.6); }
+}
+
+.cyber-tattoos {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  height: 40px;
+  background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
+  border-radius: 20px;
+  animation: tattoo-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes tattoo-glow {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.megaphone {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: #00ffff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  animation: megaphone-pulse 1s ease-in-out infinite;
+}
+
+@keyframes megaphone-pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+.neon-signs {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 5;
+}
+
+.xentrix-sign, .resistance-sign {
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #ff0040;
+  color: #ff0040;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+  animation: neon-flicker 2s ease-in-out infinite;
+}
+
+.resistance-sign {
+  border-color: #00ff00;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Sanctuary */
+.sanctuary .location-background {
+  background: 
+    linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0a0a0a 100%),
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 0, 0.1) 0%, transparent 50%);
+}
+
+.ghost-piano {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  z-index: 10;
+}
+
+.piano-body {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.piano-keys {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
+  height: 60px;
+  background: linear-gradient(90deg, #ffffff, #000000, #ffffff);
+  border-radius: 5px 5px 0 0;
+  animation: keys-glow 2s ease-in-out infinite;
+}
+
+@keyframes keys-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
+}
+
+.neon-lights {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  right: 20px;
+  height: 20px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+  border-radius: 10px;
+  animation: neon-flow 3s linear infinite;
+}
+
+@keyframes neon-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Ghost Studio */
+.ghost_studio .location-background {
+  background: 
+    linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%),
+    radial-gradient(circle at 70% 30%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
+}
+
+.mixing-consoles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 300px;
+  z-index: 10;
+}
+
+.console-panel {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #00ff00;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.faders {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 100px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.faders::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00ff00, #ff00ff, #ffff00, #00ff00);
+  animation: fader-glow 2s ease-in-out infinite;
+}
+
+@keyframes fader-glow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.screens {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  height: 60px;
+  background: #000000;
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  animation: screen-flicker 1s ease-in-out infinite;
+}
+
+@keyframes screen-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Holograms */
+.holograms-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.hologram {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--hologram-color, #00ffff);
+  border-radius: 10px;
+  cursor: pointer;
+  pointer-events: all;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: hologram-float 3s ease-in-out infinite;
+}
+
+@keyframes hologram-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hologram:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 30px var(--hologram-color, #00ffff);
+  transform: scale(1.05);
+}
+
+.hologram.active {
+  background: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 50px var(--hologram-color, #00ffff);
+  transform: scale(1.1);
+}
+
+.hologram-content {
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hologram-content h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--hologram-color, #00ffff);
+  text-shadow: 0 0 10px var(--hologram-color, #00ffff);
+}
+
+.hologram-content p {
+  font-size: 11px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.hologram-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hologram-color, #00ffff), transparent);
+  animation: scan-move 2s linear infinite;
+}
+
+@keyframes scan-move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(150px); }
+}
+
+.glitch-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 0, 255, 0.1) 2px,
+      rgba(255, 0, 255, 0.1) 4px
+    );
+  animation: glitch 0.5s ease-in-out infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Hologram Animations */
+.hologram.speaking {
+  animation: hologram-float 3s ease-in-out infinite, hologram-pulse 1s ease-in-out infinite;
+}
+
+@keyframes hologram-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.hologram.floating {
+  animation: hologram-float 4s ease-in-out infinite;
+}
+
+.hologram.orbiting {
+  animation: hologram-orbit 6s linear infinite;
+}
+
+@keyframes hologram-orbit {
+  0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+.hologram.pulsing {
+  animation: hologram-pulse 2s ease-in-out infinite;
+}
+
+/* Ambient Effects */
+.rain-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(180deg, transparent, #00ffff, transparent);
+  animation: rain-fall 1s linear infinite;
+}
+
+@keyframes rain-fall {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+.matrix-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.matrix-code {
+  position: absolute;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  animation: matrix-fall 3s linear infinite;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.data-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00ffff;
+  border-radius: 50%;
+  animation: particle-float 5s ease-in-out infinite;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+}
+
+/* Hologram Panel */
+.hologram-panel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  animation: panel-slide-in 0.3s ease-out;
+}
+
+@keyframes panel-slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.hologram-info h3 {
+  color: #00ffff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.hologram-info p {
+  color: #ffffff;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.hologram-info button {
+  background: rgba(0, 255, 255, 0.2);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hologram-info button:hover {
+  background: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Effects Controls */
+.effects-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.effects-controls button {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #ff00ff;
+  color: #ff00ff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.effects-controls button:hover {
+  background: rgba(255, 0, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.effects-controls button.active {
+  background: rgba(255, 0, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .location-selector {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    justify-content: center;
+  }
+  
+  .location-btn {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  
+  .hologram {
+    width: 150px;
+    height: 120px;
+  }
+  
+  .hologram-content h3 {
+    font-size: 12px;
+  }
+  
+  .hologram-content p {
+    font-size: 10px;
+  }
+  
+  .hologram-panel {
+    width: 250px;
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .effects-controls {
+    bottom: 10px;
+    left: 10px;
+  }
+}
