@@ -16,6 +16,9 @@ import AnalyticsService from './services/AnalyticsService';
 // Importar componentes
 import NexusInterface from './components/NexusInterface';
 import DAWEditor from './components/DAWEditor';
+import FloatingPlayer from './components/FloatingPlayer';
+import CommunityHub from './components/CommunityHub';
+import ResistanceMessage from './components/ResistanceMessage';
 
 function App() {
   const [currentView, setCurrentView] = useState('nexus');
@@ -115,6 +118,8 @@ function App() {
         return <SocialInterface services={services} />;
       case 'ghost':
         return <GhostInterface services={services} />;
+      case 'community':
+        return <CommunityHub />;
       case 'nexus':
         return <NexusInterface />;
       default:
@@ -154,7 +159,8 @@ function App() {
             { id: 'voice', label: 'Voice', icon: '🎤' },
             { id: 'analytics', label: 'Analytics', icon: '📊' },
             { id: 'social', label: 'Social', icon: '🚀' },
-            { id: 'ghost', label: 'Ghost', icon: '👻' }
+            { id: 'ghost', label: 'Ghost', icon: '👻' },
+            { id: 'community', label: 'Santuario', icon: '⚔️' }
           ].map(item => (
             <button
               key={item.id}
@@ -182,7 +188,13 @@ function App() {
       {/* Contenido principal */}
       <main className="app-main">
         {renderCurrentView()}
+        
+        {/* Mensaje de resistencia en todas las vistas */}
+        <ResistanceMessage />
       </main>
+
+      {/* Reproductor flotante global */}
+      <FloatingPlayer />
 
       {/* Footer con información del sistema */}
       <footer className="app-footer">

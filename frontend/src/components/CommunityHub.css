@@ -1,0 +1,360 @@
+/**
+ * 👥 Community Hub CSS - Estilos del Centro de Colaboraciones
+ */
+
+.community-hub {
+  padding: 20px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+}
+
+.hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #00ff00;
+}
+
+.hub-header h2 {
+  color: #00ff00;
+  font-size: 28px;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.user-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-item {
+  text-align: center;
+  background: rgba(0, 255, 0, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #00ff00;
+}
+
+.stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #00ffff;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.hub-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.top-tracks-section h3,
+.collaborations-section h3 {
+  color: #00ff00;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.track-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.track-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+  border-color: #00ffff;
+}
+
+.track-cover {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 15px;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.default-cover {
+  font-size: 48px;
+  color: #00ff00;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ff00;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.track-cover:hover .play-overlay {
+  opacity: 1;
+}
+
+.track-info {
+  margin-bottom: 15px;
+}
+
+.track-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  color: #00ffff;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+}
+
+.track-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.genre {
+  color: #ffff00;
+  background: rgba(255, 255, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.duration {
+  color: #ffffff;
+}
+
+.track-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.stat {
+  flex: 1;
+}
+
+.like-btn, .comment-btn, .share-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.like-btn:hover, .comment-btn:hover, .share-btn:hover {
+  background: #00ff00;
+  color: #000000;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.like-btn.liked {
+  background: #ff0000;
+  border-color: #ff0000;
+  color: #ffffff;
+}
+
+.like-btn.liked:hover {
+  background: #ff6666;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.collaborations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.collaboration-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.collaboration-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+}
+
+.collab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.collab-header h4 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 16px;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status.en-progreso {
+  background: rgba(255, 255, 0, 0.2);
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+.status.completado {
+  background: rgba(0, 255, 0, 0.2);
+  color: #00ff00;
+  border: 1px solid #00ff00;
+}
+
+.collab-participants {
+  color: #00ffff;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.participant {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.collab-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #333333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff00, #00ffff);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: right;
+}
+
+.collab-deadline {
+  color: #ffff00;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hub-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .tracks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hub-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .user-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tracks-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .track-stats {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.track-card:hover {
+  animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.6); }
+}
+
+.collaboration-card:hover {
+  animation: glow 2s infinite;
+}

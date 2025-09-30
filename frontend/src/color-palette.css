@@ -1,0 +1,133 @@
+/* SNK Integrations - Paleta de Colores Cyberpunk */
+/* Sistema de diseño unificado basado en el tema de son1kvers3.com */
+
+:root {
+  /* Colores Primarios - Verde Neón (Consistente con son1kvers3.com) */
+  --primary-50: #f0fff0;
+  --primary-100: #dcffdc;
+  --primary-200: #b8ffb8;
+  --primary-300: #85ff85;
+  --primary-400: #52ff52;
+  --primary-500: #00ff00;  /* Color principal - Verde neón */
+  --primary-600: #00e600;
+  --primary-700: #00cc00;
+  --primary-800: #00b300;
+  --primary-900: #009900;
+
+  /* Colores Secundarios - Cian Neón (Consistente con son1kvers3.com) */
+  --secondary-50: #f0ffff;
+  --secondary-100: #dcffff;
+  --secondary-200: #b8ffff;
+  --secondary-300: #85ffff;
+  --secondary-400: #52ffff;
+  --secondary-500: #00ffff;  /* Cian neón */
+  --secondary-600: #00e6e6;
+  --secondary-700: #00cccc;
+  --secondary-800: #00b3b3;
+  --secondary-900: #009999;
+
+  /* Colores de Estado - Consistente con frontend clásico son1kvers3.com */
+  --success-500: #00ff00;  /* Verde neón para éxito */
+  --success-600: #00e600;
+  --warning-500: #ffff00;  /* Amarillo neón para advertencia */
+  --warning-600: #e6e600;
+  --danger-500: #ff0000;   /* Rojo neón para error */
+  --danger-600: #e60000;
+  --info-500: #0080ff;     /* Azul para info */
+  --info-600: #0066cc;
+  --accent-500: #ff00ff;   /* Magenta neón para acento */
+  --accent-600: #e600e6;
+  --highlight-500: #ffff00; /* Amarillo para destacar */
+  --highlight-600: #e6e600;
+
+  /* Gradientes Cyberpunk - Consistente con son1kvers3.com */
+  --gradient-primary: linear-gradient(45deg, var(--primary-500), var(--secondary-500));
+  --gradient-secondary: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-600) 100%);
+  --gradient-success: linear-gradient(145deg, var(--success-500), var(--success-600));
+  --gradient-warning: linear-gradient(145deg, var(--warning-500), var(--warning-600));
+  --gradient-danger: linear-gradient(145deg, var(--danger-500), var(--danger-600));
+  --gradient-info: linear-gradient(145deg, var(--info-500), var(--info-600));
+  --gradient-accent: linear-gradient(145deg, var(--accent-500), var(--accent-600));
+  --gradient-highlight: linear-gradient(145deg, var(--highlight-500), var(--highlight-600));
+
+  /* Fondos - Consistente con son1kvers3.com */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #1a1a1a;
+  --bg-card: rgba(0, 255, 0, 0.05);
+  --bg-card-hover: rgba(0, 255, 0, 0.08);
+  --bg-glass: rgba(0, 255, 0, 0.08);
+  --bg-glass-hover: rgba(0, 255, 0, 0.12);
+
+  /* Texto */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.65);
+  --text-accent: var(--primary-500);
+  --text-success: var(--success-500);
+  --text-warning: var(--warning-500);
+  --text-danger: var(--danger-500);
+  --text-info: var(--info-500);
+
+  /* Bordes - Consistente con son1kvers3.com */
+  --border-primary: rgba(0, 255, 0, 0.2);
+  --border-secondary: rgba(0, 255, 0, 0.3);
+  --border-accent: rgba(0, 255, 0, 0.5);
+  --border-cyan: rgba(0, 255, 255, 0.3);
+  --border-magenta: rgba(255, 0, 255, 0.3);
+
+  /* Sombras - Consistente con son1kvers3.com */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px rgba(0, 255, 0, 0.6);
+  --shadow-glow-cyan: 0 0 15px rgba(0, 255, 255, 0.6);
+  --shadow-glow-magenta: 0 0 25px rgba(255, 0, 255, 0.6);
+}
+
+/* Clases de utilidad para colores */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--text-accent); }
+.text-success { color: var(--text-success); }
+.text-warning { color: var(--text-warning); }
+.text-danger { color: var(--text-danger); }
+.text-info { color: var(--text-info); }
+
+.bg-primary { background-color: var(--primary-500); }
+.bg-secondary { background-color: var(--secondary-500); }
+.bg-success { background-color: var(--success-500); }
+.bg-warning { background-color: var(--warning-500); }
+.bg-danger { background-color: var(--danger-500); }
+.bg-info { background-color: var(--info-500); }
+
+.bg-gradient-primary { background: var(--gradient-primary); }
+.bg-gradient-secondary { background: var(--gradient-secondary); }
+.bg-gradient-success { background: var(--gradient-success); }
+.bg-gradient-warning { background: var(--gradient-warning); }
+.bg-gradient-danger { background: var(--gradient-danger); }
+.bg-gradient-info { background: var(--gradient-info); }
+
+.border-primary { border-color: var(--border-primary); }
+.border-secondary { border-color: var(--border-secondary); }
+.border-accent { border-color: var(--border-accent); }
+
+/* Efectos de hover consistentes */
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+

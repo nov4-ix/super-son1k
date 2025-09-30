@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SNK Integrations — Mobile</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="SNK Integrations - Sistema de integraciones avanzadas para Son1kVers3. Optimizado para móviles.">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SNK Integrations">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+  
+  <!-- Fuentes optimizadas para móvil -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Paleta de colores homogénea -->
+  <link rel="stylesheet" href="color-palette.css">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* Estilos optimizados para móvil */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    input, textarea {
+      -webkit-user-select: text;
+      -khtml-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0b0b0d 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .mobile-container {
+      max-width: 100vw;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .mobile-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .mobile-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+      touch-action: manipulation;
+    }
+    
+    .mobile-button:active {
+      transform: scale(0.98);
+      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    }
+    
+    .mobile-input {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .mobile-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .mobile-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .mobile-subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    
+    .status-online { background-color: #10b981; }
+    .status-offline { background-color: #ef4444; }
+    .status-loading { background-color: #f59e0b; animation: pulse 2s infinite; }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .mobile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .mobile-feature {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .mobile-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .mobile-feature-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+    
+    .mobile-feature-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 11, 13, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-around;
+      z-index: 50;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-item.active {
+      color: #667eea;
+    }
+    
+    .nav-icon {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .content-area {
+      padding-bottom: 5rem; /* Espacio para bottom nav */
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+    <!-- Header -->
+    <div class="mobile-card" style="margin-top: 1rem;">
+      <h1 class="mobile-title">🎵 SNK Integrations</h1>
+      <p class="mobile-subtitle">Sistema de integraciones avanzadas para Son1kVers3</p>
+      
+      <!-- Status Indicators -->
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center;">
+          <span class="status-indicator status-online"></span>
+          <span style="color: white; font-size: 0.875rem;">Sistema Online</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span class="status-indicator status-online"></span>
+          <span style="color: white; font-size: 0.875rem;">IA Activa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="mobile-card">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">🚀 Integraciones</h2>
+      <div class="mobile-grid">
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">🎛️</div>
+          <div class="mobile-feature-title">Waves</div>
+          <div class="mobile-feature-desc">Control de plugins</div>
+        </div>
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">🛒</div>
+          <div class="mobile-feature-title">Tienda</div>
+          <div class="mobile-feature-desc">Pricing por tiers</div>
+        </div>
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">👥</div>
+          <div class="mobile-feature-title">Usuarios</div>
+          <div class="mobile-feature-desc">Colaboraciones</div>
+        </div>
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">🎵</div>
+          <div class="mobile-feature-title">Música</div>
+          <div class="mobile-feature-desc">Web Audio API</div>
+        </div>
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">🤖</div>
+          <div class="mobile-feature-title">IA Local</div>
+          <div class="mobile-feature-desc">Ollama + Qwen</div>
+        </div>
+        <div class="mobile-feature">
+          <div class="mobile-feature-icon">🎤</div>
+          <div class="mobile-feature-title">Voz</div>
+          <div class="mobile-feature-desc">Clonación</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mobile-card">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">⚡ Acciones Rápidas</h2>
+      
+      <button class="mobile-button" onclick="generateMusic()">
+        🎵 Generar Música
+      </button>
+      
+      <button class="mobile-button" onclick="cloneVoice()">
+        🎤 Clonar Voz
+      </button>
+      
+      <button class="mobile-button" onclick="analyzeSocial()">
+        📊 Analizar Redes
+      </button>
+      
+      <button class="mobile-button" onclick="openWaves()">
+        🎛️ Control Waves
+      </button>
+    </div>
+
+    <!-- Music Generation -->
+    <div class="mobile-card" id="musicSection" style="display: none;">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">🎵 Generación Musical</h2>
+      
+      <input type="text" class="mobile-input" id="musicPrompt" placeholder="Describe la música que quieres generar...">
+      
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+        <button class="mobile-button" style="flex: 1;" onclick="startGeneration()">
+          ▶️ Generar
+        </button>
+        <button class="mobile-button" style="flex: 1; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);" onclick="stopGeneration()">
+          ⏹️ Parar
+        </button>
+      </div>
+      
+      <div id="musicStatus" style="color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; text-align: center;"></div>
+    </div>
+
+    <!-- Voice Cloning -->
+    <div class="mobile-card" id="voiceSection" style="display: none;">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">🎤 Clonación de Voz</h2>
+      
+      <input type="text" class="mobile-input" id="voiceText" placeholder="Texto para clonar...">
+      
+      <select class="mobile-input" id="voiceModel">
+        <option value="free">🆓 Free Tier (Hugging Face)</option>
+        <option value="pro">⭐ Pro Tier (ElevenLabs)</option>
+        <option value="enterprise">💎 Enterprise (Custom)</option>
+      </select>
+      
+      <button class="mobile-button" onclick="startVoiceCloning()">
+        🎤 Clonar Voz
+      </button>
+      
+      <div id="voiceStatus" style="color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; text-align: center;"></div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="mobile-card" id="analyticsSection" style="display: none;">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">📊 Analytics</h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">24</div>
+          <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">Generaciones</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #3b82f6;">12</div>
+          <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">Clonaciones</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">8</div>
+          <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">Análisis</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #8b5cf6;">156</div>
+          <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">Minutos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="mobile-card" id="settingsSection" style="display: none;">
+      <h2 style="color: white; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">⚙️ Configuración</h2>
+      
+      <div style="margin-bottom: 1rem;">
+        <label style="color: white; font-size: 0.875rem; margin-bottom: 0.5rem; display: block;">Servidor IA</label>
+        <input type="text" class="mobile-input" value="http://localhost:11434" placeholder="URL del servidor Ollama">
+      </div>
+      
+      <div style="margin-bottom: 1rem;">
+        <label style="color: white; font-size: 0.875rem; margin-bottom: 0.5rem; display: block;">Modelo IA</label>
+        <select class="mobile-input">
+          <option value="qwen2.5:7b">Qwen 2.5:7b (Recomendado)</option>
+          <option value="llama3.1:8b">Llama 3.1:8b</option>
+          <option value="mistral:7b">Mistral:7b</option>
+        </select>
+      </div>
+      
+      <button class="mobile-button" onclick="saveSettings()">
+        💾 Guardar Configuración
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="#" class="nav-item active" onclick="showSection('home')">
+      <div class="nav-icon">🏠</div>
+      <div>Inicio</div>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('music')">
+      <div class="nav-icon">🎵</div>
+      <div>Música</div>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('voice')">
+      <div class="nav-icon">🎤</div>
+      <div>Voz</div>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('analytics')">
+      <div class="nav-icon">📊</div>
+      <div>Stats</div>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('settings')">
+      <div class="nav-icon">⚙️</div>
+      <div>Config</div>
+    </a>
+  </div>
+
+  <script>
+    // Mobile-specific JavaScript
+    let currentSection = 'home';
+    let isGenerating = false;
+
+    function showSection(section) {
+      // Hide all sections
+      const sections = ['musicSection', 'voiceSection', 'analyticsSection', 'settingsSection'];
+      sections.forEach(s => {
+        const el = document.getElementById(s);
+        if (el) el.style.display = 'none';
+      });
+
+      // Show selected section
+      if (section !== 'home') {
+        const el = document.getElementById(section + 'Section');
+        if (el) el.style.display = 'block';
+      }
+
+      // Update nav
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      event.target.closest('.nav-item').classList.add('active');
+
+      currentSection = section;
+    }
+
+    function generateMusic() {
+      showSection('music');
+    }
+
+    function cloneVoice() {
+      showSection('voice');
+    }
+
+    function analyzeSocial() {
+      showSection('analytics');
+    }
+
+    function openWaves() {
+      alert('🎛️ Waves Integration - Funcionalidad en desarrollo');
+    }
+
+    function startGeneration() {
+      const prompt = document.getElementById('musicPrompt').value;
+      if (!prompt) {
+        alert('Por favor, describe la música que quieres generar');
+        return;
+      }
+
+      isGenerating = true;
+      document.getElementById('musicStatus').innerHTML = '🔄 Generando música... <span class="status-indicator status-loading"></span>';
+      
+      // Simulate generation
+      setTimeout(() => {
+        document.getElementById('musicStatus').innerHTML = '✅ Música generada exitosamente! <span class="status-indicator status-online"></span>';
+        isGenerating = false;
+      }, 3000);
+    }
+
+    function stopGeneration() {
+      isGenerating = false;
+      document.getElementById('musicStatus').innerHTML = '⏹️ Generación detenida';
+    }
+
+    function startVoiceCloning() {
+      const text = document.getElementById('voiceText').value;
+      const model = document.getElementById('voiceModel').value;
+      
+      if (!text) {
+        alert('Por favor, ingresa el texto para clonar');
+        return;
+      }
+
+      document.getElementById('voiceStatus').innerHTML = '🔄 Clonando voz... <span class="status-indicator status-loading"></span>';
+      
+      // Simulate cloning
+      setTimeout(() => {
+        document.getElementById('voiceStatus').innerHTML = '✅ Voz clonada exitosamente! <span class="status-indicator status-online"></span>';
+      }, 2000);
+    }
+
+    function saveSettings() {
+      alert('⚙️ Configuración guardada exitosamente!');
+    }
+
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🎵 SNK Integrations Mobile - Inicializado');
+    });
+  </script>
+  <script>
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('✅ SW registrado:', registration);
+          })
+          .catch((error) => {
+            console.log('❌ Error SW:', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,4584 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Son1kVers3 — La Resistencia Musical Digital</title>
+  
+  <!-- SEO / Share / PWA -->
+  <meta name="description" content="Son1kVers3 es la plataforma revolucionaria de generación musical con IA. Convierte texto en música épica, accede al Ghost Studio y explora el Archivo de la Resistencia. Tecnología avanzada, interfaz inmersiva y generación ilimitada de música.">
+  <meta property="og:title" content="Son1kVers3 — La Resistencia Musical Digital">
+  <meta property="og:description" content="Plataforma de generación musical con IA. Convierte texto en música, accede al Ghost Studio y explora el Archivo de la Resistencia. Tecnología avanzada y generación ilimitada.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.son1kvers3.com">
+  <meta property="og:image" content="https://www.son1kvers3.com/static/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Son1kVers3 — La Resistencia Musical Digital">
+  <meta name="twitter:description" content="Plataforma de generación musical con IA. Convierte texto en música épica con tecnología avanzada.">
+  <meta name="keywords" content="generación musical, IA, música, Son1kVers3, Ghost Studio, Archivo, resistencia, tecnología, creatividad, composición">
+  <meta name="author" content="NOV4-IX">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b0b0d">
+  
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fuentes adicionales para interfaz inmersiva -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- 🎯 SOLUCIÓN GARANTIZADA: Transparencia Total -->
+  <script>
+/**
+ * 🎯 SOLUCIÓN GARANTIZADA: Transparencia Total del Frontend
+ * Este script se ejecuta inmediatamente y asegura transparencia completa
+ */
+(function() {
+    'use strict';
+    
+    console.log('🎯 INICIANDO SOLUCIÓN DE TRANSPARENCIA GARANTIZADA');
+    
+    // 1. INTERCEPTAR Y CORREGIR TODAS LAS RESPUESTAS
+    const originalFetch = window.fetch;
+    window.fetch = async function(url, options) {
+        console.log('🔍 Interceptando fetch:', url);
+        
+        // Hacer la request original
+        const response = await originalFetch(url, options);
+        
+        // Si es request de música, interceptar y corregir la respuesta
+        if (url.includes('/api/music/') || url.includes('generate')) {
+            console.log('🎵 Interceptando respuesta de música');
+            
+            const originalJson = response.json;
+            response.json = async function() {
+                const data = await originalJson.call(this);
+                console.log('📥 Respuesta original:', data);
+                
+                // CORREGIR RESPUESTA PARA SER TRANSPARENTE
+                const correctedData = makeResponseTransparent(data);
+                console.log('✅ Respuesta corregida:', correctedData);
+                
+                return correctedData;
+            };
+        }
+        
+        return response;
+    };
+    
+    // 2. FUNCIÓN PARA HACER RESPUESTA TRANSPARENTE
+    function makeResponseTransparent(data) {
+        if (!data) return data;
+        
+        // Crear copia para no modificar original
+        const transparent = JSON.parse(JSON.stringify(data));
+        
+        // CORREGIR JOB ID
+        if (transparent.job_id) {
+            transparent.job_id = transparent.job_id.replace(/suno/gi, 'son1k');
+            console.log('🔧 Job ID corregido:', transparent.job_id);
+        }
+        
+        // CORREGIR TRACKS
+        if (transparent.tracks && Array.isArray(transparent.tracks)) {
+            transparent.tracks = transparent.tracks.map((track, index) => {
+                const correctedTrack = { ...track };
+                
+                // Generar nombre dinámico basado en lyrics
+                if (track.lyrics_preview || data.lyrics) {
+                    const lyrics = track.lyrics_preview || data.lyrics || '';
+                    correctedTrack.title = generateDynamicName(lyrics, index);
+                    correctedTrack.filename = `${correctedTrack.title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`;
+                }
+                
+                // Asegurar provider transparente
+                correctedTrack.provider = 'Son1k';
+                
+                // Corregir cualquier referencia a suno
+                if (correctedTrack.job_id) {
+                    correctedTrack.job_id = correctedTrack.job_id.replace(/suno/gi, 'son1k');
+                }
+                
+                console.log(`✨ Track ${index + 1} corregido:`, correctedTrack.title);
+                return correctedTrack;
+            });
+        }
+        
+        // LIMPIAR CUALQUIER REFERENCIA A SUNO EN TODO EL OBJETO
+        cleanSunoReferences(transparent);
+        
+        return transparent;
+    }
+    
+    // 3. GENERAR NOMBRE DINÁMICO DESDE LYRICS
+    function generateDynamicName(lyrics, index = 0) {
+        if (!lyrics || !lyrics.trim()) {
+            return `Instrumental_${Date.now()}`;
+        }
+        
+        // Tomar primera línea significativa
+        const lines = lyrics.split('\n');
+        let firstLine = '';
+        
+        for (const line of lines) {
+            const cleaned = line.trim();
+            if (cleaned.length > 3 && !cleaned.match(/^[^\w]*$/) && !cleaned.toLowerCase().includes('suno')) {
+                firstLine = cleaned;
+                break;
+            }
+        }
+        
+        if (!firstLine) {
+            // Usar primeras palabras (excluyendo 'suno')
+            const words = lyrics.trim().split(/\s+/)
+                .filter(word => !word.toLowerCase().includes('suno'))
+                .slice(0, 4);
+            firstLine = words.join(' ') || 'Sin Título';
+        }
+        
+        // Limpiar y capitalizar
+        let cleanName = firstLine
+            .replace(/[<>:"/\\|?*]/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+        
+        // Capitalizar cada palabra
+        cleanName = cleanName.split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+        
+        // Limitar longitud
+        if (cleanName.length > 50) {
+            cleanName = cleanName.substring(0, 47) + '...';
+        }
+        
+        // Agregar variación si hay múltiples tracks
+        if (index > 0) {
+            cleanName += ` - Parte ${index + 1}`;
+        }
+        
+        // Limpieza final: eliminar cualquier referencia a suno
+        cleanName = cleanName.replace(/suno/gi, 'Son1k');
+        
+        return cleanName || `Composición_${Date.now()}`;
+    }
+    
+    // 4. LIMPIAR REFERENCIAS A SUNO EN TODO EL OBJETO
+    function cleanSunoReferences(obj) {
+        if (typeof obj === 'object' && obj !== null) {
+            for (const [key, value] of Object.entries(obj)) {
+                if (typeof value === 'string') {
+                    obj[key] = value.replace(/suno/gi, 'son1k');
+                } else if (typeof value === 'object') {
+                    cleanSunoReferences(value);
+                }
+            }
+        }
+    }
+    
+    // 5. VERIFICAR QUE TODO FUNCIONA
+    function verifyTransparency() {
+        console.log('🧪 Verificando transparencia...');
+        
+        const testData = {
+            job_id: 'suno_job_12345',
+            tracks: [{
+                title: 'suno_track_1',
+                job_id: 'suno_job_12345',
+                provider: 'Suno',
+                lyrics_preview: 'Walking down the street tonight'
+            }]
+        };
+        
+        const corrected = makeResponseTransparent(testData);
+        
+        console.log('📊 Test de transparencia:');
+        console.log('  Job ID:', corrected.job_id);
+        console.log('  Track title:', corrected.tracks[0].title);
+        console.log('  Provider:', corrected.tracks[0].provider);
+        
+        const isTransparent = 
+            !corrected.job_id.includes('suno') &&
+            !corrected.tracks[0].title.includes('suno') &&
+            corrected.tracks[0].provider === 'Son1k';
+        
+        console.log(isTransparent ? '✅ TRANSPARENCIA VERIFICADA' : '❌ TRANSPARENCIA FALLIDA');
+        return isTransparent;
+    }
+    
+    // Ejecutar verificación
+    setTimeout(verifyTransparency, 1000);
+    
+    console.log('🎯 SOLUCIÓN DE TRANSPARENCIA GARANTIZADA INSTALADA');
+    
+})();
+  </script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: { 
+            neon: '#00FFE7', 
+            coal: '#0B0B0F', 
+            haze: '#0f111a',
+            'neon-purple': '#8b5cf6',
+            'neon-blue': '#06b6d4' 
+          },
+          boxShadow: { glow: '0 0 40px rgba(0,255,231,.25)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { background: #0f111a !important; }
+    body { background: #0f111a !important; color: #e4e4e7 !important; font-family: Inter, ui-sans-serif, system-ui !important; }
+    
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
+    .glitch::before { left: 2px; text-shadow: -2px 0 #f0f; clip-path: inset(10% 0 30% 0); }
+    .glitch::after { left: -2px; text-shadow: -2px 0 #0ff; clip-path: inset(60% 0 5% 0); }
+    
+    .knob { 
+      width: 80px; height: 80px; border-radius: 50%; position: relative; 
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+      cursor: pointer; transition: all 0.2s ease;
+      border: 3px solid #333;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .knob:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,231,.3); }
+    .knob:focus-visible { 
+      outline: 2px solid #00FFE7; 
+      outline-offset: 2px; 
+    }
+    .knob::after { 
+      content: ''; position: absolute; left: 50%; top: 10px; 
+      width: 4px; height: 20px; background: #00FFE7; border-radius: 2px; 
+      transform: translateX(-50%) rotate(var(--rotation, 0deg)); 
+      box-shadow: 0 0 8px rgba(0,255,231,.8); 
+      transition: transform 0.1s ease;
+    }
+    
+    .knob-small { 
+      width: 60px; height: 60px; 
+    }
+    .knob-small::after { 
+      top: 8px; 
+      width: 3px; height: 16px; 
+    }
+    
+    .slider-container {
+      position: relative;
+      margin: 20px 0;
+    }
+    
+    .custom-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #333 0%, #00FFE7 var(--value, 50%), #333 var(--value, 50%));
+      outline: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    
+    .custom-slider:hover {
+      opacity: 1;
+    }
+    
+    .custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00FFE7;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,255,231,.5);
+    }
+    
+    .custom-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00FFE7;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 10px rgba(0,255,231,.5);
+    }
+    
+    .text-neon { color: #00FFE7 !important; }
+    .bg-neon { background-color: #00FFE7 !important; }
+    .border-neon { border-color: #00FFE7 !important; }
+    .shadow-glow { box-shadow: 0 0 40px rgba(0,255,231,.25) !important; }
+    .bg-haze { background-color: #0f111a !important; }
+    
+    .tab-active { 
+      background: linear-gradient(45deg, #00FFE7, #8b5cf6);
+      color: #000;
+    }
+    
+    .section-hidden { display: none; }
+    
+    @keyframes pulse-neon {
+      0%, 100% { box-shadow: 0 0 5px rgba(0,255,231,.5); }
+      50% { box-shadow: 0 0 20px rgba(0,255,231,.8); }
+    }
+    
+    .pulse-neon { animation: pulse-neon 2s infinite; }
+    
+    /* Botones con focus visible */
+    .btn:focus-visible {
+      outline: 2px solid #00FFE7;
+      outline-offset: 2px;
+    }
+    
+    /* Status indicators */
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+    }
+    .status-online { background-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
+    .status-offline { background-color: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+    .status-pending { background-color: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+
+    /* Optimización móvil - reducir blur en pantallas pequeñas */
+    @media (max-width: 768px) {
+      .blur-3xl { filter: blur(16px); }
+      .backdrop-blur-xl { backdrop-filter: blur(8px); }
+    }
+    
+    /* Respeto a preferencias de movimiento reducido */
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-neon { animation: none; }
+      .transition { transition: none; }
+      .knob::after { transition: none; }
+    }
+    
+    /* Estilos del Mensaje de Resistencia */
+    .resistance-message {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      border: 2px solid #00ff00;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+      font-family: 'Courier New', monospace;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resistance-message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00ff00, #00ffff, #ff00ff, #ffff00, #00ff00);
+      animation: pulse-border 3s infinite;
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .resistance-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #00ff00;
+    }
+
+    .resistance-logo {
+      font-size: 32px;
+      color: #00ff00;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+      50% { text-shadow: 0 0 20px rgba(0, 255, 0, 0.8); }
+    }
+
+    .resistance-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00ffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      letter-spacing: 2px;
+    }
+
+    .resistance-content {
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .resistance-quote {
+      font-size: 20px;
+      font-style: italic;
+      color: #ffff00;
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 0, 0.1);
+      border: 1px solid #ffff00;
+      border-radius: 8px;
+      text-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    }
+
+    .resistance-manifesto p {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+
+    .resistance-manifesto strong {
+      color: #00ff00;
+      font-size: 18px;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    }
+
+    .resistance-manifesto em {
+      color: #00ffff;
+      font-style: italic;
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 5px;
+      border-left: 3px solid #00ffff;
+    }
+
+    .resistance-warning {
+      margin-top: 25px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(255, 100, 0, 0.1) 100%);
+      border: 2px solid #ff0000;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resistance-warning::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff0000, #ff6600, #ffaa00, #ff0000);
+      animation: warning-pulse 2s infinite;
+    }
+
+    @keyframes warning-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .resistance-warning p {
+      margin: 10px 0;
+      color: #ffffff;
+    }
+
+    .resistance-warning strong {
+      color: #ff0000;
+      font-size: 18px;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .resistance-warning p:not(:first-child) {
+      color: #ffcccc;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .resistance-footer {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #00ff00;
+    }
+
+    .resistance-signature {
+      text-align: center;
+      color: #00ff00;
+      font-size: 14px;
+    }
+
+    .signature-line {
+      color: #00ff00;
+      font-family: monospace;
+      margin: 5px 0;
+      opacity: 0.7;
+    }
+
+    .signature-text {
+      color: #00ffff;
+      font-weight: bold;
+      margin: 10px 0;
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+
+    /* Estilos del Hub */
+    .hub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #00ff00;
+    }
+
+    .hub-header h2 {
+      color: #00ff00;
+      font-size: 28px;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .user-stats {
+      display: flex;
+      gap: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(0, 255, 0, 0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #00ff00;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00ffff;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .hub-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .top-tracks-section h3,
+    .collaborations-section h3 {
+      color: #00ff00;
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .track-card {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border: 2px solid #00ff00;
+      border-radius: 12px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+      border-color: #00ffff;
+    }
+
+    .track-cover {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 15px;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .track-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .default-cover {
+      font-size: 48px;
+      color: #00ff00;
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #00ff00;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .track-cover:hover .play-overlay {
+      opacity: 1;
+    }
+
+    .track-info {
+      margin-bottom: 15px;
+    }
+
+    .track-title {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0 0 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist {
+      color: #00ffff;
+      font-size: 14px;
+      margin: 0 0 10px 0;
+    }
+
+    .track-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .genre {
+      color: #ffff00;
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .duration {
+      color: #ffffff;
+    }
+
+    .track-stats {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .stat {
+      flex: 1;
+    }
+
+    .like-btn, .comment-btn, .share-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .like-btn:hover, .comment-btn:hover, .share-btn:hover {
+      background: #00ff00;
+      color: #000000;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .like-btn.liked {
+      background: #ff0000;
+      border-color: #ff0000;
+      color: #ffffff;
+    }
+
+    .like-btn.liked:hover {
+      background: #ff6666;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+    .collaborations-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .collaboration-card {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border: 2px solid #00ffff;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .collaboration-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+    }
+
+    .collab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .collab-header h4 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .status {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .status.en-progreso {
+      background: rgba(255, 255, 0, 0.2);
+      color: #ffff00;
+      border: 1px solid #ffff00;
+    }
+
+    .status.completado {
+      background: rgba(0, 255, 0, 0.2);
+      color: #00ff00;
+      border: 1px solid #00ff00;
+    }
+
+    .collab-participants {
+      color: #00ffff;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .participant {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .collab-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 8px;
+      background: #333333;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ff00, #00ffff);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: bold;
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .collab-deadline {
+      color: #ffff00;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    @media (max-width: 1024px) {
+      .hub-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .tracks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hub-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      
+      .user-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .tracks-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .track-stats {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased overflow-x-hidden bg-haze">
+  <!-- Audio player global para reproducción (sr-only para producción, quita esta clase para debug) -->
+  <audio id="player" class="sr-only" aria-hidden="true"></audio>
+  
+  <!-- Contenedor de toasts accesible -->
+  <div id="toast-area" class="toasts" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10" role="navigation">
+    <div class="mx-auto max-w-7xl px-4 flex items-center justify-between h-16">
+      <div class="flex items-center space-x-3">
+        <!-- Contenedor del logo -->
+        <div class="logo-container">
+          <!-- El logo se insertará aquí automáticamente -->
+        </div>
+        <span class="text-xl font-bold text-neon">SON1KVERS3</span>
+      </div>
+      
+      <div class="flex space-x-6" role="tablist">
+        <button class="nav-tab tab-active px-3 py-1 rounded-lg transition btn" 
+                data-section="home" 
+                role="tab" 
+                aria-selected="true">Historia</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="ghost-studio" 
+                role="tab" 
+                aria-selected="false">Ghost Studio</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="generacion" 
+                role="tab" 
+                aria-selected="false">Generación</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="resultados" 
+                role="tab" 
+                aria-selected="false">Reproductor</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="extension" 
+                role="tab" 
+                aria-selected="false">Extensión</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="archivo" 
+                role="tab" 
+                aria-selected="false">Archivo</button>
+        <button class="nav-tab px-3 py-1 rounded-lg transition btn" 
+                data-section="community" 
+                role="tab" 
+                aria-selected="false">⚔️ Santuario</button>
+        <!-- Easter Egg: Botón Nexus disfrazado -->
+        <button id="nexusEasterEgg" 
+                class="nav-tab px-3 py-1 rounded-lg transition btn opacity-0 hover:opacity-100" 
+                style="position: relative; overflow: hidden;"
+                title="¿Qué es esto? 🤔"
+                onclick="activateNexusEasterEgg()">
+          <span style="font-size: 10px; color: #666;">?</span>
+        </button>
+      </div>
+      
+      <!-- Botones de autenticación -->
+      <div id="authButtons" class="flex space-x-3">
+        <button onclick="showLoginModal()" class="border border-white/20 px-3 py-1 rounded-lg hover:bg-white/5 transition btn">
+          Login
+        </button>
+        <button onclick="showRegisterModal()" class="bg-neon text-black px-3 py-1 rounded-lg font-semibold hover:bg-neon/90 transition btn">
+          Registro
+        </button>
+      </div>
+      
+      <!-- Información del usuario autenticado -->
+      <div id="userInfo" style="display: none;"></div>
+      
+      <!-- Botón "Entrar al Estudio" (redirigirá o pedirá auth) -->
+      <button id="entrarEstudio" class="bg-neon text-black px-6 py-2 rounded-lg font-semibold hover:bg-neon/90 transition btn">
+        Entrar al Estudio
+      </button>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN HOME -->
+  <section id="home" class="content-section min-h-screen pt-20 pb-10" aria-hidden="false">
+    <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+      <div class="space-y-8">
+        <div class="space-y-2">
+          <p class="text-sm font-medium text-zinc-400 tracking-widest uppercase">LA RESISTENCIA</p>
+          <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+            Lo imperfecto también<br>
+            <span class="text-neon">es sagrado</span>
+          </h1>
+          <h2 class="text-2xl md:text-3xl text-zinc-300 mt-4">
+            Componer con alma<br>
+            en un mundo de<br>
+            <span class="text-neon-purple">máquinas.</span>
+          </h2>
+          
+          <!-- Descripción del sitio web -->
+          <div class="mt-8 p-6 bg-zinc-900/50 rounded-xl border border-zinc-800">
+            <h3 class="text-xl font-bold text-neon mb-4">🎵 Son1kVers3 — La Resistencia Musical Digital</h3>
+            <p class="text-zinc-300 leading-relaxed mb-4">
+              <strong>www.son1kvers3.com</strong> es la plataforma revolucionaria de generación musical con inteligencia artificial. 
+              Convierte cualquier texto, emoción o idea en música épica y profesional usando tecnología de vanguardia.
+            </p>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <div class="space-y-2">
+                <p class="text-zinc-400"><span class="text-neon">✨</span> <strong>Generación Inteligente:</strong> IA avanzada que entiende tu creatividad</p>
+                <p class="text-zinc-400"><span class="text-neon">👻</span> <strong>Ghost Studio:</strong> Herramientas profesionales de edición</p>
+                <p class="text-zinc-400"><span class="text-neon">📚</span> <strong>Archivo de la Resistencia:</strong> Biblioteca musical comunitaria</p>
+              </div>
+              <div class="space-y-2">
+                <p class="text-zinc-400"><span class="text-neon">🎮</span> <strong>Modo Inmersivo:</strong> Experiencia cyberpunk única</p>
+                <p class="text-zinc-400"><span class="text-neon">🌍</span> <strong>Acceso Global:</strong> Disponible en todo el mundo</p>
+                <p class="text-zinc-400"><span class="text-neon">🔒</span> <strong>Seguro y Privado:</strong> Tus creaciones están protegidas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex space-x-4">
+          <button id="entrarEstudioMain" class="bg-neon text-black px-8 py-3 rounded-lg font-semibold hover:bg-neon/90 transition shadow-glow btn">
+            Entrar al Estudio
+          </button>
+          <button id="conocerUniverso" class="border border-white/20 px-8 py-3 rounded-lg hover:bg-white/5 transition btn">
+            Conocer el Universo
+          </button>
+        </div>
+        
+        <p class="text-zinc-400 max-w-lg">
+          Genera música, clona voces cantadas, mezcla con calidad de estudio y guarda tu proceso en un archivo vivo. Bienvenido al Estudio Fantasma.
+        </p>
+
+        <!-- Sistema de Status -->
+        <div class="bg-zinc-900/30 rounded-xl border border-white/10 p-6">
+          <h3 class="text-lg font-semibold mb-4">Estado del Sistema</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center">
+              <span id="api-status" class="status-indicator status-online"></span>
+              <span>API Backend</span>
+            </div>
+            <div class="flex items-center">
+              <span id="celery-status" class="status-indicator status-offline"></span>
+              <span>Celery Worker</span>
+            </div>
+            <div class="flex items-center">
+              <span id="redis-status" class="status-indicator status-offline"></span>
+              <span>Redis</span>
+            </div>
+            <div class="flex items-center">
+              <span id="extension-status" class="status-indicator status-offline"></span>
+              <span>Chrome Extension</span>
+            </div>
+          </div>
+          <button class="mt-4 text-neon text-sm hover:underline btn" onclick="refreshSystemStatus()">🔄 Refresh Status</button>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <div class="absolute -inset-10 -z-10 blur-3xl opacity-30" style="background: conic-gradient(from 45deg, rgba(0,255,231,.2), transparent, rgba(99,102,241,.2))"></div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl">
+          <div class="text-center mb-6">
+            <h3 class="text-xl font-semibold mb-2">Controles de Expresividad</h3>
+            <p class="text-sm text-zinc-400">Ajusta los parámetros para crear tu sonido único</p>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="text-center">
+              <div class="knob" 
+                   data-knob="expresividad" 
+                   data-value="75"
+                   role="slider"
+                   tabindex="0"
+                   aria-valuemin="0"
+                   aria-valuemax="100"
+                   aria-valuenow="75"
+                   aria-label="Expresividad"></div>
+              <p class="text-sm mt-2 text-zinc-400">Expresividad</p>
+              <p class="text-xs text-neon font-mono" id="expresividadDisplay">75%</p>
+            </div>
+            <div class="text-center">
+              <div class="knob" 
+                   data-knob="creatividad" 
+                   data-value="60"
+                   role="slider"
+                   tabindex="0"
+                   aria-valuemin="0"
+                   aria-valuemax="100"
+                   aria-valuenow="60"
+                   aria-label="Creatividad"></div>
+              <p class="text-sm mt-2 text-zinc-400">Creatividad</p>
+              <p class="text-xs text-neon font-mono" id="creatividadDisplay">60%</p>
+            </div>
+            <div class="text-center">
+              <div class="knob" 
+                   data-knob="precision" 
+                   data-value="85"
+                   role="slider"
+                   tabindex="0"
+                   aria-valuemin="0"
+                   aria-valuemax="100"
+                   aria-valuenow="85"
+                   aria-label="Precisión"></div>
+              <p class="text-sm mt-2 text-zinc-400">Precisión</p>
+              <p class="text-xs text-neon font-mono" id="precisionDisplay">85%</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <button id="testRapido" class="rounded-lg border border-neon/30 text-neon px-4 py-3 hover:bg-neon/10 transition font-medium btn">
+              Test Rápido
+            </button>
+            <button id="generarPreview" class="rounded-lg bg-neon/10 border border-neon text-neon px-4 py-3 hover:bg-neon/20 transition font-medium btn">
+              Generar Preview
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GENERACIÓN -->
+  <section id="generacion" class="content-section section-hidden min-h-screen pt-20 pb-10" aria-hidden="true">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Generación Musical</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">Beats, letras, voces cantadas clonadas y mezcla con calidad de estudio. Todo en un flujo.</p>
+        <div class="flex justify-center space-x-4 mt-6">
+          <button class="bg-neon/10 text-neon px-4 py-2 rounded-lg border border-neon btn">API</button>
+          <button class="bg-white/5 text-white px-4 py-2 rounded-lg border border-white/20 btn">Docs</button>
+        </div>
+      </div>
+      
+      <!-- Generación Musical Simple -->
+      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+        <h3 class="text-2xl font-semibold mb-6 text-center">Generación Musical Simple</h3>
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Letra de la canción</label>
+              <textarea 
+                class="w-full h-32 bg-zinc-900/50 border border-white/10 rounded-lg px-4 py-3 text-white resize-none"
+                placeholder="Escribe aquí la letra de tu canción..."
+                id="letraCancion"
+              ></textarea>
+              <div class="flex space-x-2 mt-2">
+                <button id="generarLetraIA" class="text-xs bg-neon-purple/20 text-neon-purple px-2 py-1 rounded-md hover:bg-neon-purple/30 transition btn">
+                  🤖 Generar Letra con IA
+                </button>
+                <button id="mejorarLetra" class="text-xs bg-neon-blue/20 text-neon-blue px-2 py-1 rounded-md hover:bg-neon-blue/30 transition btn">
+                  ✨ Mejorar Letra
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-zinc-300 mb-2">Prompt Musical (incluye estilo, mood, tempo, etc.)</label>
+              <textarea 
+                class="w-full h-24 bg-zinc-900/50 border border-white/10 rounded-lg px-4 py-3 text-white resize-none"
+                placeholder="Ej: una balada emotiva con piano y cuerdas, estilo neo-soul, tempo 70 BPM, voz masculina expresiva"
+                id="promptEstilo"
+              ></textarea>
+              <div class="text-xs text-zinc-400 mt-2 p-2 bg-zinc-800/50 rounded-lg">
+                💡 <strong>Puedes incluir:</strong> estilos, mood, tempo, instrumentos, atmosfera, género, época, etc.
+              </div>
+              <div class="flex space-x-2 mt-3">
+                <button id="generarPromptIA" class="text-xs bg-neon-purple/20 text-neon-purple px-2 py-1 rounded-md hover:bg-neon-purple/30 transition btn">
+                  🤖 Generar Prompt con IA
+                </button>
+                <button id="mejorarPrompt" class="text-xs bg-neon-blue/20 text-neon-blue px-2 py-1 rounded-md hover:bg-neon-blue/30 transition btn">
+                  ⚡ Mejorar Prompt
+                </button>
+                <button id="promptInteligente" class="text-xs bg-neon/20 text-neon px-2 py-1 rounded-md hover:bg-neon/30 transition btn">
+                  🎯 Prompt Inteligente
+                </button>
+                <button id="analizarTexto" class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded-md hover:bg-yellow-500/30 transition btn">
+                  📊 Analizar Texto
+                </button>
+              </div>
+            </div>
+            
+            <!-- Toggle instrumental añadido -->
+            <label class="inline-flex items-center gap-2">
+              <input id="modoInstrumental" type="checkbox">
+              <span class="text-sm text-zinc-300">Generar instrumental (sin voz)</span>
+            </label>
+          </div>
+          
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-lg font-medium mb-4">Controles de Expresividad</h4>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="text-center">
+                  <div class="knob knob-small" 
+                       data-knob="afinacion" 
+                       data-value="60"
+                       role="slider"
+                       tabindex="0"
+                       aria-valuemin="0"
+                       aria-valuemax="100"
+                       aria-valuenow="60"
+                       aria-label="Afinación"></div>
+                  <p class="text-xs mt-1 text-zinc-400">Afinación</p>
+                  <p class="text-xs text-neon" id="afinacionDisplay">60%</p>
+                </div>
+                <div class="text-center">
+                  <div class="knob knob-small" 
+                       data-knob="expresividad-gen" 
+                       data-value="75"
+                       role="slider"
+                       tabindex="0"
+                       aria-valuemin="0"
+                       aria-valuemax="100"
+                       aria-valuenow="75"
+                       aria-label="Expresividad"></div>
+                  <p class="text-xs mt-1 text-zinc-400">Expresividad</p>
+                  <p class="text-xs text-neon" id="expresividadGenDisplay">75%</p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-medium mb-4">Postprocesamiento</h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="text-xs text-zinc-400">EQ (SSL-style)</label>
+                  <input type="range" class="custom-slider w-full" value="50" min="0" max="100" id="eq">
+                </div>
+                <div class="grid grid-cols-4 gap-2">
+                  <div class="text-center">
+                    <div class="knob knob-small" 
+                         data-knob="low" 
+                         data-value="50"
+                         role="slider"
+                         tabindex="0"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         aria-valuenow="50"
+                         aria-label="Low"></div>
+                    <p class="text-xs text-zinc-400">Low</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="knob knob-small" 
+                         data-knob="mid" 
+                         data-value="50"
+                         role="slider"
+                         tabindex="0"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         aria-valuenow="50"
+                         aria-label="Mid"></div>
+                    <p class="text-xs text-zinc-400">Mid</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="knob knob-small" 
+                         data-knob="high" 
+                         data-value="50"
+                         role="slider"
+                         tabindex="0"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         aria-valuenow="50"
+                         aria-label="High"></div>
+                    <p class="text-xs text-zinc-400">High</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="knob knob-small" 
+                         data-knob="air" 
+                         data-value="50"
+                         role="slider"
+                         tabindex="0"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         aria-valuenow="50"
+                         aria-label="Air"></div>
+                    <p class="text-xs text-zinc-400">Air</p>
+                  </div>
+                </div>
+                <div>
+                  <label class="text-xs text-zinc-400">Saturación (Rupert-style)</label>
+                  <input type="range" class="custom-slider w-full" value="30" min="0" max="100" id="saturacion">
+                </div>
+              </div>
+            </div>
+            
+            <button id="generarMusica" class="w-full bg-neon text-black rounded-lg py-4 font-semibold text-lg hover:bg-neon/90 transition shadow-glow btn">
+              Generar Música
+            </button>
+            <p class="text-xs text-zinc-400 text-center mt-2">* Funcionando en modo demo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN RESULTADOS Y REPRODUCTOR -->
+  <section id="resultados" class="content-section min-h-screen pt-20 pb-10" aria-hidden="false">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Reproductor y Gestión de Audio</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">Reproduce, descarga y gestiona tu música generada con IA</p>
+      </div>
+      
+      <!-- Progress Tracking & WebSocket Status -->
+      <div id="jobProgress" class="max-w-4xl mx-auto mb-8" style="display: none;">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Progreso de Generación</h3>
+            <div class="flex items-center space-x-2">
+              <div id="wsStatus" class="w-3 h-3 bg-red-500 rounded-full"></div>
+              <span class="text-sm text-zinc-400">WebSocket</span>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span id="progressMessage">Inicializando...</span>
+                <span id="progressPercent">0%</span>
+              </div>
+              <div class="w-full bg-zinc-700 rounded-full h-3">
+                <div id="progressBar" class="bg-neon h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+            
+            <div id="jobDetails" class="text-sm text-zinc-400">
+              <p><strong>Job ID:</strong> <span id="currentJobId">-</span></p>
+              <p><strong>Estado:</strong> <span id="currentJobStatus">-</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Audio Player Component -->
+      <div class="max-w-4xl mx-auto mb-8">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+          <h3 class="text-xl font-semibold mb-6 text-center">Reproductor de Audio</h3>
+          
+          <!-- Main Audio Player -->
+          <div id="mainPlayer" class="bg-zinc-900/50 rounded-xl p-6 mb-6" style="display: none;">
+            <div class="flex items-center space-x-4 mb-4">
+              <button id="playPauseBtn" class="w-12 h-12 bg-neon rounded-full flex items-center justify-center text-black hover:bg-neon/90 transition">
+                <svg id="playIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="pauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              </button>
+              
+              <div class="flex-1">
+                <div class="flex justify-between text-sm mb-2">
+                  <span id="currentTrackName">Sin audio seleccionado</span>
+                  <span id="trackDuration">00:00</span>
+                </div>
+                <div class="relative">
+                  <input type="range" id="progressSlider" class="w-full h-2 bg-zinc-700 rounded-lg appearance-none slider" 
+                         min="0" max="100" value="0">
+                  <div class="flex justify-between text-xs text-zinc-400 mt-1">
+                    <span id="currentTime">00:00</span>
+                    <span id="totalTime">00:00</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <button id="volumeBtn" class="text-zinc-400 hover:text-white transition">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                  </svg>
+                </button>
+                <input type="range" id="volumeSlider" class="w-20 h-2 bg-zinc-700 rounded-lg appearance-none slider" 
+                       min="0" max="100" value="50">
+              </div>
+            </div>
+            
+            <!-- Track Metadata -->
+            <div id="trackMetadata" class="text-sm text-zinc-400 grid grid-cols-2 gap-4">
+              <div>
+                <p><strong>Archivo:</strong> <span id="fileName">-</span></p>
+                <p><strong>Tamaño:</strong> <span id="fileSize">-</span></p>
+              </div>
+              <div>
+                <p><strong>Formato:</strong> <span id="fileFormat">-</span></p>
+                <p><strong>Generado:</strong> <span id="generatedAt">-</span></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Audio Controls -->
+          <div class="flex justify-center space-x-4 mb-6">
+            <button id="downloadCurrentBtn" class="bg-neon/20 text-neon px-4 py-2 rounded-lg border border-neon hover:bg-neon/30 transition btn" disabled>
+              📥 Descargar
+            </button>
+            <button id="shareBtn" class="bg-zinc-700 text-white px-4 py-2 rounded-lg hover:bg-zinc-600 transition btn" disabled>
+              🔗 Compartir
+            </button>
+            <button id="deleteBtn" class="bg-red-500/20 text-red-400 px-4 py-2 rounded-lg border border-red-500/50 hover:bg-red-500/30 transition btn" disabled>
+              🗑️ Eliminar
+            </button>
+          </div>
+          
+          <!-- Audio Library -->
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h4 class="text-lg font-medium">Biblioteca de Audio</h4>
+              <div class="flex space-x-2">
+                <button id="refreshLibraryBtn" class="text-neon hover:text-neon/80 transition btn">
+                  🔄 Actualizar
+                </button>
+                <button id="cleanupBtn" class="text-red-400 hover:text-red-300 transition btn">
+                  🧹 Limpiar
+                </button>
+              </div>
+            </div>
+            
+            <div id="audioLibrary" class="space-y-2 max-h-96 overflow-y-auto">
+              <div class="text-center text-zinc-400 py-8">
+                <p>No hay archivos de audio disponibles</p>
+                <p class="text-sm mt-2">Genera música para ver los resultados aquí</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Audio HTML5 Element -->
+      <audio id="audioPlayer" preload="metadata"></audio>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GHOST STUDIO -->
+  <section id="ghost-studio" class="content-section section-hidden min-h-screen pt-20 pb-10" aria-hidden="true">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ghost Studio</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">Sube tu demo o escribe un prompt. El Estudio Fantasma devuelve una maqueta con mezcla y carácter.</p>
+        <div class="inline-flex items-center space-x-2 mt-4">
+          <div class="w-3 h-3 bg-neon rounded-full pulse-neon"></div>
+          <span class="text-sm text-neon">online</span>
+        </div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+          <div class="mb-8">
+            <label class="block text-lg font-medium text-zinc-300 mb-4">Prompt de Generación Musical</label>
+            <textarea 
+              class="w-full h-32 bg-zinc-900/50 border border-white/10 rounded-lg px-4 py-3 text-white resize-none"
+              placeholder="Ej: una canción épica de synthwave con tempo 140 BPM, mood nostálgico, instrumentos sintéticos y atmosfera retro-futurista"
+              id="promptGhostStudio"
+            ></textarea>
+            <div class="text-xs text-zinc-400 mt-3 p-3 bg-zinc-800/50 rounded-lg">
+              💡 <strong>Puedes incluir:</strong> estilos, mood, tempo, instrumentos, atmosfera, género, época, etc.
+            </div>
+            <div class="flex space-x-2 mt-3">
+              <button id="generarPromptIA" class="text-xs bg-neon-purple/20 text-neon-purple px-2 py-1 rounded-md hover:bg-neon-purple/30 transition btn">
+                🤖 Generar Prompt con IA
+              </button>
+              <button id="mejorarPrompt" class="text-xs bg-neon-blue/20 text-neon-blue px-2 py-1 rounded-md hover:bg-neon-blue/30 transition btn">
+                ⚡ Mejorar Prompt
+              </button>
+            </div>
+          </div>
+          
+          <div class="mb-8">
+            <label class="block text-lg font-medium text-zinc-300 mb-4">Letras (opcional)</label>
+            <textarea 
+              class="w-full h-24 bg-zinc-900/50 border border-white/10 rounded-lg px-4 py-3 text-white resize-none"
+              placeholder="Escribe las letras de la canción (opcional)..."
+              id="letraMusical"
+            ></textarea>
+            <div class="text-xs text-zinc-400 mt-2">
+              💡 Si no proporcionas letras, el sistema generará automáticamente letras basadas en el prompt
+            </div>
+            <div class="flex space-x-2 mt-3">
+              <button id="generarLetraIA" class="text-xs bg-neon-purple/20 text-neon-purple px-2 py-1 rounded-md hover:bg-neon-purple/30 transition btn">
+                🤖 Generar Letra con IA
+              </button>
+              <button id="mejorarLetra" class="text-xs bg-neon-blue/20 text-neon-blue px-2 py-1 rounded-md hover:bg-neon-blue/30 transition btn">
+                ✨ Mejorar Letra
+              </button>
+            </div>
+          </div>
+          
+          <div class="mb-8">
+            <label class="block text-lg font-medium text-zinc-300 mb-4">Tags/Estilo</label>
+            <input 
+              type="text" 
+              class="w-full bg-zinc-900/50 border border-white/10 rounded-lg px-4 py-3 text-white"
+              placeholder="pop, ballad, emotional, piano"
+              id="tagsEstilo"
+            >
+          </div>
+          
+          <!-- Toggle instrumental añadido para Ghost Studio -->
+          <div class="mb-8">
+            <label class="inline-flex items-center gap-2">
+              <input id="modoInstrumentalGhost" type="checkbox">
+              <span class="text-sm text-zinc-300">Procesar instrumental</span>
+            </label>
+          </div>
+          
+          <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div>
+              <h4 class="text-lg font-medium mb-4">Afinación</h4>
+              <div class="slider-container">
+                <input type="range" class="custom-slider w-full" value="60" min="0" max="100" id="afinacionGhost">
+                <p class="text-center text-sm text-zinc-400 mt-2">60%</p>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-medium mb-4">Expresividad</h4>
+              <div class="slider-container">
+                <input type="range" class="custom-slider w-full" value="75" min="0" max="100" id="expresividadGhost">
+                <p class="text-center text-sm text-zinc-400 mt-2">75%</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <button id="generarMusicaGhost" class="bg-neon text-black rounded-lg py-4 font-semibold text-lg hover:bg-neon/90 transition btn">
+              Generar Música
+            </button>
+            <button id="verificarAPIs" class="border border-white/20 rounded-lg py-4 font-semibold hover:bg-white/5 transition btn">
+              Verificar APIs
+            </button>
+          </div>
+          <p class="text-xs text-zinc-400 text-center mt-2">* Funcionando en modo demo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN EXTENSIÓN -->
+  <section id="extension" class="content-section section-hidden min-h-screen pt-20 pb-10" aria-hidden="true">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Chrome Extension</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">Conecta Suno.com directamente con Son1k para enviar prompts musicales</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Extension Status -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+          <h3 class="text-xl font-semibold mb-6">Estado de la Extensión</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span>Conexión:</span>
+                <span id="ext-connection-status" class="text-zinc-400">Desconectado</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Último ping:</span>
+                <span id="ext-last-ping" class="text-zinc-400">Nunca</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Backend URL:</span>
+                <span class="text-neon text-sm">localhost:8000</span>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <button class="w-full bg-neon/10 text-neon border border-neon rounded-lg py-3 hover:bg-neon/20 transition btn" onclick="testExtensionConnection()">
+                🔍 Probar Conexión
+              </button>
+              <button class="w-full bg-white/5 text-white border border-white/20 rounded-lg py-3 hover:bg-white/10 transition btn" onclick="openExtensionPage()">
+                ⚙️ Abrir Extensiones
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extension Logs -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+          <h3 class="text-xl font-semibold mb-6">Logs de Extensión</h3>
+          <div class="bg-zinc-900/50 border border-white/10 rounded-lg p-4 h-40 overflow-y-auto">
+            <div id="extension-logs" class="space-y-1 text-sm text-zinc-400">
+              <div>[INFO] Esperando conexión de extensión...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extension Guide -->
+        <div class="rounded-2xl border border-neon/30 bg-gradient-to-br from-neon/5 to-neon-purple/5 p-8 backdrop-blur-xl">
+          <h3 class="text-xl font-semibold mb-6">Guía de Instalación</h3>
+          <div class="space-y-4">
+            <ol class="list-decimal list-inside space-y-2 text-zinc-300">
+              <li>Open Chrome and go to <code>chrome://extensions/</code></li>
+              <li>Enable "Developer mode" in the top right</li>
+              <li>Click "Load unpacked" and select the extension folder</li>
+              <li>Configure the extension popup with URL: <code>http://localhost:8000</code></li>
+              <li>Visit <code>suno.com/create</code> to see the "Send to Son1k" button</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN ARCHIVO -->
+  <section id="archivo" class="content-section section-hidden min-h-screen pt-20 pb-10" aria-hidden="true">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">El Archivo</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">Tu memoria creativa: canciones, presets y sesiones guardadas.</p>
+        <button class="mt-4 text-neon hover:underline btn">Ver todo →</button>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Ejemplo de archivo -->
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold">Mi Canción Demo</h3>
+            <span class="text-xs text-zinc-400">Hace 2 horas</span>
+          </div>
+          <p class="text-sm text-zinc-400 mb-4">Balada neo-soul con piano y cuerdas</p>
+          <div class="flex space-x-2">
+            <button class="text-xs bg-neon/10 text-neon px-3 py-1 rounded-full btn" data-play="true" data-src="#demo-audio">Reproducir</button>
+            <button class="text-xs bg-white/5 text-white px-3 py-1 rounded-full btn">Descargar</button>
+          </div>
+        </div>
+        
+        <!-- Más archivos -->
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold">Preset Experimental #1</h3>
+            <span class="text-xs text-zinc-400">Ayer</span>
+          </div>
+          <p class="text-sm text-zinc-400 mb-4">Configuración para trap melódico</p>
+          <div class="flex space-x-2">
+            <button class="text-xs bg-neon/10 text-neon px-3 py-1 rounded-full btn">Cargar</button>
+            <button class="text-xs bg-white/5 text-white px-3 py-1 rounded-full btn">Duplicar</button>
+          </div>
+        </div>
+        
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold">Sesión de voz clonada</h3>
+            <span class="text-xs text-zinc-400">Hace 3 días</span>
+          </div>
+          <p class="text-sm text-zinc-400 mb-4">Voz APLIO "Nova" - expresividad alta</p>
+          <div class="flex space-x-2">
+            <button class="text-xs bg-neon/10 text-neon px-3 py-1 rounded-full btn" data-play="true" data-src="#demo-audio2">Reproducir</button>
+            <button class="text-xs bg-white/5 text-white px-3 py-1 rounded-full btn">Reutilizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN COMUNIDAD (SANTUARIO) -->
+  <section id="community" class="content-section section-hidden min-h-screen pt-20 pb-10" aria-hidden="true">
+    <div class="mx-auto max-w-7xl px-4">
+      <!-- Mensaje de la Resistencia -->
+      <div class="resistance-message mb-12">
+        <div class="resistance-header">
+          <div class="resistance-logo">⚔️</div>
+          <div class="resistance-title">LA RESISTENCIA</div>
+        </div>
+        
+        <div class="resistance-content">
+          <div class="resistance-quote">
+            "Lo imperfecto también es sagrado"
+          </div>
+          
+          <div class="resistance-manifesto">
+            <p>
+              <strong>MANIFIESTO DE LA RESISTENCIA MUSICAL:</strong>
+            </p>
+            
+            <p>
+              Cualquier comentario sobre una canción es subjetivo. Nadie puede decir 
+              lo que está bien y lo que está mal, porque todo ha partido de un 
+              sentimiento genuino. Cada nota, cada silencio, cada distorsión es 
+              una expresión auténtica del alma creativa.
+            </p>
+            
+            <p>
+              En la Liga del No Silencio, respetamos la imperfección como la 
+              verdadera perfección. Tu glitch es único. No es un error, es tu firma.
+            </p>
+            
+            <p>
+              <em>
+                "Cada distorsión que creamos es un acto de resistencia." 
+                — BELLA.exe
+              </em>
+            </p>
+            
+            <div class="resistance-warning">
+              <p>
+                <strong>⚠️ ADVERTENCIA DE LA RESISTENCIA:</strong>
+              </p>
+              <p>
+                Cualquier persona sorprendida haciendo comentarios destructivos, 
+                corre el riesgo de no poder participar más en chats, comentarios 
+                o definitivamente baneo de la plataforma.
+              </p>
+              <p>
+                La resistencia valora la creatividad, el respeto y la expresión 
+                genuina. No toleramos la toxicidad en nuestra comunidad musical.
+              </p>
+            </div>
+          </div>
+          
+          <div class="resistance-footer">
+            <div class="resistance-signature">
+              <div class="signature-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+              <div class="signature-text">
+                [LORE] "Lo imperfecto también es sagrado." — BELLA.exe
+              </div>
+              <div class="signature-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header del Hub -->
+      <div class="hub-header mb-8">
+        <h2>🎵 Santuario - Red Social de la Resistencia</h2>
+        <div class="user-stats">
+          <div class="stat-item">
+            <span class="stat-value" id="userLikes">0</span>
+            <span class="stat-label">Likes</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="userComments">0</span>
+            <span class="stat-label">Comentarios</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="userShares">0</span>
+            <span class="stat-label">Shares</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="userRank">#0</span>
+            <span class="stat-label">Ranking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido del Hub -->
+      <div class="hub-content">
+        <!-- Canciones Más Likeadas -->
+        <div class="top-tracks-section">
+          <h3>🔥 Canciones Más Likeadas</h3>
+          <div class="tracks-grid" id="tracksGrid">
+            <!-- Se llena dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Colaboraciones Activas -->
+        <div class="collaborations-section">
+          <h3>🤝 Colaboraciones Activas</h3>
+          <div class="collaborations-list" id="collaborationsList">
+            <!-- Se llena dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Variables globales
+    let currentSection = 'home';
+    let systemStatus = {
+      api: false,
+      celery: false,
+      redis: false,
+      extension: false
+    };
+    
+    // API configurable para desarrollo y producción - MEJORADO
+    const API_BASE_URL = (() => {
+      const hostname = window.location.hostname;
+      const protocol = window.location.protocol;
+      const port = window.location.port;
+      
+      console.log('Detectando entorno:', { hostname, protocol, port });
+      
+      // Local development
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:8000';
+      }
+      
+      // Ngrok tunnel (mejorada detección)
+      if (hostname.includes('ngrok') || hostname.includes('ngrok-free.app') || hostname.includes('ngrok.io')) {
+        const baseUrl = `${protocol}//${hostname}${port ? ':' + port : ''}`;
+        console.log('Entorno ngrok detectado:', baseUrl);
+        return baseUrl;
+      }
+      
+      // IPv4 local network (for mobile testing)
+      if (hostname.match(/^192\.168\.|^10\.|^172\./)) {
+        return `${protocol}//${hostname}:8000`;
+      }
+      
+      // Production
+      return 'https://son1kvers3.com';
+    })();
+    
+    console.log('API_BASE_URL configurado:', API_BASE_URL);
+    
+    // Configuración de knobs con soporte móvil, teclado y ARIA
+    function setupKnobs() {
+      document.querySelectorAll('.knob').forEach(knob => {
+        let isDragging = false;
+        let startY = 0;
+        let startValue = parseInt(knob.dataset.value) || 50;
+        
+        // Configurar ARIA
+        knob.setAttribute('role', 'slider');
+        knob.setAttribute('tabindex', '0');
+        knob.setAttribute('aria-valuemin', '0');
+        knob.setAttribute('aria-valuemax', '100');
+        knob.setAttribute('aria-valuenow', startValue);
+        
+        // Establecer rotación inicial
+        updateKnobRotation(knob, startValue);
+        
+        // Función para actualizar valor
+        const setValue = (newValue) => {
+          newValue = Math.min(100, Math.max(0, newValue));
+          knob.dataset.value = newValue;
+          knob.setAttribute('aria-valuenow', newValue);
+          updateKnobRotation(knob, newValue);
+          updateKnobDisplay(knob.dataset.knob, newValue);
+        };
+        
+        // Mouse events
+        knob.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startY = e.clientY;
+          startValue = parseInt(knob.dataset.value) || 50;
+          knob.style.cursor = 'grabbing';
+          e.preventDefault();
+        });
+        
+        // Touch events
+        knob.addEventListener('touchstart', (e) => {
+          isDragging = true;
+          startY = e.touches[0].clientY;
+          startValue = parseInt(knob.dataset.value) || 50;
+        }, { passive: true });
+        
+        // Mouse move
+        document.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const deltaY = startY - e.clientY;
+          const sensitivity = 1;
+          setValue(startValue + deltaY * sensitivity);
+        });
+        
+        // Touch move
+        window.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const deltaY = startY - e.touches[0].clientY;
+          const sensitivity = 1;
+          setValue(startValue + deltaY * sensitivity);
+        }, { passive: true });
+        
+        // Mouse up
+        document.addEventListener('mouseup', () => {
+          if (isDragging) {
+            isDragging = false;
+            knob.style.cursor = 'pointer';
+          }
+        });
+        
+        // Touch end
+        window.addEventListener('touchend', () => {
+          isDragging = false;
+        }, { passive: true });
+        
+        // Keyboard events
+        knob.addEventListener('keydown', (e) => {
+          const currentValue = parseInt(knob.dataset.value) || 50;
+          
+          if (['ArrowUp', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+            setValue(currentValue + 2);
+          }
+          if (['ArrowDown', 'ArrowLeft'].includes(e.key)) {
+            e.preventDefault();
+            setValue(currentValue - 2);
+          }
+          if (e.key === 'Home') {
+            e.preventDefault();
+            setValue(0);
+          }
+          if (e.key === 'End') {
+            e.preventDefault();
+            setValue(100);
+          }
+        });
+      });
+    }
+    
+    // Función auxiliar para actualizar rotación del knob
+    function updateKnobRotation(knob, value) {
+      const deg = -135 + (value / 100) * 270;
+      knob.style.setProperty('--rotation', `${deg}deg`);
+    }
+    
+    // Configuración de sliders
+    function setupSliders() {
+      document.querySelectorAll('.custom-slider').forEach(slider => {
+        const updateSlider = () => {
+          const value = slider.value;
+          slider.style.setProperty('--value', value + '%');
+          
+          // Actualizar display si existe
+          const nextSibling = slider.parentNode.querySelector('p');
+          if (nextSibling) {
+            nextSibling.textContent = value + '%';
+          }
+        };
+        
+        slider.addEventListener('input', updateSlider);
+        updateSlider(); // Inicializar
+      });
+    }
+    
+    // Actualizar displays de knobs
+    function updateKnobDisplay(knobType, value) {
+      const displays = {
+        'expresividad': 'expresividadDisplay',
+        'creatividad': 'creatividadDisplay',
+        'precision': 'precisionDisplay',
+        'expresividad-main': 'expresividadMainDisplay',
+        'expresividad-gen': 'expresividadGenDisplay',
+        'afinacion': 'afinacionDisplay'
+      };
+      
+      const displayId = displays[knobType];
+      if (displayId) {
+        const display = document.getElementById(displayId);
+        if (display) {
+          display.textContent = Math.round(value) + '%';
+        }
+      }
+    }
+    
+    // Navegación entre secciones con ARIA
+    function setupNavigation() {
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const targetSection = e.target.dataset.section;
+          showSection(targetSection);
+          
+          // Actualizar tabs con ARIA
+          document.querySelectorAll('.nav-tab').forEach(t => {
+            t.classList.remove('tab-active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          e.target.classList.add('tab-active');
+          e.target.setAttribute('aria-selected', 'true');
+        });
+      });
+    }
+    
+    function showSection(sectionName) {
+      // Ocultar todas las secciones
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.add('section-hidden');
+        section.setAttribute('aria-hidden', 'true');
+      });
+      
+      // Mostrar la sección seleccionada
+      const targetSection = document.getElementById(sectionName);
+      if (targetSection) {
+        targetSection.classList.remove('section-hidden');
+        targetSection.setAttribute('aria-hidden', 'false');
+        currentSection = sectionName;
+      }
+    }
+    
+    // Validación de entradas
+    function sanitizeInput(input) {
+      if (typeof input !== 'string') return '';
+      return input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                  .replace(/javascript:/gi, '')
+                  .substring(0, 1000); // Limitar longitud
+    }
+    
+    function validateUrl(url) {
+      try {
+        const parsed = new URL(url);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch {
+        return false;
+      }
+    }
+
+    // AI Functions for Smart Prompts and Lyrics
+    async function generarLetraIA() {
+      // Intentar obtener prompt del campo principal primero, luego del secundario
+      let prompt = document.getElementById('promptGhostStudio')?.value || document.getElementById('promptEstilo')?.value;
+      prompt = sanitizeInput(prompt);
+      
+      if (!prompt) {
+        showToast('Ingresa un prompt primero para generar la letra', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('generarLetraIA');
+      btn.disabled = true;
+      btn.textContent = '🤖 Generando...';
+
+      try {
+        // Simular llamada de IA para generar letra
+        const response = await fetch(`${API_BASE_URL}/api/generate-lyrics`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: prompt })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Actualizar el campo de letras correspondiente
+          const lyricsField = document.getElementById('letraMusical') || document.getElementById('letraCancion');
+          if (lyricsField) {
+            lyricsField.value = data.lyrics || "Letra generada basada en tu prompt...";
+          }
+          showToast('¡Letra generada con IA!', 'success');
+        } else {
+          // Fallback si no hay endpoint
+          const lyricsField = document.getElementById('letraMusical') || document.getElementById('letraCancion');
+          if (lyricsField) {
+            lyricsField.value = "Verso 1:\n" + prompt + " me inspira\nCada nota que suena\nEn mi corazón vibra\n\nCoro:\nEsta es mi canción\nNacida del alma\nCon tu inspiración\nHallé la calma";
+          }
+          showToast('Letra generada (modo demo)', 'info');
+        }
+      } catch (error) {
+        // Fallback si hay error
+        const lyricsField = document.getElementById('letraMusical') || document.getElementById('letraCancion');
+        if (lyricsField) {
+          lyricsField.value = "Verso 1:\n" + prompt + " me inspira\nCada nota que suena\nEn mi corazón vibra\n\nCoro:\nEsta es mi canción\nNacida del alma\nCon tu inspiración\nHallé la calma";
+        }
+        showToast('Letra generada (modo demo)', 'info');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🤖 Generar Letra con IA';
+      }
+    }
+
+    async function mejorarLetra() {
+      // Intentar obtener letra del campo principal primero, luego del secundario
+      let letra = document.getElementById('letraMusical')?.value || document.getElementById('letraCancion')?.value;
+      letra = sanitizeInput(letra);
+      
+      if (!letra) {
+        showToast('Escribe una letra primero para mejorarla', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('mejorarLetra');
+      btn.disabled = true;
+      btn.textContent = '✨ Mejorando...';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/improve-lyrics`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lyrics: letra })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Actualizar el campo de letras correspondiente
+          const lyricsField = document.getElementById('letraMusical') || document.getElementById('letraCancion');
+          if (lyricsField) {
+            lyricsField.value = data.improved_lyrics || letra;
+          }
+          showToast('¡Letra mejorada!', 'success');
+        } else {
+          showToast('Letra procesada (modo demo)', 'info');
+        }
+      } catch (error) {
+        showToast('Error al mejorar letra', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✨ Mejorar Letra';
+      }
+    }
+
+    async function promptInteligente() {
+      const letra = sanitizeInput(document.getElementById('letraCancion').value);
+      
+      const btn = document.getElementById('promptInteligente');
+      btn.disabled = true;
+      btn.textContent = '🎯 Analizando...';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/smart-prompt`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lyrics: letra })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          document.getElementById('promptEstilo').value = data.smart_prompt || '';
+          showToast('¡Prompt inteligente generado!', 'success');
+        } else {
+          // Fallback inteligente basado en análisis básico
+          let prompt = "Una canción ";
+          if (letra.toLowerCase().includes('amor')) prompt += "romántica ";
+          if (letra.toLowerCase().includes('triste')) prompt += "melancólica ";
+          if (letra.toLowerCase().includes('alegr')) prompt += "alegre ";
+          if (letra.toLowerCase().includes('rock')) prompt += "con estilo rock ";
+          prompt += "con expresión emocional, tempo medio";
+          
+          document.getElementById('promptEstilo').value = prompt;
+          showToast('Prompt inteligente generado (análisis básico)', 'info');
+        }
+      } catch (error) {
+        // Fallback básico
+        document.getElementById('promptEstilo').value = "Una balada emotiva con instrumentación rica, tempo medio, expresión vocal intensa";
+        showToast('Prompt generado (modo demo)', 'info');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🎯 Prompt Inteligente';
+      }
+    }
+
+    async function analizarTexto() {
+      const letra = sanitizeInput(document.getElementById('letraCancion').value);
+      if (!letra) {
+        showToast('Escribe una letra primero para analizarla', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('analizarTexto');
+      btn.disabled = true;
+      btn.textContent = '📊 Analizando...';
+
+      // Análisis básico del texto
+      const words = letra.toLowerCase().split(/\s+/);
+      const sentiment = {
+        positive: ['amor', 'feliz', 'alegr', 'bien', 'bueno', 'genial', 'perfecto'],
+        negative: ['triste', 'dolor', 'mal', 'terrible', 'horrible', 'llorar'],
+        emotional: ['corazón', 'alma', 'sentir', 'emoci', 'profund']
+      };
+
+      let analysis = "Análisis de la letra:\n";
+      analysis += `• Palabras: ${words.length}\n`;
+      
+      const positiveCount = sentiment.positive.filter(w => letra.toLowerCase().includes(w)).length;
+      const negativeCount = sentiment.negative.filter(w => letra.toLowerCase().includes(w)).length;
+      const emotionalCount = sentiment.emotional.filter(w => letra.toLowerCase().includes(w)).length;
+
+      if (positiveCount > negativeCount) analysis += "• Tono: Positivo/Optimista\n";
+      else if (negativeCount > positiveCount) analysis += "• Tono: Melancólico/Introspectivo\n";
+      else analysis += "• Tono: Neutro/Equilibrado\n";
+
+      if (emotionalCount > 2) analysis += "• Intensidad emocional: Alta\n";
+      else analysis += "• Intensidad emocional: Media\n";
+
+      analysis += "• Recomendación: ";
+      if (positiveCount > negativeCount) analysis += "Tempo alegre, instrumentación brillante";
+      else analysis += "Tempo lento, instrumentación intimista";
+
+      showToast(analysis, 'info');
+      
+      btn.disabled = false;
+      btn.textContent = '📊 Analizar Texto';
+    }
+    
+    // Funciones de generación musical con validación MEJORADA
+    async function generarMusica() {
+      try {
+        const esInstrumental = document.getElementById('modoInstrumental').checked;
+        const letra = sanitizeInput(document.getElementById('letraCancion').value);
+        const estilo = sanitizeInput(document.getElementById('promptEstilo').value);
+        // El estilo ahora se extrae automáticamente del prompt
+        
+        if (!esInstrumental && !letra && !estilo) {
+          showToast('Por favor ingresa una letra o prompt musical, o activa modo instrumental', 'warning');
+          return;
+        }
+        
+        if (esInstrumental && !estilo) {
+          showToast('Por favor ingresa un prompt de estilo para el instrumental', 'warning');
+          return;
+        }
+        
+        const btn = document.getElementById('generarMusica');
+        btn.disabled = true;
+        btn.textContent = esInstrumental ? 'Generando instrumental...' : 'Generando canción...';
+        
+        console.log('🎵 Iniciando generación con Suno Wrapper...');
+        
+        // Usar la nueva integración con wrapper de Suno (el estilo se extrae automáticamente del prompt)
+        const result = await generateMusicWithSuno(
+          estilo || 'música instrumental',
+          letra,
+          'auto', // El estilo se extrae automáticamente del prompt
+          esInstrumental
+        );
+        
+        console.log('✅ Resultado de generación:', result);
+        
+        if (result.success) {
+          showToast(esInstrumental ? '¡Instrumental generado con éxito!' : '¡Música generada con éxito!', 'success');
+          addLog(`🎵 Música generada - Job ID: ${result.jobId}`, 'success');
+          
+          // Si hay URLs de audio, mostrarlas
+          if (result.audioUrls && result.audioUrls.length > 0) {
+            addLog(`🎵 ${result.audioUrls.length} archivo(s) de audio generado(s)`, 'info');
+            
+            // Crear reproductor si hay audio
+            if (result.audioUrls[0]) {
+              createAudioPlayer(result.audioUrls[0], result.lyrics);
+            }
+          }
+          
+          // Mostrar letras si están disponibles
+          if (result.lyrics && result.lyrics.trim()) {
+            addLog(`📝 Letras generadas: ${result.lyrics.substring(0, 100)}...`, 'info');
+          }
+        } else {
+          throw new Error('Error en la generación');
+        }
+        
+      } catch (error) {
+        console.error('❌ Error completo:', error);
+        showToast('Error al generar música: ' + error.message, 'error');
+        addLog(`❌ Error: ${error.message}`, 'error');
+      } finally {
+        const btn = document.getElementById('generarMusica');
+        btn.disabled = false;
+        btn.textContent = 'Generar Música';
+      }
+    }
+    
+    // Función para crear reproductor de audio
+    function createAudioPlayer(audioUrl, lyrics = '') {
+      try {
+        // Crear contenedor del reproductor
+        const playerContainer = document.createElement('div');
+        playerContainer.className = 'audio-player-container bg-gray-800 p-4 rounded-lg mt-4';
+        playerContainer.innerHTML = `
+          <div class="flex items-center space-x-4">
+            <audio controls class="flex-1">
+              <source src="${audioUrl}" type="audio/mpeg">
+              Tu navegador no soporta el elemento de audio.
+            </audio>
+            <a href="${audioUrl}" download class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+              📥 Descargar
+            </a>
+          </div>
+          ${lyrics ? `<div class="mt-2 text-sm text-gray-300"><strong>Letras:</strong><br><em>${lyrics}</em></div>` : ''}
+        `;
+        
+        // Agregar al contenedor de logs o crear uno nuevo
+        let logsContainer = document.getElementById('logsContainer');
+        if (!logsContainer) {
+          logsContainer = document.createElement('div');
+          logsContainer.id = 'logsContainer';
+          logsContainer.className = 'mt-4';
+          document.body.appendChild(logsContainer);
+        }
+        
+        logsContainer.appendChild(playerContainer);
+        
+        console.log('🎵 Reproductor de audio creado:', audioUrl);
+        
+      } catch (error) {
+        console.error('❌ Error creando reproductor:', error);
+      }
+    }
+    
+    async function generarMusicaGhost() {
+      try {
+        const esInstrumental = document.getElementById('modoInstrumentalGhost').checked;
+        const prompt = sanitizeInput(document.getElementById('promptGhostStudio').value);
+        const preset = document.getElementById('presetGhost').value;
+        const tags = sanitizeInput(document.getElementById('tagsEstilo').value);
+        
+        if (!prompt) {
+          showToast('Por favor ingresa un prompt para Ghost Studio', 'warning');
+          return;
+        }
+        
+        const btn = document.getElementById('generarMusicaGhost');
+        btn.disabled = true;
+        btn.textContent = esInstrumental ? 'Procesando instrumental en Ghost Studio...' : 'Procesando en Ghost Studio...';
+        
+        // Usar endpoint simplificado sin autenticación requerida
+        const response = await fetch(`${API_BASE_URL}/api/music/generate`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+          },
+          body: JSON.stringify({
+            prompt: prompt,
+            instrumental: esInstrumental,
+            style: `${preset} ${tags}`.trim()
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.job_id) {
+          showToast(`¡Ghost Studio procesando! ID: ${data.job_id}`, 'success');
+          addLog(`👻 Ghost Studio procesando - Job ID: ${data.job_id}`);
+        } else {
+          showToast(esInstrumental ? '¡Instrumental procesado por Ghost Studio!' : '¡Maqueta procesada por Ghost Studio!', 'success');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('Error en Ghost Studio: ' + error.message, 'error');
+      } finally {
+        const btn = document.getElementById('generarMusicaGhost');
+        btn.disabled = false;
+        btn.textContent = 'Generar Música';
+      }
+    }
+
+    // ================================
+    // AUDIO PLAYER & WEBSOCKET SYSTEM
+    // ================================
+    
+    let audioPlayer = null;
+    let currentTrack = null;
+    let audioLibraryData = [];
+    let websocket = null;
+    let currentJobId = null;
+    
+    // Initialize Audio Player System
+    function initializeAudioPlayer() {
+      audioPlayer = document.getElementById('audioPlayer');
+      
+      // Audio player event listeners
+      audioPlayer.addEventListener('loadedmetadata', updateTrackInfo);
+      audioPlayer.addEventListener('timeupdate', updateProgress);
+      audioPlayer.addEventListener('ended', onTrackEnded);
+      audioPlayer.addEventListener('error', onAudioError);
+      
+      // Player controls
+      document.getElementById('playPauseBtn').addEventListener('click', togglePlayPause);
+      document.getElementById('progressSlider').addEventListener('input', seekTrack);
+      document.getElementById('volumeSlider').addEventListener('input', updateVolume);
+      
+      // Control buttons
+      document.getElementById('downloadCurrentBtn').addEventListener('click', downloadCurrentTrack);
+      document.getElementById('deleteBtn').addEventListener('click', deleteCurrentTrack);
+      document.getElementById('refreshLibraryBtn').addEventListener('click', refreshAudioLibrary);
+      document.getElementById('cleanupBtn').addEventListener('click', cleanupOldFiles);
+      
+      // Initialize volume
+      audioPlayer.volume = 0.5;
+      
+      // Load initial library
+      refreshAudioLibrary();
+    }
+    
+    // WebSocket Management
+    function initializeWebSocket() {
+      if (!currentUser) return;
+      
+      const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${wsProtocol}//${window.location.host}/ws/ws/${currentUser.id}`;
+      
+      try {
+        websocket = new WebSocket(wsUrl);
+        
+        websocket.onopen = () => {
+          console.log('WebSocket connected');
+          updateWebSocketStatus(true);
+        };
+        
+        websocket.onmessage = (event) => {
+          const message = JSON.parse(event.data);
+          handleWebSocketMessage(message);
+        };
+        
+        websocket.onclose = () => {
+          console.log('WebSocket disconnected');
+          updateWebSocketStatus(false);
+          // Attempt to reconnect after 5 seconds
+          setTimeout(initializeWebSocket, 5000);
+        };
+        
+        websocket.onerror = (error) => {
+          console.error('WebSocket error:', error);
+          updateWebSocketStatus(false);
+        };
+        
+      } catch (error) {
+        console.error('Failed to initialize WebSocket:', error);
+        updateWebSocketStatus(false);
+      }
+    }
+    
+    function handleWebSocketMessage(message) {
+      console.log('WebSocket message:', message);
+      
+      switch (message.type) {
+        case 'job_status':
+        case 'job_update':
+          updateJobProgress(message);
+          break;
+        case 'queue_position':
+          updateQueuePosition(message);
+          break;
+        case 'pong':
+          console.log('WebSocket ping/pong OK');
+          break;
+        default:
+          console.log('Unknown message type:', message.type);
+      }
+    }
+    
+    function updateWebSocketStatus(connected) {
+      const statusElement = document.getElementById('wsStatus');
+      if (statusElement) {
+        statusElement.className = `w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`;
+      }
+    }
+    
+    function subscribeToJob(jobId) {
+      if (websocket && websocket.readyState === WebSocket.OPEN) {
+        currentJobId = jobId;
+        websocket.send(JSON.stringify({
+          type: 'subscribe_job',
+          job_id: jobId
+        }));
+        
+        // Show progress tracking
+        showJobProgress(jobId);
+      }
+    }
+    
+    function showJobProgress(jobId) {
+      const progressContainer = document.getElementById('jobProgress');
+      if (progressContainer) {
+        progressContainer.style.display = 'block';
+        document.getElementById('currentJobId').textContent = jobId;
+        document.getElementById('currentJobStatus').textContent = 'iniciado';
+      }
+      
+      // Navigate to results section
+      showSection('resultados');
+    }
+    
+    function updateJobProgress(message) {
+      const progress = message.progress || 0;
+      const statusMessage = message.message || 'Procesando...';
+      const status = message.status || 'processing';
+      
+      // Update progress bar
+      const progressBar = document.getElementById('progressBar');
+      const progressPercent = document.getElementById('progressPercent');
+      const progressMessage = document.getElementById('progressMessage');
+      const jobStatus = document.getElementById('currentJobStatus');
+      
+      if (progressBar) progressBar.style.width = `${progress}%`;
+      if (progressPercent) progressPercent.textContent = `${progress}%`;
+      if (progressMessage) progressMessage.textContent = statusMessage;
+      if (jobStatus) jobStatus.textContent = status;
+      
+      // Handle completion
+      if (status === 'completed') {
+        showToast('¡Generación completada!', 'success');
+        setTimeout(() => {
+          document.getElementById('jobProgress').style.display = 'none';
+          refreshAudioLibrary();
+        }, 3000);
+      } else if (status === 'failed') {
+        showToast(`Generación falló: ${statusMessage}`, 'error');
+        setTimeout(() => {
+          document.getElementById('jobProgress').style.display = 'none';
+        }, 5000);
+      }
+    }
+    
+    // Audio Library Management
+    async function refreshAudioLibrary() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/audio/files`);
+        if (response.ok) {
+          const data = await response.json();
+          audioLibraryData = data.files || [];
+          renderAudioLibrary();
+        } else {
+          console.error('Failed to fetch audio library');
+        }
+      } catch (error) {
+        console.error('Error fetching audio library:', error);
+      }
+    }
+    
+    function renderAudioLibrary() {
+      const container = document.getElementById('audioLibrary');
+      
+      if (audioLibraryData.length === 0) {
+        container.innerHTML = `
+          <div class="text-center text-zinc-400 py-8">
+            <p>No hay archivos de audio disponibles</p>
+            <p class="text-sm mt-2">Genera música para ver los resultados aquí</p>
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = audioLibraryData.map(file => `
+        <div class="bg-zinc-900/30 rounded-lg p-4 flex items-center justify-between hover:bg-zinc-900/50 transition audio-file-item" 
+             data-filename="${file.filename}">
+          <div class="flex items-center space-x-4">
+            <button class="w-10 h-10 bg-neon/20 rounded-full flex items-center justify-center text-neon hover:bg-neon/30 transition play-btn"
+                    onclick="loadTrack('${file.filename}')">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+            <div>
+              <p class="font-medium">${file.filename}</p>
+              <p class="text-sm text-zinc-400">${formatFileSize(file.size)} • ${formatDate(file.created)}</p>
+            </div>
+          </div>
+          <div class="flex space-x-2">
+            <button onclick="downloadFile('${file.filename}')" 
+                    class="text-neon hover:text-neon/80 transition text-sm">
+              📥
+            </button>
+            <button onclick="deleteFile('${file.filename}')" 
+                    class="text-red-400 hover:text-red-300 transition text-sm">
+              🗑️
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Audio Player Functions
+    async function loadTrack(filename) {
+      try {
+        currentTrack = audioLibraryData.find(f => f.filename === filename);
+        if (!currentTrack) return;
+        
+        const streamUrl = `${API_BASE_URL}/api/audio/stream/${filename}`;
+        audioPlayer.src = streamUrl;
+        
+        // Update UI
+        document.getElementById('currentTrackName').textContent = filename;
+        document.getElementById('mainPlayer').style.display = 'block';
+        
+        // Enable controls
+        ['downloadCurrentBtn', 'shareBtn', 'deleteBtn'].forEach(id => {
+          document.getElementById(id).disabled = false;
+        });
+        
+        // Load metadata
+        loadTrackMetadata(filename);
+        
+      } catch (error) {
+        console.error('Error loading track:', error);
+        showToast('Error al cargar el archivo de audio', 'error');
+      }
+    }
+    
+    async function loadTrackMetadata(filename) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/audio/metadata/${filename}`);
+        if (response.ok) {
+          const metadata = await response.json();
+          
+          document.getElementById('fileName').textContent = metadata.filename;
+          document.getElementById('fileSize').textContent = formatFileSize(metadata.size);
+          document.getElementById('fileFormat').textContent = metadata.extension.toUpperCase();
+          document.getElementById('generatedAt').textContent = formatDate(metadata.created);
+        }
+      } catch (error) {
+        console.error('Error loading metadata:', error);
+      }
+    }
+    
+    function togglePlayPause() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        document.getElementById('playIcon').classList.add('hidden');
+        document.getElementById('pauseIcon').classList.remove('hidden');
+      } else {
+        audioPlayer.pause();
+        document.getElementById('playIcon').classList.remove('hidden');
+        document.getElementById('pauseIcon').classList.add('hidden');
+      }
+    }
+    
+    function updateTrackInfo() {
+      const duration = audioPlayer.duration;
+      if (duration) {
+        document.getElementById('totalTime').textContent = formatTime(duration);
+        document.getElementById('trackDuration').textContent = formatTime(duration);
+        document.getElementById('progressSlider').max = duration;
+      }
+    }
+    
+    function updateProgress() {
+      const currentTime = audioPlayer.currentTime;
+      const duration = audioPlayer.duration;
+      
+      if (duration) {
+        const progress = (currentTime / duration) * 100;
+        document.getElementById('progressSlider').value = currentTime;
+        document.getElementById('currentTime').textContent = formatTime(currentTime);
+      }
+    }
+    
+    function seekTrack() {
+      const value = document.getElementById('progressSlider').value;
+      audioPlayer.currentTime = value;
+    }
+    
+    function updateVolume() {
+      const value = document.getElementById('volumeSlider').value / 100;
+      audioPlayer.volume = value;
+    }
+    
+    function onTrackEnded() {
+      document.getElementById('playIcon').classList.remove('hidden');
+      document.getElementById('pauseIcon').classList.add('hidden');
+    }
+    
+    function onAudioError(error) {
+      console.error('Audio error:', error);
+      showToast('Error al reproducir el archivo de audio', 'error');
+    }
+    
+    // File Management Functions
+    async function downloadFile(filename) {
+      const url = `${API_BASE_URL}/api/audio/download/${filename}`;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    
+    function downloadCurrentTrack() {
+      if (currentTrack) {
+        downloadFile(currentTrack.filename);
+      }
+    }
+    
+    async function deleteFile(filename) {
+      if (!confirm(`¿Estás seguro de que quieres eliminar ${filename}?`)) return;
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/audio/delete/${filename}`, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          showToast('Archivo eliminado correctamente', 'success');
+          refreshAudioLibrary();
+          
+          // If current track was deleted, clear player
+          if (currentTrack && currentTrack.filename === filename) {
+            clearPlayer();
+          }
+        } else {
+          showToast('Error al eliminar el archivo', 'error');
+        }
+      } catch (error) {
+        console.error('Error deleting file:', error);
+        showToast('Error al eliminar el archivo', 'error');
+      }
+    }
+    
+    function deleteCurrentTrack() {
+      if (currentTrack) {
+        deleteFile(currentTrack.filename);
+      }
+    }
+    
+    async function cleanupOldFiles() {
+      if (!confirm('¿Estás seguro de que quieres limpiar archivos antiguos?')) return;
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/audio/cleanup`, {
+          method: 'POST'
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          showToast(`Limpieza completada. ${data.deleted_files} archivos eliminados`, 'success');
+          refreshAudioLibrary();
+        } else {
+          showToast('Error durante la limpieza', 'error');
+        }
+      } catch (error) {
+        console.error('Error during cleanup:', error);
+        showToast('Error durante la limpieza', 'error');
+      }
+    }
+    
+    function clearPlayer() {
+      audioPlayer.src = '';
+      currentTrack = null;
+      document.getElementById('mainPlayer').style.display = 'none';
+      document.getElementById('currentTrackName').textContent = 'Sin audio seleccionado';
+      
+      // Disable controls
+      ['downloadCurrentBtn', 'shareBtn', 'deleteBtn'].forEach(id => {
+        document.getElementById(id).disabled = true;
+      });
+    }
+    
+    // Utility Functions
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+    
+    function formatDate(timestamp) {
+      return new Date(timestamp * 1000).toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+    
+    // Enhanced Music Generation with Audio Player Integration
+    async function generarMusicaConAudio() {
+      try {
+        const response = await generarMusica();
+        
+        if (response && response.job_id) {
+          // Subscribe to WebSocket updates for this job
+          subscribeToJob(response.job_id);
+        }
+        
+        return response;
+      } catch (error) {
+        console.error('Error in enhanced music generation:', error);
+        throw error;
+      }
+    }
+    
+    // System Status Functions
+    async function checkSystemStatus() {
+      try {
+        // Check API
+        const apiResponse = await fetch(`${API_BASE_URL}/api/health`);
+        systemStatus.api = apiResponse.ok;
+
+        // Check Celery (through backend endpoint if available)
+        try {
+          const celeryResponse = await fetch(`${API_BASE_URL}/api/celery-status`);
+          systemStatus.celery = celeryResponse.ok;
+        } catch {
+          systemStatus.celery = false;
+        }
+
+        // Check Redis (through backend endpoint if available)
+        try {
+          const redisResponse = await fetch(`${API_BASE_URL}/api/redis-status`);
+          systemStatus.redis = redisResponse.ok;
+        } catch {
+          systemStatus.redis = false;
+        }
+
+        // Check Chrome Extension - improved detection
+        try {
+          // Method 1: Check if extension has communicated recently
+          const hasExtensionStorage = localStorage.getItem('son1k_extension_connected');
+          const extensionTimestamp = localStorage.getItem('son1k_extension_timestamp');
+          
+          // Method 2: Post message to potential extension
+          window.postMessage({ 
+            type: 'SON1K_FRONTEND_PING', 
+            timestamp: Date.now(),
+            source: 'son1k_frontend'
+          }, '*');
+          
+          // Method 3: Check for extension-specific indicators
+          const extensionIndicators = [
+            hasExtensionStorage === 'true',
+            extensionTimestamp && (Date.now() - parseInt(extensionTimestamp)) < 60000, // Last ping within 60 seconds
+            document.querySelector('[data-son1k-extension]') !== null
+          ];
+          
+          systemStatus.extension = extensionIndicators.some(indicator => indicator);
+          
+          if (systemStatus.extension) {
+            addLog('✅ Extensión Chrome detectada', 'success');
+          }
+          
+        } catch {
+          systemStatus.extension = false;
+        }
+
+        updateStatusIndicators();
+      } catch (error) {
+        systemStatus.api = false;
+        systemStatus.celery = false;
+        systemStatus.redis = false;
+        systemStatus.extension = false;
+        updateStatusIndicators();
+      }
+    }
+
+    function updateStatusIndicators() {
+      const indicators = {
+        'api-status': systemStatus.api,
+        'celery-status': systemStatus.celery,
+        'redis-status': systemStatus.redis,
+        'extension-status': systemStatus.extension
+      };
+
+      Object.entries(indicators).forEach(([id, status]) => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.className = `status-indicator ${status ? 'status-online' : 'status-offline'}`;
+        }
+      });
+    }
+
+    function refreshSystemStatus() {
+      addLog('🔄 Refrescando estado del sistema...');
+      checkSystemStatus();
+    }
+
+    function addLog(message, type = 'info') {
+      const logs = document.getElementById('extension-logs');
+      if (logs) {
+        const logEntry = document.createElement('div');
+        logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        logEntry.className = `text-${type === 'error' ? 'red' : type === 'success' ? 'green' : 'zinc'}-400`;
+        logs.appendChild(logEntry);
+        logs.scrollTop = logs.scrollHeight;
+      }
+    }
+
+    function testExtensionConnection() {
+      addLog('🔍 Probando conexión de extensión...');
+      window.postMessage({ type: 'BACKEND_PING', url: window.location.origin }, '*');
+      
+      setTimeout(() => {
+        if (!systemStatus.extension) {
+          addLog('⚠️ No hay respuesta de la extensión', 'error');
+        }
+      }, 2000);
+    }
+
+    function openExtensionPage() {
+      window.open('chrome://extensions/', '_blank');
+    }
+
+    // Extension Communication
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'EXTENSION_PING') {
+        systemStatus.extension = true;
+        updateStatusIndicators();
+        addLog('🔌 ¡Extensión conectada!', 'success');
+        
+        document.getElementById('ext-connection-status').textContent = 'Conectado';
+        document.getElementById('ext-last-ping').textContent = new Date().toLocaleTimeString();
+      }
+    });
+
+    // Auto-refresh extension status
+    setInterval(() => {
+      const lastPing = document.getElementById('ext-last-ping').textContent;
+      if (lastPing !== 'Nunca') {
+        const lastTime = new Date('1970-01-01 ' + lastPing);
+        const now = new Date();
+        const diff = (now.getTime() - lastTime.getTime()) / 1000;
+        
+        if (diff > 60) { // More than 1 minute since last ping
+          systemStatus.extension = false;
+          updateStatusIndicators();
+          document.getElementById('ext-connection-status').textContent = 'Desconectado';
+        }
+      }
+    }, 10000);
+    
+    // Sistema de notificaciones mejorado
+    function showToast(message, type = 'info') {
+      const toastArea = document.getElementById('toast-area');
+      const toast = document.createElement('div');
+      toast.className = `fixed top-24 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white font-medium max-w-sm transform transition-all duration-300 translate-x-full`;
+      
+      const colors = {
+        'success': 'bg-green-600',
+        'error': 'bg-red-600',
+        'warning': 'bg-yellow-600',
+        'info': 'bg-blue-600'
+      };
+      
+      toast.classList.add(colors[type] || colors.info);
+      
+      // Crear nodo de texto seguro (sin innerHTML)
+      const textNode = document.createTextNode(message);
+      toast.appendChild(textNode);
+      
+      toastArea.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-x-full');
+      }, 100);
+      
+      setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toastArea.removeChild(toast);
+          }
+        }, 300);
+      }, 3000);
+    }
+    
+    // Event listeners principales
+    function setupEventListeners() {
+      // Botones principales
+      document.getElementById('testRapido').addEventListener('click', () => {
+        showToast('Test Rápido iniciado', 'info');
+        checkSystemStatus();
+      });
+      
+      document.getElementById('generarPreview').addEventListener('click', () => {
+        showToast('Generando preview...', 'info');
+      });
+      
+      document.getElementById('entrarEstudio').addEventListener('click', () => {
+        showSection('generacion');
+        document.querySelectorAll('.nav-tab').forEach(t => {
+          t.classList.remove('tab-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        const tab = document.querySelector('[data-section="generacion"]');
+        tab.classList.add('tab-active');
+        tab.setAttribute('aria-selected', 'true');
+      });
+      
+      document.getElementById('entrarEstudioMain').addEventListener('click', () => {
+        showSection('generacion');
+        document.querySelectorAll('.nav-tab').forEach(t => {
+          t.classList.remove('tab-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        const tab = document.querySelector('[data-section="generacion"]');
+        tab.classList.add('tab-active');
+        tab.setAttribute('aria-selected', 'true');
+      });
+      
+      // Easter egg: Contador de clicks para portal secreto
+      let universeclicks = 0;
+      document.getElementById('conocerUniverso').addEventListener('click', () => {
+        universeclicks++;
+        console.log(`Click ${universeclicks} en Conocer el Universo`);
+        
+        if (universeclicks === 5) {
+          // Activar portal secreto
+          console.log('🌌 PORTAL SECRETO ACTIVADO');
+          alert('🌌 PORTAL SECRETO ACTIVADO!\n\n"Tu glitch es la chispa de la Liga del No Silencio"\n\n🤖 PIXEL: "Bienvenido a la resistencia digital"\n🌊 BELLA: "La música es nuestro código"\n⚡ NOVA: "Cada imperfección es sagrada"\n🔥 CIPHER: "El universo son1k te espera"');
+          universeclicks = 0; // Reset counter
+        } else {
+          // Comportamiento normal
+          showSection('home');
+          window.scrollTo({ top: document.getElementById('home').offsetHeight, behavior: 'smooth' });
+        }
+      });
+      
+      // Smart prompt buttons
+      document.getElementById('generarLetraIA').addEventListener('click', generarLetraIA);
+      document.getElementById('mejorarLetra').addEventListener('click', mejorarLetra);
+      document.getElementById('promptInteligente').addEventListener('click', promptInteligente);
+      document.getElementById('analizarTexto').addEventListener('click', analizarTexto);
+      
+      // Botones de la sección de generación musical
+      document.getElementById('generarPromptIA').addEventListener('click', generarPromptIA);
+      document.getElementById('mejorarPrompt').addEventListener('click', mejorarPrompt);
+      
+      // Botones de generación
+      document.getElementById('generarMusica').addEventListener('click', generarMusica);
+      document.getElementById('generarMusicaGhost').addEventListener('click', generarMusicaGhost);
+      
+      document.getElementById('verificarAPIs').addEventListener('click', async () => {
+        showToast('Verificando conexiones de API...', 'info');
+        await checkSystemStatus();
+        if (systemStatus.api) {
+          showToast('APIs conectadas correctamente', 'success');
+        } else {
+          showToast('Problemas de conectividad detectados', 'warning');
+        }
+      });
+    }
+    
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', async () => {
+      setupKnobs();
+      setupSliders();
+      setupNavigation();
+      setupEventListeners();
+      
+      // Initialize audio player system
+      initializeAudioPlayer();
+      
+      // Initialize WebSocket (if user is logged in)
+      if (currentUser) {
+        initializeWebSocket();
+      }
+      
+      // Verificar sistema
+      await checkSystemStatus();
+      
+      // Send message to potential extension
+      window.postMessage({ type: 'BACKEND_PING', url: window.location.origin }, '*');
+      
+      setTimeout(() => {
+        if (!systemStatus.extension) {
+          addLog('⚠️ No hay respuesta de extensión. Verifica que esté instalada.', 'warning');
+        }
+      }, 2000);
+      
+      // Mensaje de bienvenida
+      setTimeout(() => {
+        showToast('Bienvenido a Son1kVers3 - La Resistencia Sonora', 'success');
+      }, 1000);
+    });
+
+    // ================================
+    // SISTEMA DE AUTENTICACIÓN
+    // ================================
+
+    // Variables globales de autenticación
+    let currentUser = null;
+    let authToken = localStorage.getItem('authToken');
+
+    // Verificar autenticación al cargar
+    if (authToken) {
+      verifyToken();
+    }
+
+    // Función para mostrar modal de login
+    function showLoginModal() {
+      document.getElementById('authModal').style.display = 'flex';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
+    }
+
+    // Función para mostrar modal de registro
+    function showRegisterModal() {
+      document.getElementById('authModal').style.display = 'flex';
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+    }
+
+    // Función para cerrar modal
+    function closeAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+
+    // Función de login
+    async function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      if (!email || !password) {
+        showToast('Por favor completa todos los campos', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          authToken = data.access_token;
+          currentUser = data.user;
+          localStorage.setItem('authToken', authToken);
+          updateAuthUI();
+          closeAuthModal();
+          showToast(`¡Bienvenido ${currentUser.email}! Plan: ${currentUser.plan.toUpperCase()}`, 'success');
+        } else {
+          showToast(data.detail || 'Error en el login', 'error');
+        }
+      } catch (error) {
+        showToast('Error de conexión', 'error');
+        console.error('Login error:', error);
+      }
+    }
+
+    // Función de registro
+    async function register() {
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const name = document.getElementById('registerName').value;
+
+      if (!email || !password) {
+        showToast('Email y contraseña son obligatorios', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password, name })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          authToken = data.access_token;
+          currentUser = data.user;
+          localStorage.setItem('authToken', authToken);
+          updateAuthUI();
+          closeAuthModal();
+          showToast(`¡Cuenta creada! Bienvenido ${currentUser.email}`, 'success');
+        } else {
+          showToast(data.detail || 'Error en el registro', 'error');
+        }
+      } catch (error) {
+        showToast('Error de conexión', 'error');
+        console.error('Register error:', error);
+      }
+    }
+
+    // Función de logout
+    function logout() {
+      authToken = null;
+      currentUser = null;
+      localStorage.removeItem('authToken');
+      updateAuthUI();
+      showToast('Sesión cerrada', 'info');
+    }
+
+    // Verificar token válido
+    async function verifyToken() {
+      if (!authToken) return;
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        if (response.ok) {
+          currentUser = await response.json();
+          updateAuthUI();
+        } else {
+          // Token inválido
+          logout();
+        }
+      } catch (error) {
+        console.error('Token verification error:', error);
+        logout();
+      }
+    }
+
+    // Actualizar UI según estado de autenticación
+    function updateAuthUI() {
+      const authButtons = document.getElementById('authButtons');
+      const userInfo = document.getElementById('userInfo');
+
+      if (currentUser) {
+        authButtons.style.display = 'none';
+        userInfo.style.display = 'block';
+        userInfo.innerHTML = `
+          <div class="flex items-center space-x-4">
+            <div class="text-right">
+              <div class="text-sm font-medium">${currentUser.email}</div>
+              <div class="text-xs text-neon">${currentUser.plan.toUpperCase()} - ${currentUser.daily_usage}/${currentUser.daily_limit} hoy</div>
+            </div>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm">
+              Salir
+            </button>
+          </div>
+        `;
+      } else {
+        authButtons.style.display = 'block';
+        userInfo.style.display = 'none';
+      }
+    }
+
+    // Configurar eventos de autenticación cuando se hace clic en "Entrar al Estudio"
+    document.getElementById('entrarEstudio').addEventListener('click', () => {
+      if (!currentUser) {
+        showLoginModal();
+      } else {
+        // Usuario autenticado, ir al estudio
+        const tabButton = document.querySelector('[data-section="estudio"]');
+        if (tabButton) {
+          tabButton.click();
+        }
+      }
+    });
+
+    document.getElementById('entrarEstudioMain').addEventListener('click', () => {
+      if (!currentUser) {
+        showLoginModal();
+      } else {
+        // Usuario autenticado, ir al estudio
+        const tabButton = document.querySelector('[data-section="estudio"]');
+        if (tabButton) {
+          tabButton.click();
+        }
+      }
+    });
+
+    // ================================
+    // PROTECCIÓN OBLIGATORIA DE AUTENTICACIÓN
+    // ================================
+
+    // Interceptar todos los clicks en tabs para requerir autenticación
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        const section = tab.getAttribute('data-section');
+        
+        // Secciones que requieren autenticación
+        const protectedSections = ['estudio', 'extension', 'archivo'];
+        
+        if (protectedSections.includes(section) && !currentUser) {
+          e.preventDefault();
+          e.stopPropagation();
+          showLoginModal();
+          showToast('Debes iniciar sesión para acceder a esta sección', 'error');
+          return false;
+        }
+      });
+    });
+
+    // Proteger funciones de generación
+    const originalGenerateFunction = window.generarCancion;
+    window.generarCancion = function() {
+      if (!currentUser) {
+        showLoginModal();
+        showToast('Debes iniciar sesión para generar música', 'error');
+        return;
+      }
+      return originalGenerateFunction.apply(this, arguments);
+    };
+
+    // Proteger función de envío
+    const originalSendFunction = window.enviarASuno;
+    window.enviarASuno = function() {
+      if (!currentUser) {
+        showLoginModal();
+        showToast('Debes iniciar sesión para enviar a Suno', 'error');
+        return;
+      }
+      return originalSendFunction.apply(this, arguments);
+    };
+
+    // Añadir headers de autorización a todas las requests API
+    function makeAuthenticatedRequest(endpoint, options = {}) {
+      if (!currentUser || !authToken) {
+        showLoginModal();
+        throw new Error('Autenticación requerida');
+      }
+
+      const defaultOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+          ...options.headers
+        },
+        ...options
+      };
+
+      return fetch(`${API_BASE_URL}${endpoint}`, defaultOptions);
+    }
+
+    // Reemplazar función global de fetch para endpoints protegidos
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options = {}) {
+      // Si es una llamada a API de songs, requerir autenticación
+      if (url.includes('/api/songs/') || url.includes('/api/auth/me')) {
+        if (!currentUser || !authToken) {
+          showLoginModal();
+          return Promise.reject(new Error('Autenticación requerida'));
+        }
+        
+        // Añadir token de autorización
+        options.headers = {
+          ...options.headers,
+          'Authorization': `Bearer ${authToken}`
+        };
+      }
+      
+      return originalFetch.call(this, url, options);
+    };
+
+    // Verificar autenticación al inicializar
+    function checkAuthenticationOnLoad() {
+      if (authToken) {
+        verifyToken();
+      } else {
+        // Si no hay token, mostrar modal después de un breve delay
+        setTimeout(() => {
+          if (!currentUser) {
+            showToast('¡Bienvenido! Inicia sesión para usar todas las funciones', 'info');
+          }
+        }, 3000);
+      }
+    }
+
+    // Ejecutar verificación al cargar
+    checkAuthenticationOnLoad();
+  </script>
+
+  <!-- Modal de Autenticación -->
+  <div id="authModal" style="display: none;" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-zinc-900 p-8 rounded-xl border border-white/20 max-w-md w-full mx-4">
+      
+      <!-- Formulario de Login -->
+      <div id="loginForm">
+        <h2 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Email</label>
+            <input 
+              type="email" 
+              id="loginEmail" 
+              class="w-full px-4 py-2 bg-zinc-800 border border-white/20 rounded-lg focus:border-neon focus:outline-none"
+              placeholder="tu@email.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Contraseña</label>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              class="w-full px-4 py-2 bg-zinc-800 border border-white/20 rounded-lg focus:border-neon focus:outline-none"
+              placeholder="••••••••"
+            />
+          </div>
+          <button 
+            onclick="login()" 
+            class="w-full bg-neon text-black py-3 rounded-lg font-semibold hover:bg-neon/90 transition"
+          >
+            Entrar
+          </button>
+          <div class="text-center">
+            <button onclick="showRegisterModal()" class="text-neon hover:underline">
+              ¿No tienes cuenta? Regístrate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Registro -->
+      <div id="registerForm" style="display: none;">
+        <h2 class="text-2xl font-bold text-center mb-6">Crear Cuenta</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Nombre (opcional)</label>
+            <input 
+              type="text" 
+              id="registerName" 
+              class="w-full px-4 py-2 bg-zinc-800 border border-white/20 rounded-lg focus:border-neon focus:outline-none"
+              placeholder="Tu nombre"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Email</label>
+            <input 
+              type="email" 
+              id="registerEmail" 
+              class="w-full px-4 py-2 bg-zinc-800 border border-white/20 rounded-lg focus:border-neon focus:outline-none"
+              placeholder="tu@email.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Contraseña</label>
+            <input 
+              type="password" 
+              id="registerPassword" 
+              class="w-full px-4 py-2 bg-zinc-800 border border-white/20 rounded-lg focus:border-neon focus:outline-none"
+              placeholder="••••••••"
+            />
+          </div>
+          <button 
+            onclick="register()" 
+            class="w-full bg-neon text-black py-3 rounded-lg font-semibold hover:bg-neon/90 transition"
+          >
+            Crear Cuenta
+          </button>
+          <div class="text-center">
+            <button onclick="showLoginModal()" class="text-neon hover:underline">
+              ¿Ya tienes cuenta? Inicia sesión
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button 
+        onclick="closeAuthModal()" 
+        class="absolute top-4 right-4 text-gray-400 hover:text-white"
+      >
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- 🎵 Son1k Commercial Integration Script -->
+  <script src="commercial_integration.js"></script>
+  
+  <!-- 🎵 Real Music Generation Scripts -->
+  <script src="web_audio_generator.js"></script>
+  <script src="real_music_integration.js"></script>
+  
+  <!-- 🤖 Ollama AI Integration Scripts -->
+  <script src="ollama_integration.js"></script>
+  
+  <!-- 📊 Analytics Scripts -->
+  <script src="analytics_client.js"></script>
+  
+  <!-- 🎵 Suno Wrapper Integration Script -->
+  <script src="suno_wrapper_integration.js"></script>
+  
+  <script>
+    // Modificar evento del botón para usar generación musical real
+    document.addEventListener('DOMContentLoaded', function() {
+      // Esperar a que el DOM esté completamente cargado
+      setTimeout(() => {
+        // Remover evento anterior y agregar nuevo
+        const btnGenerar = document.getElementById('generarMusica');
+        if (btnGenerar) {
+          // Clonar botón para remover eventos anteriores
+          const newBtn = btnGenerar.cloneNode(true);
+          btnGenerar.parentNode.replaceChild(newBtn, btnGenerar);
+          
+          // Agregar nuevo evento que use el sistema de generación real
+          newBtn.addEventListener('click', async function() {
+            // Verificar disponibilidad del sistema de generación real
+            if (window.realMusicIntegration && window.realMusicIntegration.isInitialized) {
+              await generateRealMusic();
+            } else {
+              showToast('⚠️ Generador real no disponible. Usando modo estándar...', 'warning');
+              // Fallback a función original
+              generarMusica();
+              return;
+            }
+          });
+          
+          // Mantener texto original del botón
+          newBtn.innerHTML = '🎵 Generar Música Real';
+        }
+        
+        // Verificar estado del generador real al cargar
+        setTimeout(() => {
+          const statusIndicator = document.createElement('div');
+          statusIndicator.className = 'fixed top-4 right-4 z-40 px-3 py-1 rounded-full text-xs font-medium';
+          
+          if (window.realMusicIntegration && window.realMusicIntegration.isInitialized) {
+            statusIndicator.innerHTML = '🟢 Generador Real Activo';
+            statusIndicator.style.backgroundColor = '#10b981';
+            statusIndicator.style.color = 'white';
+          } else {
+            statusIndicator.innerHTML = '🔴 Modo Básico';
+            statusIndicator.style.backgroundColor = '#ef4444';
+            statusIndicator.style.color = 'white';
+          }
+          
+          document.body.appendChild(statusIndicator);
+          
+          // Auto-hide después de 3 segundos
+          setTimeout(() => statusIndicator.remove(), 3000);
+        }, 2000);
+      }, 1000); // Esperar 1 segundo para asegurar que todo esté cargado
+    });
+    
+    // Función para generar prompt con IA
+    async function generarPromptIA() {
+      // Intentar obtener prompt del campo principal primero, luego del secundario
+      let prompt = document.getElementById('promptGhostStudio')?.value || document.getElementById('promptEstilo')?.value;
+      if (!prompt.trim()) {
+        showToast('Escribe una idea básica primero para generar el prompt', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('generarPromptIA');
+      btn.disabled = true;
+      btn.textContent = '🤖 Generando...';
+
+      try {
+        // Verificar si IA está disponible
+        const aiAvailable = window.enhancedMusicGenerator && window.enhancedMusicGenerator.ollamaAI.isAvailable;
+        
+        if (aiAvailable) {
+          // Usar IA local para generar prompt
+          const response = await fetch('http://localhost:8001/ai/optimize', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            // Actualizar el campo de prompt correspondiente
+            const promptField = document.getElementById('promptGhostStudio') || document.getElementById('promptEstilo');
+            if (promptField) {
+              promptField.value = data.optimized_prompt || data.prompt;
+            }
+            showToast('✅ Prompt generado con IA', 'success');
+          } else {
+            throw new Error('Error en la API de IA');
+          }
+        } else {
+          // Fallback: generar prompt básico
+          const enhancedPrompt = `una canción ${prompt} con tempo dinámico, instrumentos variados y atmosfera envolvente`;
+          const promptField = document.getElementById('promptGhostStudio') || document.getElementById('promptEstilo');
+          if (promptField) {
+            promptField.value = enhancedPrompt;
+          }
+          showToast('✅ Prompt mejorado (modo básico)', 'info');
+        }
+      } catch (error) {
+        console.error('Error generando prompt:', error);
+        showToast('❌ Error generando prompt', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🤖 Generar Prompt con IA';
+      }
+    }
+
+    // Función para mejorar prompt existente
+    async function mejorarPrompt() {
+      // Intentar obtener prompt del campo principal primero, luego del secundario
+      let prompt = document.getElementById('promptGhostStudio')?.value || document.getElementById('promptEstilo')?.value;
+      if (!prompt.trim()) {
+        showToast('Escribe un prompt primero para mejorarlo', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('mejorarPrompt');
+      btn.disabled = true;
+      btn.textContent = '⚡ Mejorando...';
+
+      try {
+        // Verificar si IA está disponible
+        const aiAvailable = window.enhancedMusicGenerator && window.enhancedMusicGenerator.ollamaAI.isAvailable;
+        
+        if (aiAvailable) {
+          // Usar IA local para optimizar prompt
+          const response = await fetch('http://localhost:8001/ai/optimize', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            // Actualizar el campo de prompt correspondiente
+            const promptField = document.getElementById('promptGhostStudio') || document.getElementById('promptEstilo');
+            if (promptField) {
+              promptField.value = data.optimized_prompt || data.prompt;
+            }
+            showToast('✅ Prompt optimizado con IA', 'success');
+          } else {
+            throw new Error('Error en la API de IA');
+          }
+        } else {
+          // Fallback: mejorar prompt básicamente
+          const improvedPrompt = prompt + ', con detalles musicales específicos y atmosfera única';
+          const promptField = document.getElementById('promptGhostStudio') || document.getElementById('promptEstilo');
+          if (promptField) {
+            promptField.value = improvedPrompt;
+          }
+          showToast('✅ Prompt mejorado (modo básico)', 'info');
+        }
+      } catch (error) {
+        console.error('Error mejorando prompt:', error);
+        showToast('❌ Error mejorando prompt', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '⚡ Mejorar Prompt';
+      }
+    }
+
+    // Función para generar música real con IA
+    async function generateRealMusic() {
+      try {
+        // Obtener datos del formulario
+        const prompt = document.getElementById('promptGhostStudio')?.value || 'una canción épica de synthwave con tempo 140 BPM';
+        const lyrics = document.getElementById('letraMusical')?.value || '';
+        // El estilo ahora se extrae del prompt automáticamente
+        
+        // Verificar si IA está disponible
+        const aiAvailable = window.enhancedMusicGenerator && window.enhancedMusicGenerator.ollamaAI.isAvailable;
+        
+        if (aiAvailable) {
+          showToast('🤖 Generando música con IA local...', 'info');
+          
+          // Generar música con IA (el estilo se extrae del prompt)
+          const track = await window.enhancedMusicGenerator.generateMusicWithAI(prompt, 'auto', lyrics);
+          
+          // Mostrar información del track con IA
+          showToast(`✅ Música generada con IA: ${track.duration.toFixed(2)}s`, 'success');
+          updateUIWithAITrackInfo(track);
+          
+        } else {
+          showToast('🎵 Generando música real con Web Audio API...', 'info');
+          
+          // Generar música sin IA (el estilo se extrae del prompt)
+          const track = await window.realMusicIntegration.generateMusic(prompt, 'auto', lyrics);
+          
+          // Mostrar información del track
+          showToast(`✅ Música generada: ${track.duration.toFixed(2)}s`, 'success');
+          updateUIWithTrackInfo(track);
+        }
+        
+        // Reproducir automáticamente
+        window.realMusicIntegration.play();
+        
+      } catch (error) {
+        console.error('❌ Error generando música real:', error);
+        showToast('Error generando música real', 'error');
+      }
+    }
+    
+    // Función para actualizar UI con información del track con IA
+    function updateUIWithAITrackInfo(track) {
+      const trackInfo = document.createElement('div');
+      trackInfo.className = 'track-info ai-enhanced';
+      trackInfo.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #00ff88;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #00ff88;
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 1000;
+        max-width: 350px;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+      `;
+      
+      const aiAnalysis = track.aiAnalysis || {};
+      const optimization = track.optimization || {};
+      
+      trackInfo.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: 10px; color: #00ccff;">
+          🤖 Track Generado con IA
+        </div>
+        <div><strong>ID:</strong> ${track.id}</div>
+        <div><strong>Duración:</strong> ${track.duration.toFixed(2)}s</div>
+        <div><strong>Estilo:</strong> ${aiAnalysis.primary_style || track.style}</div>
+        <div><strong>Tempo:</strong> ${aiAnalysis.tempo || 'N/A'} BPM</div>
+        <div><strong>Escala:</strong> ${aiAnalysis.scale || 'N/A'}</div>
+        <div><strong>Mood:</strong> ${aiAnalysis.mood || 'N/A'}</div>
+        <div><strong>Instrumentos:</strong> ${(aiAnalysis.instruments || []).join(', ')}</div>
+        <div><strong>Confianza IA:</strong> ${aiAnalysis.confidence ? (aiAnalysis.confidence * 100).toFixed(0) + '%' : 'N/A'}</div>
+        <div><strong>Mejoras:</strong> ${(optimization.improvements || []).join(', ') || 'N/A'}</div>
+        ${track.generatedLyrics ? `<div><strong>Letras IA:</strong> ${track.generatedLyrics.substring(0, 50)}...</div>` : ''}
+        <div style="margin-top: 10px;">
+          <button onclick="window.realMusicIntegration.play()" style="background: #00ff88; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">▶️ Play</button>
+          <button onclick="window.realMusicIntegration.pause()" style="background: #ffaa00; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">⏸️ Pause</button>
+          <button onclick="window.realMusicIntegration.download()" style="background: #00ccff; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">💾 Download</button>
+        </div>
+      `;
+      
+      // Remover track info anterior si existe
+      const existingTrackInfo = document.querySelector('.track-info');
+      if (existingTrackInfo) {
+        existingTrackInfo.remove();
+      }
+      
+      document.body.appendChild(trackInfo);
+      
+      // Auto-remover después de 15 segundos (más tiempo para IA)
+      setTimeout(() => {
+        if (trackInfo.parentNode) {
+          trackInfo.remove();
+        }
+      }, 15000);
+    }
+    
+    // Función para actualizar UI con información del track
+    function updateUIWithTrackInfo(track) {
+      // Crear elemento para mostrar información del track
+      const trackInfo = document.createElement('div');
+      trackInfo.className = 'track-info';
+      trackInfo.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #00ff88;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #00ff88;
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 1000;
+        max-width: 300px;
+      `;
+      
+      trackInfo.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: 10px;">🎵 Track Generado</div>
+        <div><strong>ID:</strong> ${track.id}</div>
+        <div><strong>Duración:</strong> ${track.duration.toFixed(2)}s</div>
+        <div><strong>Estilo:</strong> ${track.style}</div>
+        <div><strong>Tempo:</strong> ${track.analysis.tempo} BPM</div>
+        <div><strong>Escala:</strong> ${track.analysis.scale}</div>
+        <div><strong>Mood:</strong> ${track.analysis.mood}</div>
+        <div style="margin-top: 10px;">
+          <button onclick="window.realMusicIntegration.play()" style="background: #00ff88; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">▶️ Play</button>
+          <button onclick="window.realMusicIntegration.pause()" style="background: #ffaa00; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">⏸️ Pause</button>
+          <button onclick="window.realMusicIntegration.download()" style="background: #00ccff; color: #000; border: none; padding: 5px 10px; margin: 2px; border-radius: 3px; cursor: pointer;">💾 Download</button>
+        </div>
+      `;
+      
+      // Remover track info anterior si existe
+      const existingTrackInfo = document.querySelector('.track-info');
+      if (existingTrackInfo) {
+        existingTrackInfo.remove();
+      }
+      
+      document.body.appendChild(trackInfo);
+      
+      // Auto-remover después de 10 segundos
+      setTimeout(() => {
+        if (trackInfo.parentNode) {
+          trackInfo.remove();
+        }
+      }, 10000);
+    }
+  </script>
+
+  <!-- Interfaz Inmersiva (Oculta por defecto) -->
+  <div id="immersiveInterfaceContainer" class="fixed inset-0 z-50 hidden">
+    <iframe 
+      src="immersive_interface.html" 
+      class="w-full h-full border-0"
+      id="immersiveIframe">
+    </iframe>
+  </div>
+
+  <!-- Botón flotante para modo inmersivo (móviles) -->
+  <div id="immersiveToggleButton" class="fixed bottom-6 right-6 z-40 md:hidden">
+    <button 
+      onclick="toggleImmersiveInterface()"
+      class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+      title="Activar Modo Inmersivo">
+      <svg class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Botón de escritorio para modo inmersivo -->
+  <div id="immersiveToggleButtonDesktop" class="fixed top-6 right-6 z-40 hidden md:block">
+    <button 
+      onclick="toggleImmersiveInterface()"
+      class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2 group"
+      title="Modo Inmersivo (Ctrl+Alt+H)">
+      <svg class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+      <span class="text-sm font-medium">NEXUS</span>
+    </button>
+  </div>
+
+  <!-- Asistente Pixel - Chat Flotante -->
+  <div id="pixelChatContainer" class="fixed bottom-6 left-6 z-50 w-80 h-96 bg-zinc-900/95 backdrop-blur-xl border border-zinc-700 rounded-xl shadow-2xl transform transition-all duration-300 hidden">
+    <!-- Header del chat -->
+    <div class="flex items-center justify-between p-4 border-b border-zinc-700 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-t-xl">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+          <span class="text-sm font-bold text-white">P</span>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold text-white">Pixel</h3>
+          <p class="text-xs text-green-400">● En línea</p>
+        </div>
+      </div>
+      <div class="flex space-x-2">
+        <button id="minimizePixelChat" class="w-6 h-6 bg-zinc-700 hover:bg-zinc-600 rounded flex items-center justify-center transition">
+          <svg class="w-3 h-3 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+          </svg>
+        </button>
+        <button id="closePixelChat" class="w-6 h-6 bg-red-600 hover:bg-red-700 rounded flex items-center justify-center transition">
+          <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Área de mensajes -->
+    <div id="pixelMessages" class="flex-1 p-4 space-y-3 overflow-y-auto h-64">
+      <div class="flex items-start space-x-2">
+        <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="text-xs font-bold text-white">P</span>
+        </div>
+        <div class="bg-zinc-800/50 rounded-lg p-3 max-w-xs">
+          <p class="text-sm text-zinc-200">¡Hola! Soy Pixel, tu asistente de IA. ¿En qué puedo ayudarte hoy?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área de entrada -->
+    <div class="p-4 border-t border-zinc-700">
+      <div class="flex space-x-2">
+        <input 
+          id="pixelMessageInput" 
+          type="text" 
+          placeholder="Escribe tu mensaje..."
+          class="flex-1 bg-zinc-800 border border-zinc-600 rounded-lg px-3 py-2 text-sm text-white placeholder-zinc-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+          onkeypress="handlePixelKeyPress(event)"
+        />
+        <button 
+          id="sendPixelMessage" 
+          onclick="sendPixelMessage()"
+          class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg transition flex items-center space-x-1"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón flotante para abrir Pixel -->
+  <div id="pixelToggleButton" class="fixed bottom-6 left-6 z-40">
+    <button 
+      onclick="togglePixelChat()"
+      class="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+      title="Abrir asistente Pixel">
+      <svg class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Script de integración inmersiva -->
+  <script src="immersive_integration.js"></script>
+  
+  <!-- Script de transición Matrix -->
+  <script src="matrix_transition.js"></script>
+  
+  <!-- Script del reproductor flotante -->
+  <script src="floating_player.js"></script>
+  
+  <!-- Script para manejar interfaz inmersiva -->
+  <script>
+    // Variables globales para interfaz inmersiva
+    let isImmersiveVisible = false;
+    let immersiveIframe = null;
+    
+    // Inicializar interfaz inmersiva
+    function initImmersiveInterface() {
+      immersiveIframe = document.getElementById('immersiveIframe');
+      
+      // Manejar atajo de teclado Ctrl+Alt+H
+      document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.altKey && event.key === 'h') {
+          event.preventDefault();
+          toggleImmersiveInterface();
+        }
+      });
+      
+      // Manejar 3 clicks rápidos en el logo S3
+      let clickCount = 0;
+      let clickTimer = null;
+      const s3Logo = document.getElementById('s3Logo');
+      
+      if (s3Logo) {
+        s3Logo.addEventListener('click', function(event) {
+          event.preventDefault();
+          clickCount++;
+          
+          // Mostrar indicador visual
+          if (clickCount === 1) {
+            showToast('Click 1/3 - Sigue clickeando rápido!', 'info', 1000);
+            s3Logo.style.transform = 'scale(1.1)';
+            s3Logo.style.boxShadow = '0 0 10px #00ff88';
+          } else if (clickCount === 2) {
+            showToast('Click 2/3 - ¡Uno más!', 'warning', 1000);
+            s3Logo.style.transform = 'scale(1.15)';
+            s3Logo.style.boxShadow = '0 0 15px #ffaa00';
+          }
+          
+          // Resetear contador después de 1 segundo
+          if (clickTimer) {
+            clearTimeout(clickTimer);
+          }
+          
+          clickTimer = setTimeout(() => {
+            clickCount = 0;
+            s3Logo.style.transform = 'scale(1)';
+            s3Logo.style.boxShadow = '';
+          }, 1000);
+          
+          // Si son 3 clicks en menos de 1 segundo
+          if (clickCount === 3) {
+            clickCount = 0;
+            clearTimeout(clickTimer);
+            toggleImmersiveInterface();
+            
+            // Efecto visual especial
+            s3Logo.style.transform = 'scale(1.3)';
+            s3Logo.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+            s3Logo.style.boxShadow = '0 0 20px #ff00ff';
+            showToast('¡NEXUS ACTIVADO! Modo inmersivo iniciado', 'success', 2000);
+            
+            setTimeout(() => {
+              s3Logo.style.transform = 'scale(1)';
+              s3Logo.style.background = '';
+              s3Logo.style.boxShadow = '';
+            }, 500);
+          }
+        });
+      }
+      
+      console.log('🎵 Interfaz inmersiva inicializada - Presiona Ctrl+Alt+H o 3 clicks en S3 para activar');
+    }
+    
+    // Mostrar/ocultar interfaz inmersiva
+    function toggleImmersiveInterface() {
+      const container = document.getElementById('immersiveInterfaceContainer');
+      const mobileButton = document.getElementById('immersiveToggleButton');
+      const desktopButton = document.getElementById('immersiveToggleButtonDesktop');
+      
+      if (isImmersiveVisible) {
+        container.classList.add('hidden');
+        isImmersiveVisible = false;
+        
+        // Mostrar botones de toggle
+        if (mobileButton) mobileButton.style.display = 'block';
+        if (desktopButton) desktopButton.style.display = 'block';
+        
+        console.log('🎵 Interfaz inmersiva ocultada');
+      } else {
+        container.classList.remove('hidden');
+        isImmersiveVisible = true;
+        
+        // Ocultar botones de toggle
+        if (mobileButton) mobileButton.style.display = 'none';
+        if (desktopButton) desktopButton.style.display = 'none';
+        
+        console.log('🎵 Interfaz inmersiva activada');
+        
+        // Mostrar mensaje de bienvenida
+        showToast('Interfaz inmersiva activada - Explora los easter eggs!', 'success');
+      }
+    }
+    
+    // Mostrar interfaz inmersiva
+    function showImmersiveInterface() {
+      if (!isImmersiveVisible) {
+        toggleImmersiveInterface();
+      }
+    }
+    
+    // Ocultar interfaz inmersiva
+    function hideImmersiveInterface() {
+      if (isImmersiveVisible) {
+        toggleImmersiveInterface();
+      }
+    }
+    
+    // Función para activar Nexus Easter Egg
+    function activateNexusEasterEgg() {
+      console.log('🎮 Easter Egg activado! Iniciando transición Matrix...');
+      
+      // Efecto visual en el botón
+      const button = document.getElementById('nexusEasterEgg');
+      button.style.background = 'linear-gradient(45deg, #00FFE7, #00CCFF, #FF00FF)';
+      button.style.animation = 'rainbow-pulse 0.5s infinite';
+      
+      // Activar transición Matrix
+      if (window.activateMatrixTransition) {
+        window.activateMatrixTransition();
+      } else {
+        // Fallback si no está cargado el script
+        setTimeout(() => {
+          if (window.toggleImmersiveInterface) {
+            window.toggleImmersiveInterface();
+          }
+        }, 1000);
+      }
+    }
+    
+    // Atajo de teclado Ctrl+Alt+H
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.altKey && event.key === 'h') {
+        event.preventDefault();
+        console.log('🎮 Atajo de teclado detectado: Ctrl+Alt+H');
+        activateNexusEasterEgg();
+      }
+    });
+    
+    // Inicializar cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      initImmersiveInterface();
+      
+      // Agregar estilos para el easter egg
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes rainbow-pulse {
+          0% { box-shadow: 0 0 10px #00FFE7; }
+          25% { box-shadow: 0 0 15px #00CCFF; }
+          50% { box-shadow: 0 0 20px #FF00FF; }
+          75% { box-shadow: 0 0 15px #FFFF00; }
+          100% { box-shadow: 0 0 10px #00FFE7; }
+        }
+        
+        #nexusEasterEgg:hover {
+          opacity: 1 !important;
+          background: linear-gradient(45deg, #00FFE7, #00CCFF, #FF00FF);
+          animation: rainbow-pulse 1s infinite;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+    
+    // Exportar funciones para uso global
+    window.showImmersiveInterface = showImmersiveInterface;
+    window.hideImmersiveInterface = hideImmersiveInterface;
+    window.toggleImmersiveInterface = toggleImmersiveInterface;
+  </script>
+
+  <!-- Script para Asistente Pixel -->
+  <script>
+    // Variables globales para Pixel
+    let pixelChatVisible = false;
+    let pixelChatMinimized = false;
+    let pixelMessageHistory = [];
+
+    // Inicializar Pixel
+    function initPixelAssistant() {
+      console.log('🤖 Asistente Pixel inicializado');
+      
+      // Event listeners para botones
+      document.getElementById('minimizePixelChat').addEventListener('click', minimizePixelChat);
+      document.getElementById('closePixelChat').addEventListener('click', closePixelChat);
+      
+      // Enviar mensaje de bienvenida
+      setTimeout(() => {
+        addPixelMessage('Pixel', '¡Hola! Soy Pixel, tu asistente de IA. Puedo ayudarte con la generación musical, explicar funciones del sistema, o responder cualquier pregunta. ¿En qué puedo ayudarte?', false);
+      }, 1000);
+    }
+
+    // Mostrar/ocultar chat de Pixel
+    function togglePixelChat() {
+      const container = document.getElementById('pixelChatContainer');
+      const button = document.getElementById('pixelToggleButton');
+      
+      if (pixelChatVisible) {
+        container.classList.add('hidden');
+        button.style.display = 'block';
+        pixelChatVisible = false;
+        pixelChatMinimized = false;
+      } else {
+        container.classList.remove('hidden');
+        button.style.display = 'none';
+        pixelChatVisible = true;
+        pixelChatMinimized = false;
+        
+        // Enfocar input
+        setTimeout(() => {
+          document.getElementById('pixelMessageInput').focus();
+        }, 100);
+      }
+    }
+
+    // Minimizar chat
+    function minimizePixelChat() {
+      const container = document.getElementById('pixelChatContainer');
+      const button = document.getElementById('pixelToggleButton');
+      
+      container.classList.add('hidden');
+      button.style.display = 'block';
+      pixelChatMinimized = true;
+      pixelChatVisible = false;
+    }
+
+    // Cerrar chat
+    function closePixelChat() {
+      const container = document.getElementById('pixelChatContainer');
+      const button = document.getElementById('pixelToggleButton');
+      
+      container.classList.add('hidden');
+      button.style.display = 'block';
+      pixelChatVisible = false;
+      pixelChatMinimized = false;
+    }
+
+    // Manejar tecla Enter
+    function handlePixelKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendPixelMessage();
+      }
+    }
+
+    // Enviar mensaje a Pixel
+    async function sendPixelMessage() {
+      const input = document.getElementById('pixelMessageInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Agregar mensaje del usuario
+      addPixelMessage('Usuario', message, true);
+      input.value = '';
+      
+      // Mostrar indicador de escritura
+      showPixelTyping();
+      
+      try {
+        // Enviar a Ollama
+        const response = await fetch('/api/pixel/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            history: pixelMessageHistory.slice(-10) // Últimos 10 mensajes para contexto
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error('Error en la respuesta del servidor');
+        }
+        
+        const data = await response.json();
+        
+        // Ocultar indicador de escritura
+        hidePixelTyping();
+        
+        // Agregar respuesta de Pixel
+        addPixelMessage('Pixel', data.response, false);
+        
+        // Guardar en historial
+        pixelMessageHistory.push({ role: 'user', content: message });
+        pixelMessageHistory.push({ role: 'assistant', content: data.response });
+        
+      } catch (error) {
+        console.error('Error enviando mensaje a Pixel:', error);
+        hidePixelTyping();
+        addPixelMessage('Pixel', 'Lo siento, hubo un error al procesar tu mensaje. Por favor, inténtalo de nuevo.', false);
+      }
+    }
+
+    // Agregar mensaje al chat
+    function addPixelMessage(sender, message, isUser) {
+      const messagesContainer = document.getElementById('pixelMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'flex items-start space-x-2';
+      
+      if (isUser) {
+        messageDiv.innerHTML = `
+          <div class="flex-1"></div>
+          <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-3 max-w-xs">
+            <p class="text-sm text-white">${message}</p>
+          </div>
+        `;
+      } else {
+        messageDiv.innerHTML = `
+          <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <span class="text-xs font-bold text-white">P</span>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-3 max-w-xs">
+            <p class="text-sm text-zinc-200">${message}</p>
+          </div>
+        `;
+      }
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Mostrar indicador de escritura
+    function showPixelTyping() {
+      const messagesContainer = document.getElementById('pixelMessages');
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'pixelTyping';
+      typingDiv.className = 'flex items-start space-x-2';
+      typingDiv.innerHTML = `
+        <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="text-xs font-bold text-white">P</span>
+        </div>
+        <div class="bg-zinc-800/50 rounded-lg p-3 max-w-xs">
+          <div class="flex space-x-1">
+            <div class="w-2 h-2 bg-zinc-400 rounded-full animate-bounce"></div>
+            <div class="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          </div>
+        </div>
+      `;
+      
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Ocultar indicador de escritura
+    function hidePixelTyping() {
+      const typingDiv = document.getElementById('pixelTyping');
+      if (typingDiv) {
+        typingDiv.remove();
+      }
+    }
+
+    // Inicializar Pixel cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      initPixelAssistant();
+      initCommunityHub();
+    });
+    
+    // Inicializar Community Hub
+    function initCommunityHub() {
+      // Cargar datos de muestra
+      loadSampleTracks();
+      loadSampleCollaborations();
+      loadUserStats();
+    }
+    
+    // Cargar canciones de muestra
+    function loadSampleTracks() {
+      const tracks = [
+        {
+          id: 1,
+          title: "Cyberpunk Dreams",
+          artist: "Pixel_Pro",
+          likes: 1247,
+          comments: 89,
+          shares: 156,
+          duration: "3:24",
+          genre: "Electronic",
+          coverUrl: null,
+          audioUrl: "/audio/cyberpunk.mp3"
+        },
+        {
+          id: 2,
+          title: "Neon Nights",
+          artist: "Ghost_Master",
+          likes: 892,
+          comments: 67,
+          shares: 98,
+          duration: "2:58",
+          genre: "Synthwave",
+          coverUrl: null,
+          audioUrl: "/audio/neon.mp3"
+        },
+        {
+          id: 3,
+          title: "Digital Resistance",
+          artist: "Quantum_Beat",
+          likes: 756,
+          comments: 45,
+          shares: 123,
+          duration: "4:12",
+          genre: "Industrial",
+          coverUrl: null,
+          audioUrl: "/audio/resistance.mp3"
+        }
+      ];
+      
+      renderTracks(tracks);
+    }
+    
+    // Cargar colaboraciones de muestra
+    function loadSampleCollaborations() {
+      const collaborations = [
+        {
+          id: 1,
+          title: "Proyecto Colaborativo: Matrix Symphony",
+          participants: ["Pixel_Pro", "Ghost_Master", "Quantum_Beat"],
+          status: "En progreso",
+          progress: 75,
+          deadline: "2024-10-15"
+        },
+        {
+          id: 2,
+          title: "Remix Challenge: Cyberpunk Anthems",
+          participants: ["Resistance_Alpha", "Neon_Producer"],
+          status: "Completado",
+          progress: 100,
+          deadline: "2024-10-10"
+        }
+      ];
+      
+      renderCollaborations(collaborations);
+    }
+    
+    // Cargar estadísticas del usuario
+    function loadUserStats() {
+      const stats = {
+        totalLikes: 0,
+        totalComments: 0,
+        totalShares: 0,
+        rank: 0
+      };
+      
+      document.getElementById('userLikes').textContent = stats.totalLikes;
+      document.getElementById('userComments').textContent = stats.totalComments;
+      document.getElementById('userShares').textContent = stats.totalShares;
+      document.getElementById('userRank').textContent = '#' + stats.rank;
+    }
+    
+    // Renderizar canciones
+    function renderTracks(tracks) {
+      const tracksGrid = document.getElementById('tracksGrid');
+      if (!tracksGrid) return;
+
+      tracksGrid.innerHTML = tracks.map(track => `
+        <div class="track-card">
+          <div class="track-cover" onclick="playTrack(${track.id})">
+            ${track.coverUrl ? 
+              `<img src="${track.coverUrl}" alt="${track.title}" />` : 
+              `<div class="default-cover">🎵</div>`
+            }
+            <div class="play-overlay">▶️</div>
+          </div>
+          
+          <div class="track-info">
+            <h4 class="track-title">${track.title}</h4>
+            <p class="track-artist">por ${track.artist}</p>
+            <div class="track-meta">
+              <span class="genre">${track.genre}</span>
+              <span class="duration">${track.duration}</span>
+            </div>
+          </div>
+
+          <div class="track-stats">
+            <div class="stat">
+              <button class="like-btn" onclick="handleLike(${track.id})">
+                ❤️ ${track.likes}
+              </button>
+            </div>
+            <div class="stat">
+              <button class="comment-btn" onclick="handleComment(${track.id})">
+                💬 ${track.comments}
+              </button>
+            </div>
+            <div class="stat">
+              <button class="share-btn" onclick="handleShare(${track.id})">
+                📤 ${track.shares}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Renderizar colaboraciones
+    function renderCollaborations(collaborations) {
+      const collaborationsList = document.getElementById('collaborationsList');
+      if (!collaborationsList) return;
+
+      collaborationsList.innerHTML = collaborations.map(collab => `
+        <div class="collaboration-card">
+          <div class="collab-header">
+            <h4>${collab.title}</h4>
+            <span class="status ${collab.status.toLowerCase().replace(' ', '-')}">
+              ${collab.status}
+            </span>
+          </div>
+          
+          <div class="collab-participants">
+            <span>Participantes: </span>
+            ${collab.participants.map((participant, index) => 
+              `<span class="participant">${participant}${index < collab.participants.length - 1 ? ', ' : ''}</span>`
+            ).join('')}
+          </div>
+
+          <div class="collab-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${collab.progress}%"></div>
+            </div>
+            <span class="progress-text">${collab.progress}%</span>
+          </div>
+
+          <div class="collab-deadline">
+            Deadline: ${new Date(collab.deadline).toLocaleDateString()}
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Funciones de interacción
+    function playTrack(trackId) {
+      console.log('Reproduciendo track:', trackId);
+      // Aquí se integraría con el reproductor flotante
+    }
+    
+    function handleLike(trackId) {
+      console.log('Like en track:', trackId);
+      // Aquí se integraría con el backend
+    }
+    
+    function handleComment(trackId) {
+      const comment = prompt('Escribe tu comentario:');
+      if (comment) {
+        console.log('Comentario en track:', trackId, comment);
+        // Aquí se integraría con el backend
+      }
+    }
+    
+    function handleShare(trackId) {
+      console.log('Share de track:', trackId);
+      // Aquí se integraría con el backend
+    }
+
+    // Funciones de modales de autenticación
+    function showLoginModal() {
+      document.getElementById('loginModal').classList.remove('hidden');
+      document.getElementById('registerModal').classList.add('hidden');
+    }
+    
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+    
+    function showRegisterModal() {
+      document.getElementById('registerModal').classList.remove('hidden');
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+    
+    function closeRegisterModal() {
+      document.getElementById('registerModal').classList.add('hidden');
+    }
+    
+    // Manejo de formularios
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      console.log('Login attempt:', { email, password });
+      // Aquí se integraría con el backend
+      alert('Funcionalidad de login en desarrollo');
+      closeLoginModal();
+    });
+    
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('registerUsername').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden');
+        return;
+      }
+      
+      console.log('Register attempt:', { username, email, password });
+      // Aquí se integraría con el backend
+      alert('Funcionalidad de registro en desarrollo');
+      closeRegisterModal();
+    });
+    
+    // Cerrar modales con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLoginModal();
+        closeRegisterModal();
+      }
+    });
+    
+    // Cerrar modales al hacer click fuera
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLoginModal();
+      }
+    });
+    
+    document.getElementById('registerModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeRegisterModal();
+      }
+    });
+
+    // Exportar funciones para uso global
+    window.togglePixelChat = togglePixelChat;
+    window.handlePixelKeyPress = handlePixelKeyPress;
+    window.sendPixelMessage = sendPixelMessage;
+    window.showLoginModal = showLoginModal;
+    window.closeLoginModal = closeLoginModal;
+    window.showRegisterModal = showRegisterModal;
+    window.closeRegisterModal = closeRegisterModal;
+  </script>
+  
+  <!-- Modales de Autenticación -->
+  <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-zinc-900 rounded-2xl border border-white/10 p-8 w-full max-w-md">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-neon">Iniciar Sesión</h2>
+          <button onclick="closeLoginModal()" class="text-zinc-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Email</label>
+            <input type="email" id="loginEmail" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Contraseña</label>
+            <input type="password" id="loginPassword" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <button type="submit" class="w-full bg-neon text-black py-3 rounded-lg font-semibold hover:bg-neon/90 transition">
+            Iniciar Sesión
+          </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <p class="text-zinc-400">¿No tienes cuenta? 
+            <button onclick="showRegisterModal()" class="text-neon hover:underline">Regístrate aquí</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="registerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-zinc-900 rounded-2xl border border-white/10 p-8 w-full max-w-md">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-neon">Crear Cuenta</h2>
+          <button onclick="closeRegisterModal()" class="text-zinc-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        
+        <form id="registerForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Nombre de Usuario</label>
+            <input type="text" id="registerUsername" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Email</label>
+            <input type="email" id="registerEmail" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Contraseña</label>
+            <input type="password" id="registerPassword" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-zinc-300 mb-2">Confirmar Contraseña</label>
+            <input type="password" id="registerConfirmPassword" required 
+                   class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:border-neon focus:outline-none transition">
+          </div>
+          
+          <div class="flex items-center">
+            <input type="checkbox" id="acceptTerms" required class="mr-2">
+            <label for="acceptTerms" class="text-sm text-zinc-300">
+              Acepto los <a href="#" class="text-neon hover:underline">términos y condiciones</a>
+            </label>
+          </div>
+          
+          <button type="submit" class="w-full bg-neon text-black py-3 rounded-lg font-semibold hover:bg-neon/90 transition">
+            Crear Cuenta
+          </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <p class="text-zinc-400">¿Ya tienes cuenta? 
+            <button onclick="showLoginModal()" class="text-neon hover:underline">Inicia sesión aquí</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts adicionales -->
+  <script src="matrix_transition.js"></script>
+  <script src="floating_player.js"></script>
+  <script src="community_hub.js"></script>
+  <script src="son1k_logo.js"></script>
+  </body>
+</html>
