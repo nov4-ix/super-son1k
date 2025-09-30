@@ -523,6 +523,8 @@ class NovaPostPilotService {
 }
 
 // Exportar para uso global
+export default NovaPostPilotService;
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = NovaPostPilotService;
 } else {

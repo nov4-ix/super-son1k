@@ -526,6 +526,8 @@ class VoiceCloningService {
 }
 
 // Exportar para uso global
+export default VoiceCloningService;
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = VoiceCloningService;
 } else {

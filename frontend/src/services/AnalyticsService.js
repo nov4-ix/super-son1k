@@ -593,6 +593,8 @@ class AnalyticsService {
 }
 
 // Exportar para uso global
+export default AnalyticsService;
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AnalyticsService;
 } else {

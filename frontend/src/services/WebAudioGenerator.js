@@ -580,6 +580,8 @@ class WebAudioGenerator {
 }
 
 // Exportar para uso global
+export default WebAudioGenerator;
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = WebAudioGenerator;
 } else {

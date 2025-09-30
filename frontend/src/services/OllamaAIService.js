@@ -379,6 +379,8 @@ Que nunca se acaba
 }
 
 // Exportar para uso global
+export default OllamaAIService;
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = OllamaAIService;
 } else {
