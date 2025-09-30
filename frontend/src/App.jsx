@@ -115,6 +115,8 @@ function App() {
         return <SocialInterface services={services} />;
       case 'ghost':
         return <GhostInterface services={services} />;
+      case 'nexus':
+        return <NexusInterface />;
       default:
         return <NexusInterface />;
     }
