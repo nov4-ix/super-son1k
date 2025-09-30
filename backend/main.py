@@ -40,6 +40,40 @@ app.add_middleware(
 # Incluir routers
 app.include_router(community_router)
 
+# Pixel AI Assistant endpoint
+@app.post("/api/pixel/chat")
+async def pixel_chat(request: dict):
+    """Endpoint para el asistente Pixel"""
+    try:
+        message = request.get("message", "")
+        history = request.get("history", [])
+        
+        # Respuesta simulada del asistente Pixel
+        responses = [
+            "¡Hola! Soy Pixel, tu asistente de IA musical. ¿En qué puedo ayudarte?",
+            "Puedo ayudarte con generación musical, análisis de letras, o sugerencias creativas.",
+            "¿Te gustaría generar una nueva canción o necesitas ayuda con algo específico?",
+            "Soy tu compañero creativo en Son1kVers3. ¿Qué música quieres crear hoy?",
+            "Puedo ayudarte con prompts musicales, estilos, o cualquier pregunta sobre la plataforma."
+        ]
+        
+        # Respuesta inteligente basada en el mensaje
+        if "música" in message.lower() or "music" in message.lower():
+            response = "¡Perfecto! Para generar música, ve a la sección 'Generación' y usa los controles. Puedo ayudarte a crear prompts musicales específicos."
+        elif "nexus" in message.lower() or "inmersivo" in message.lower():
+            response = "Nexus es nuestro modo inmersivo cyberpunk. Presiona Ctrl+Alt+H o busca el botón oculto '?' en la navegación para activarlo."
+        elif "ayuda" in message.lower() or "help" in message.lower():
+            response = "Puedo ayudarte con: 🎵 Generación musical, 🎤 Clonación de voz, 📊 Analytics, 👥 Comunidad, y mucho más. ¿Qué necesitas?"
+        else:
+            import random
+            response = random.choice(responses)
+        
+        return {"response": response}
+        
+    except Exception as e:
+        logger.error(f"Error en pixel chat: {e}")
+        return {"response": "Lo siento, hubo un error. Por favor, inténtalo de nuevo."}
+
 # Health check endpoint
 @app.get("/")
 async def root():
