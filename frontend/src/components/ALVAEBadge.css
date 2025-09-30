@@ -1,0 +1,571 @@
+/* ALVAE Badge - Distintivo de la Liga del No Silencio */
+
+.alvae-badge {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.alvae-badge:hover {
+  transform: scale(1.05);
+}
+
+.alvae-badge:focus {
+  outline: 2px solid var(--alvae-color);
+  outline-offset: 4px;
+}
+
+/* Tamaños */
+.badge-small {
+  width: 40px;
+  height: 40px;
+}
+
+.badge-medium {
+  width: 60px;
+  height: 60px;
+}
+
+.badge-large {
+  width: 80px;
+  height: 80px;
+}
+
+.badge-xlarge {
+  width: 120px;
+  height: 120px;
+}
+
+/* Círculo exterior */
+.badge-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.circle-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--alvae-color);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 
+    0 0 15px var(--alvae-glow),
+    inset 0 0 15px var(--alvae-glow);
+}
+
+.circle-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  border: 1px solid var(--alvae-color);
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0.6;
+}
+
+.circle-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, var(--alvae-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: circle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes circle-pulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Rayo central */
+.badge-lightning {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  z-index: 2;
+}
+
+.lightning-bolt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lightning-bolt::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 80%;
+  background: linear-gradient(180deg, var(--alvae-color) 0%, #fff 50%, var(--alvae-color) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--alvae-glow);
+}
+
+.lightning-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(ellipse, var(--alvae-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: lightning-glow 2s ease-in-out infinite;
+}
+
+@keyframes lightning-glow {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Geometría fractal */
+.badge-fractals {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.fractal-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 1px solid var(--alvae-color);
+  opacity: 0.4;
+  animation: fractal-rotate 8s linear infinite;
+}
+
+.fractal-1 {
+  top: 20%;
+  left: 20%;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 15px solid var(--alvae-color);
+  animation-delay: 0s;
+}
+
+.fractal-2 {
+  top: 20%;
+  right: 20%;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid var(--alvae-color);
+  animation-delay: 1s;
+}
+
+.fractal-3 {
+  bottom: 20%;
+  left: 20%;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 12px solid var(--alvae-color);
+  animation-delay: 2s;
+}
+
+.fractal-4 {
+  bottom: 20%;
+  right: 20%;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 15px solid var(--alvae-color);
+  animation-delay: 3s;
+}
+
+@keyframes fractal-rotate {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+  50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
+}
+
+/* Nodos conectivos */
+.badge-nodes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+.node {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--alvae-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--alvae-glow);
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+.node-1 { top: 15%; left: 50%; animation-delay: 0s; }
+.node-2 { top: 30%; left: 20%; animation-delay: 0.3s; }
+.node-3 { top: 30%; right: 20%; animation-delay: 0.6s; }
+.node-4 { bottom: 30%; left: 20%; animation-delay: 0.9s; }
+.node-5 { bottom: 30%; right: 20%; animation-delay: 1.2s; }
+.node-6 { bottom: 15%; left: 50%; animation-delay: 1.5s; }
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+
+/* Conexiones */
+.badge-connections {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.connection {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--alvae-color), transparent);
+  height: 1px;
+  opacity: 0.6;
+  animation: connection-flow 3s ease-in-out infinite;
+}
+
+.connection-1 {
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  transform: rotate(15deg);
+  animation-delay: 0s;
+}
+
+.connection-2 {
+  top: 50%;
+  left: 20%;
+  width: 30%;
+  transform: rotate(-20deg);
+  animation-delay: 1s;
+}
+
+.connection-3 {
+  bottom: 25%;
+  right: 20%;
+  width: 30%;
+  transform: rotate(25deg);
+  animation-delay: 2s;
+}
+
+@keyframes connection-flow {
+  0%, 100% { opacity: 0.3; transform: scaleX(1); }
+  50% { opacity: 0.8; transform: scaleX(1.2); }
+}
+
+/* Efectos de energía */
+.badge-energy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.energy-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--alvae-color);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: energy-ring-expand 4s ease-in-out infinite;
+}
+
+.energy-ring-1 {
+  width: 120%;
+  height: 120%;
+  animation-delay: 0s;
+}
+
+.energy-ring-2 {
+  width: 140%;
+  height: 140%;
+  animation-delay: 1s;
+}
+
+@keyframes energy-ring-expand {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+.energy-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--alvae-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: energy-pulse 2s ease-in-out infinite;
+}
+
+@keyframes energy-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; }
+}
+
+/* Partículas */
+.badge-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  background: var(--alvae-color);
+  border-radius: 50%;
+  animation: particle-orbit 4s linear infinite;
+  animation-delay: var(--particle-delay);
+  transform-origin: 0 0;
+}
+
+@keyframes particle-orbit {
+  0% { 
+    transform: rotate(var(--particle-angle)) translateX(40px) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: rotate(var(--particle-angle)) translateX(40px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Texto ALVAE */
+.badge-text {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 6;
+}
+
+.alvae-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--alvae-color);
+  text-shadow: 0 0 8px var(--alvae-glow);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Nivel */
+.badge-level {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 6;
+}
+
+.level-number {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--alvae-color);
+  text-shadow: 0 0 8px var(--alvae-glow);
+  letter-spacing: 1px;
+}
+
+.level-name {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--alvae-color);
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Efectos de activación */
+.activation-effects {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+}
+
+.activation-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  border: 2px solid var(--alvae-color);
+  border-radius: 50%;
+  animation: activation-ring 1s ease-out;
+}
+
+@keyframes activation-ring {
+  0% { 
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.activation-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--alvae-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: activation-pulse 1s ease-out;
+}
+
+@keyframes activation-pulse {
+  0% { 
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Estados */
+.alvae-badge.inactive {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.alvae-badge.inactive .circle-outer {
+  border-color: #666;
+  box-shadow: none;
+}
+
+.alvae-badge.inactive .lightning-bolt::before {
+  background: #666;
+  box-shadow: none;
+}
+
+.alvae-badge.active .circle-outer {
+  box-shadow: 
+    0 0 20px var(--alvae-glow),
+    inset 0 0 20px var(--alvae-glow);
+}
+
+.alvae-badge.active .lightning-bolt::before {
+  box-shadow: 0 0 15px var(--alvae-glow);
+}
+
+.alvae-badge.animated .circle-glow {
+  animation-duration: 2s;
+}
+
+.alvae-badge.animated .lightning-glow {
+  animation-duration: 1.5s;
+}
+
+.alvae-badge.animated .node {
+  animation-duration: 1.5s;
+}
+
+.alvae-badge.animated .connection {
+  animation-duration: 2s;
+}
+
+.alvae-badge.interactive:hover .circle-glow {
+  animation-duration: 1s;
+}
+
+.alvae-badge.interactive:hover .lightning-glow {
+  animation-duration: 1s;
+}
+
+.alvae-badge.hovered {
+  transform: scale(1.1);
+}
+
+.alvae-badge.activated {
+  animation: badge-activation 0.5s ease-out;
+}
+
+@keyframes badge-activation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .badge-text {
+    bottom: -20px;
+  }
+  
+  .alvae-label {
+    font-size: 0.7rem;
+  }
+  
+  .badge-level {
+    top: -20px;
+  }
+  
+  .level-number {
+    font-size: 0.8rem;
+  }
+  
+  .level-name {
+    font-size: 0.6rem;
+  }
+}
+

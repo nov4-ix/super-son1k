@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 import sqlite3
 import json
+import os
 from datetime import datetime
 
 router = APIRouter(prefix="/api/community", tags=["community"])
@@ -53,7 +54,9 @@ class ShareRequest(BaseModel):
 
 # Base de datos
 def get_db_connection():
-    conn = sqlite3.connect('community.db')
+    # Usar directorio temporal en Vercel
+    db_path = os.getenv("DATABASE_PATH", "community.db")
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -397,19 +400,46 @@ def is_user_banned(user_id: str) -> bool:
     return result
 
 def check_comment_toxicity(comment: str) -> dict:
-    """Verificar toxicidad en comentarios (simulado)"""
+    """Verificar toxicidad en comentarios (optimizado)"""
+    # Lista expandida de palabras tóxicas
     toxic_keywords = [
-        'odio', 'basura', 'mierda', 'estúpido', 'idiota', 'tonto',
-        'hate', 'trash', 'stupid', 'idiot', 'dumb', 'sucks'
+        'odio', 'basura', 'mierda', 'estúpido', 'idiota', 'tonto', 'imbécil',
+        'hate', 'trash', 'stupid', 'idiot', 'dumb', 'sucks', 'crap',
+        'puto', 'puta', 'joder', 'coño', 'fuck', 'shit', 'damn',
+        'feo', 'ugly', 'asqueroso', 'disgusting', 'repugnante'
+    ]
+    
+    # Palabras que indican spam
+    spam_keywords = [
+        'comprar', 'venta', 'oferta', 'descuento', 'gratis', 'click aquí',
+        'buy', 'sale', 'offer', 'discount', 'free', 'click here'
     ]
     
     comment_lower = comment.lower()
-    toxic_count = sum(1 for keyword in toxic_keywords if keyword in comment_lower)
+    
+    # Verificar toxicidad
+    toxic_words = [kw for kw in toxic_keywords if kw in comment_lower]
+    toxic_count = len(toxic_words)
+    
+    # Verificar spam
+    spam_words = [kw for kw in spam_keywords if kw in comment_lower]
+    spam_count = len(spam_words)
+    
+    # Calcular nivel de toxicidad
+    toxicity_level = min((toxic_count * 25) + (spam_count * 15), 100)
     
     return {
-        "is_toxic": toxic_count > 0,
-        "toxicity_level": min(toxic_count * 20, 100),
-        "detected_keywords": [kw for kw in toxic_keywords if kw in comment_lower]
+        "is_toxic": toxic_count > 0 or spam_count > 2,
+        "is_spam": spam_count > 2,
+        "toxicity_level": toxicity_level,
+        "detected_keywords": toxic_words,
+        "spam_keywords": spam_words,
+        "comment_length": len(comment),
+        "suspicious_patterns": [
+            "repeated_chars" if any(comment.count(c) > 5 for c in set(comment.lower()) if c.isalpha()) else None,
+            "all_caps" if comment.isupper() and len(comment) > 10 else None,
+            "excessive_punctuation" if comment.count('!') > 3 or comment.count('?') > 3 else None
+        ]
     }
 
 @router.post("/moderate/comment")

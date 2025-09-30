@@ -54,6 +54,8 @@ body {
   border-bottom: 2px solid var(--primary-color);
   box-shadow: var(--glow-primary);
   position: sticky;
+  flex-wrap: wrap;
+  gap: 1rem;
   top: 0;
   z-index: 100;
 }
@@ -575,6 +577,167 @@ body {
 ::-moz-selection {
   background: var(--primary-color);
   color: var(--background-color);
+}
+
+/* Controles de Usuario */
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--secondary-color);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: var(--glow-secondary);
+}
+
+.username {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.user-tier {
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-btn,
+.admin-btn,
+.logout-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, var(--primary-color), #00cc00);
+  color: var(--background-color);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-primary);
+}
+
+.admin-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: white;
+}
+
+.admin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #666, #888);
+  color: white;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(102, 102, 102, 0.5);
+}
+
+/* Responsive para controles de usuario */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .user-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .user-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .user-profile {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.8rem;
+  }
+  
+  .user-actions {
+    justify-content: center;
+  }
+  
+  .login-btn,
+  .admin-btn,
+  .logout-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .user-profile {
+    padding: 0.6rem;
+  }
+  
+  .username {
+    font-size: 0.8rem;
+  }
+  
+  .user-tier {
+    font-size: 0.7rem;
+  }
+  
+  .login-btn,
+  .admin-btn,
+  .logout-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+  }
 }
 
 

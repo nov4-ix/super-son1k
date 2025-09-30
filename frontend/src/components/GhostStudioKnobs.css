@@ -1,0 +1,482 @@
+/* Ghost Studio Knobs - Creative Controls */
+.ghost-studio-knobs {
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6);
+  border: 2px solid #333;
+  font-family: 'Roboto Mono', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-studio-knobs::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #ff8c00, #4ecdc4, #45b7d1, #9b59b6, #e74c3c);
+  opacity: 0.9;
+}
+
+/* Header */
+.knobs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #444;
+}
+
+.knobs-header h3 {
+  color: #00ffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  margin: 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.knobs-controls {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Auto Prompt Toggle */
+.auto-prompt-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.auto-prompt-toggle input {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: #333;
+  border-radius: 30px;
+  transition: 0.4s;
+  border: 2px solid #555;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background: linear-gradient(145deg, #666, #444);
+  border-radius: 50%;
+  transition: 0.4s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+input:checked + .toggle-slider {
+  background: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(30px);
+  background: linear-gradient(145deg, #fff, #ccc);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.toggle-label {
+  color: #ccc;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Advanced Button */
+.advanced-btn {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  color: #eee;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.advanced-btn:hover {
+  background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Knobs Grid */
+.knobs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.knob-section {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid #333;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.7),
+    0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.knob-section h4 {
+  color: #ff8c00;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 2rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+/* Knob Container */
+.knob-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #252525, #151515);
+  border-radius: 10px;
+  border: 1px solid #333;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.knob-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Knob Label */
+.knob-label {
+  color: #00ffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  text-align: center;
+}
+
+/* Knob */
+.knob {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.knob:active {
+  cursor: grabbing;
+}
+
+.knob:hover {
+  transform: scale(1.05);
+}
+
+.knob-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #3a3a3a, #1a1a1a);
+  border: 4px solid var(--knob-color, #555);
+  position: relative;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 20px var(--knob-color, #555);
+  transition: all 0.3s ease;
+}
+
+.knob:hover .knob-ring {
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.8),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 30px var(--knob-color, #555);
+}
+
+.knob-pointer {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 6px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--knob-color, #ff8c00), #fff);
+  border-radius: 3px;
+  transform-origin: center 52px;
+  box-shadow: 0 0 10px var(--knob-color, #ff8c00);
+  z-index: 2;
+}
+
+.knob-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--knob-color, #00ffff);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--knob-color, #00ffff);
+  z-index: 1;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Expresividad Knob (especial) */
+.expressiveness-knob .knob-ring {
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border: 4px solid var(--knob-color, #555);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 20px var(--knob-color, #555);
+}
+
+.expressiveness-knob .knob-pointer {
+  background: linear-gradient(to bottom, var(--knob-color, #ff8c00), #fff);
+  box-shadow: 0 0 15px var(--knob-color, #ff8c00);
+}
+
+/* Knob Description */
+.knob-description {
+  color: #ccc;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  min-height: 1.2rem;
+}
+
+/* Prompt Preview */
+.prompt-preview {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid #333;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.7),
+    0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.prompt-preview h4 {
+  color: #ff8c00;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(255, 140, 0, 0.4);
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+.prompt-display {
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: #00ffff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: 'Share Tech Mono', monospace;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.6),
+      inset 0 4px 8px rgba(0, 0, 0, 0.8),
+      inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+      0 0 20px var(--knob-color, #555);
+  }
+  50% { 
+    box-shadow: 
+      0 12px 24px rgba(0, 0, 0, 0.8),
+      inset 0 4px 8px rgba(0, 0, 0, 0.8),
+      inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+      0 0 30px var(--knob-color, #555);
+  }
+}
+
+.knob:hover .knob-ring {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .knobs-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .knob-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .knobs-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .knobs-header h3 {
+    font-size: 2rem;
+  }
+  
+  .knobs-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .knob {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .knob-pointer {
+    height: 32px;
+    transform-origin: center 42px;
+  }
+  
+  .knob-value {
+    font-size: 1rem;
+  }
+  
+  .knob-label {
+    font-size: 1rem;
+  }
+  
+  .knob-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Focus states */
+.knob:focus {
+  outline: none;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 25px var(--knob-color, #555);
+}
+
+/* Active states */
+.knob:active {
+  transform: scale(0.95);
+}
+
+.knob-container:active {
+  transform: translateY(0);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Loading states */
+.knob-container.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.knob-container.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid #333;
+  border-top: 3px solid var(--knob-color, #00ffff);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Special effects for different knob types */
+.knob-container:nth-child(1) .knob-ring {
+  border-color: #ff6b6b;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 20px #ff6b6b;
+}
+
+.knob-container:nth-child(2) .knob-ring {
+  border-color: #ff8c00;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 20px #ff8c00;
+}
+
+.knob-container:nth-child(3) .knob-ring {
+  border-color: #4ecdc4;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1),
+    0 0 20px #4ecdc4;
+}
+

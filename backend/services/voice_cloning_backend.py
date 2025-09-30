@@ -29,9 +29,14 @@ security = HTTPBearer()
 
 # Configuration
 HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
-MODELS_DIR = os.getenv("MODELS_DIR", "./models")
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", "./output")
-UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
+MODELS_DIR = os.getenv("MODELS_DIR", "/tmp/models")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", "/tmp/output")
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "/tmp/uploads")
+
+# Fallback configuration for development
+if not HUGGINGFACE_API_KEY:
+    logger.warning("HUGGINGFACE_API_KEY not set, using fallback mode")
+    HUGGINGFACE_API_KEY = "demo_key"
 
 # Ensure directories exist
 os.makedirs(MODELS_DIR, exist_ok=True)
@@ -40,11 +45,15 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Models
 class VoiceCloneRequest(BaseModel):
+    model_config = {"protected_namespaces": ()}
+    
     text: str
     voice_settings: Dict[str, Any] = {}
     model_preference: Optional[str] = None
 
 class VoiceCloneResponse(BaseModel):
+    model_config = {"protected_namespaces": ()}
+    
     success: bool
     audio_url: str
     model_used: str
@@ -98,12 +107,25 @@ class SoVITSProcessor:
     
     async def process_voice_conversion(self, audio_file: UploadFile, text: str, settings: Dict[str, Any]) -> Dict[str, Any]:
         """Process voice conversion using so-VITS-SVC 4.0"""
+        temp_file = None
         try:
+            # Validate input
+            if not audio_file.filename or not audio_file.filename.lower().endswith(('.wav', '.mp3', '.m4a')):
+                raise HTTPException(status_code=400, detail="Invalid audio file format")
+            
+            if not text or len(text.strip()) < 3:
+                raise HTTPException(status_code=400, detail="Text too short")
+            
             # Save uploaded file temporarily
             temp_file = f"{UPLOAD_DIR}/temp_{uuid.uuid4()}_{audio_file.filename}"
             with open(temp_file, "wb") as buffer:
                 content = await audio_file.read()
                 buffer.write(content)
+            
+            # Check if we have a valid API key
+            if HUGGINGFACE_API_KEY == "demo_key":
+                # Demo mode - return mock response
+                return self._create_demo_response(text, settings)
             
             # Prepare request for so-VITS
             files = {
@@ -112,23 +134,41 @@ class SoVITSProcessor:
             }
             
             headers = {
-                "Authorization": f"Bearer {HUGGINGFACE_API_KEY}"
+                "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
+                "User-Agent": "Son1kVers3-Enhanced/2.0"
             }
             
-            # Make request to so-VITS
-            async with httpx.AsyncClient() as client:
-                response = await client.post(
-                    f"{self.api_url}/{self.model_id}",
-                    files=files,
-                    headers=headers,
-                    timeout=120.0
-                )
-            
-            if response.status_code != 200:
-                raise HTTPException(
-                    status_code=response.status_code,
-                    detail=f"so-VITS API error: {response.text}"
-                )
+            # Make request to so-VITS with retry logic
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    async with httpx.AsyncClient() as client:
+                        response = await client.post(
+                            f"{self.api_url}/{self.model_id}",
+                            files=files,
+                            headers=headers,
+                            timeout=120.0
+                        )
+                    
+                    if response.status_code == 200:
+                        break
+                    elif response.status_code == 429:  # Rate limited
+                        if attempt < max_retries - 1:
+                            await asyncio.sleep(2 ** attempt)  # Exponential backoff
+                            continue
+                        else:
+                            raise HTTPException(status_code=429, detail="Rate limited, please try again later")
+                    else:
+                        raise HTTPException(
+                            status_code=response.status_code,
+                            detail=f"so-VITS API error: {response.text}"
+                        )
+                except httpx.TimeoutException:
+                    if attempt < max_retries - 1:
+                        await asyncio.sleep(2 ** attempt)
+                        continue
+                    else:
+                        raise HTTPException(status_code=408, detail="Request timeout")
             
             # Save result
             result_id = str(uuid.uuid4())
@@ -136,9 +176,6 @@ class SoVITSProcessor:
             
             with open(result_path, "wb") as f:
                 f.write(response.content)
-            
-            # Clean up temp file
-            os.remove(temp_file)
             
             return {
                 "audio_url": f"/api/audio/{result_id}",
@@ -150,9 +187,33 @@ class SoVITSProcessor:
                 }
             }
             
+        except HTTPException:
+            raise
         except Exception as e:
             logger.error(f"so-VITS processing error: {e}")
             raise HTTPException(status_code=500, detail=f"so-VITS processing failed: {str(e)}")
+        finally:
+            # Clean up temp file
+            if temp_file and os.path.exists(temp_file):
+                try:
+                    os.remove(temp_file)
+                except Exception as e:
+                    logger.warning(f"Failed to clean up temp file: {e}")
+    
+    def _create_demo_response(self, text: str, settings: Dict[str, Any]) -> Dict[str, Any]:
+        """Create demo response when API key is not available"""
+        result_id = str(uuid.uuid4())
+        return {
+            "audio_url": f"/api/audio/{result_id}",
+            "duration": 30.0,
+            "model_info": {
+                "name": "so-VITS-SVC 4.0 (Demo Mode)",
+                "provider": "demo",
+                "features": ["voice_conversion", "real_time", "multilingual"]
+            },
+            "demo_mode": True,
+            "message": "Demo mode - install HuggingFace API key for real processing"
+        }
 
     def estimate_duration(self, audio_content: bytes) -> float:
         """Estimate audio duration from content"""

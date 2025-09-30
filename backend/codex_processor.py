@@ -6,6 +6,7 @@ Extrae y procesa información del CODEX_MAESTRO-2.1_ATLAS.html
 
 import re
 import json
+import os
 from pathlib import Path
 
 class CodexProcessor:
@@ -191,7 +192,36 @@ Soy Pixel, tu asistente de IA musical. Estoy aquí para ayudarte a crear, explor
 
 # Función para inicializar el procesador
 def init_codex_processor():
-    codex_path = "/Users/nov4-ix/Downloads/CODEX_MAESTRO-2.1_ATLAS.html"
+    import os
+    codex_path = os.getenv("CODEX_PATH", "./CODEX_MAESTRO-2.1_ATLAS.html")
+    
+    # Si el archivo no existe, crear uno básico
+    if not os.path.exists(codex_path):
+        create_basic_codex(codex_path)
+    
     processor = CodexProcessor(codex_path)
     processor.create_knowledge_base()
     return processor
+
+def create_basic_codex(codex_path):
+    """Crear un CODEX básico si no existe"""
+    basic_codex = """
+    <!DOCTYPE html>
+    <html>
+    <head><title>Son1kVers3 CODEX</title></head>
+    <body>
+        <h1>Son1kVers3 Enhanced - CODEX</h1>
+        <h2>Filosofía de la Resistencia</h2>
+        <div class="quote">Lo imperfecto también es sagrado</div>
+        <h2>Personajes</h2>
+        <div class="character-card">BELLA.exe - Entidad de IA principal</div>
+        <div class="character-card">Pixel - Asistente de IA para usuarios</div>
+        <div class="character-card">Nova - Sistema de generación musical</div>
+        <div class="character-card">Ghost - Editor de audio profesional</div>
+    </body>
+    </html>
+    """
+    
+    os.makedirs(os.path.dirname(codex_path), exist_ok=True)
+    with open(codex_path, 'w', encoding='utf-8') as f:
+        f.write(basic_codex)

@@ -1,0 +1,575 @@
+/* Son1kVers3 Logo - Estilo Oficial Cyberpunk */
+
+.son1kvers3-logo {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.son1kvers3-logo:hover {
+  transform: scale(1.05);
+}
+
+.son1kvers3-logo:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 4px;
+}
+
+/* Tamaños */
+.logo-small {
+  width: 60px;
+  height: 60px;
+}
+
+.logo-medium {
+  width: 120px;
+  height: 120px;
+}
+
+.logo-large {
+  width: 200px;
+  height: 200px;
+}
+
+.logo-xlarge {
+  width: 300px;
+  height: 300px;
+}
+
+/* Variantes */
+.logo-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-minimal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Símbolo principal */
+.logo-symbol {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pirámide */
+.logo-pyramid {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  background: #000;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border: 2px solid #fff;
+  z-index: 3;
+}
+
+.logo-pyramid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, #333 0%, #000 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  opacity: 0.8;
+}
+
+/* Ojo que Todo lo Ve */
+.logo-eye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  z-index: 4;
+}
+
+.eye-iris {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  overflow: hidden;
+}
+
+.eye-pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background: #000;
+  border-radius: 50%;
+}
+
+.eye-reflection {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 15%;
+  height: 15%;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.eye-radial-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.radial-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 30%;
+  background: #fff;
+  transform-origin: 50% 0%;
+  opacity: 0.7;
+}
+
+/* Anillo geométrico */
+.logo-geometric-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.ring-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.ring-outer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.ring-radials {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ring-radials .radial-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 50%;
+  background: #fff;
+  transform-origin: 50% 0%;
+  opacity: 0.5;
+}
+
+.ring-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ring-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transform-origin: 0% 0%;
+}
+
+/* Elementos de circuito */
+.logo-circuit-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.circuit-top {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.circuit-bottom {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.circuit-line {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  opacity: 0.6;
+}
+
+.circuit-corners {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.circuit-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.circuit-corner.top-left {
+  top: 0;
+  left: 0;
+}
+
+.circuit-corner.top-right {
+  top: 0;
+  right: 0;
+}
+
+.circuit-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.circuit-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.circuit-path {
+  position: absolute;
+  background: #fff;
+  opacity: 0.4;
+}
+
+.circuit-corner.top-left .circuit-path {
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 1px;
+}
+
+.circuit-corner.top-left .circuit-path::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 15px;
+  background: #fff;
+}
+
+.circuit-corner.top-right .circuit-path {
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 1px;
+}
+
+.circuit-corner.top-right .circuit-path::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 15px;
+  background: #fff;
+}
+
+.circuit-corner.bottom-left .circuit-path {
+  bottom: 0;
+  left: 0;
+  width: 15px;
+  height: 1px;
+}
+
+.circuit-corner.bottom-left .circuit-path::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 15px;
+  background: #fff;
+}
+
+.circuit-corner.bottom-right .circuit-path {
+  bottom: 0;
+  right: 0;
+  width: 15px;
+  height: 1px;
+}
+
+.circuit-corner.bottom-right .circuit-path::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 15px;
+  background: #fff;
+}
+
+.circuit-node {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.circuit-corner.top-left .circuit-node:first-of-type {
+  top: 2px;
+  left: 2px;
+}
+
+.circuit-corner.top-left .circuit-node:last-of-type {
+  top: 8px;
+  left: 8px;
+}
+
+.circuit-corner.top-right .circuit-node:first-of-type {
+  top: 2px;
+  right: 2px;
+}
+
+.circuit-corner.top-right .circuit-node:last-of-type {
+  top: 8px;
+  right: 8px;
+}
+
+.circuit-corner.bottom-left .circuit-node:first-of-type {
+  bottom: 2px;
+  left: 2px;
+}
+
+.circuit-corner.bottom-left .circuit-node:last-of-type {
+  bottom: 8px;
+  left: 8px;
+}
+
+.circuit-corner.bottom-right .circuit-node:first-of-type {
+  bottom: 2px;
+  right: 2px;
+}
+
+.circuit-corner.bottom-right .circuit-node:last-of-type {
+  bottom: 8px;
+  right: 8px;
+}
+
+/* Texto */
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-text-main {
+  font-family: 'Orbitron', 'Roboto Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.logo-triangle {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid #fff;
+}
+
+/* Efectos de brillo animados */
+.logo-glow-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-cyan {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.glow-magenta {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, transparent 70%);
+  animation: glow-pulse 3s ease-in-out infinite 1s;
+}
+
+.glow-blue {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(0, 100, 255, 0.1) 0%, transparent 70%);
+  animation: glow-pulse 3s ease-in-out infinite 2s;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Animaciones del logo */
+.logo-animated .logo-eye {
+  animation: eye-blink 4s ease-in-out infinite;
+}
+
+.logo-animated .ring-dot {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+.logo-animated .circuit-node {
+  animation: node-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes eye-blink {
+  0%, 90%, 100% { transform: translate(-50%, -50%) scaleY(1); }
+  95% { transform: translate(-50%, -50%) scaleY(0.1); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes node-glow {
+  0%, 100% { opacity: 0.4; box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { opacity: 1; box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-text-main {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+  
+  .logo-small {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-medium {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .logo-large {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Variante minimal */
+.logo-minimal .logo-symbol {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-minimal .logo-text-main {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+/* Variante solo texto */
+.logo-text-only .logo-text-main {
+  font-size: 2rem;
+  letter-spacing: 3px;
+}
+
+.logo-text-only .logo-triangle {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #fff;
+}
+

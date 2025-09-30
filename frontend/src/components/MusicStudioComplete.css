@@ -1,0 +1,416 @@
+/* Music Studio Complete - Interfaz Integrada de Producción */
+
+.music-studio-complete {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+  border-radius: 25px;
+  box-shadow: 
+    0 0 0 1px #333,
+    0 0 0 2px #222,
+    0 0 0 3px #111,
+    0 30px 60px rgba(0, 0, 0, 0.9),
+    inset 0 3px 6px rgba(255, 255, 255, 0.03),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  border: 5px solid #444;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+}
+
+.music-studio-complete::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #ff6b6b, #ff8c00, #4ecdc4, #45b7d1, #9b59b6, #e74c3c, #00ff00);
+  opacity: 0.9;
+}
+
+.studio-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  border-bottom: 2px solid #444;
+}
+
+.studio-header h1 {
+  color: #00ff00;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+  margin: 0 0 1rem 0;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.studio-header p {
+  color: #aaffaa;
+  font-size: 1.3rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.studio-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.studio-tab {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 2px solid #444;
+  border-radius: 20px;
+  padding: 1.2rem 2.5rem;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+}
+
+.studio-tab:hover {
+  color: #00ff00;
+  border-color: #00ff00;
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.studio-tab.active {
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  color: #000;
+  border-color: #00ff00;
+  box-shadow: 0 0 35px rgba(0, 255, 0, 0.6);
+}
+
+.studio-tab:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.studio-tab:hover:before {
+  left: 100%;
+}
+
+.studio-content {
+  min-height: 700px;
+}
+
+.studio-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.workflow-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workflow-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.workflow-panel {
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  border: 2px solid #333;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00ff00, #00ffff, #ff6b6b, #ff8c00);
+  opacity: 0.8;
+}
+
+.workflow-panel h3 {
+  color: #00ff00;
+  font-size: 1.6rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.8rem;
+}
+
+.workflow-controls {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 2px solid #444;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.export-btn {
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  border: none;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.export-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
+}
+
+.export-btn:disabled {
+  background: #666;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.export-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.export-btn:hover:before {
+  left: 100%;
+}
+
+.track-info {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.track-details h4 {
+  color: #00ff00;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.track-details p {
+  margin: 0.3rem 0;
+  color: #aaa;
+}
+
+.studio-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #444;
+  text-align: center;
+}
+
+.studio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.studio-info p {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .workflow-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .music-studio-complete {
+    padding: 1.5rem;
+  }
+  
+  .studio-header h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .music-studio-complete {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .studio-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .studio-header p {
+    font-size: 1.1rem;
+  }
+  
+  .studio-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .studio-tab {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .workflow-panel {
+    padding: 1.5rem;
+  }
+  
+  .workflow-controls {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .export-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-studio-complete {
+    padding: 0.8rem;
+    margin: 0.25rem;
+  }
+  
+  .studio-header h1 {
+    font-size: 2rem;
+  }
+  
+  .studio-tab {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .workflow-panel {
+    padding: 1rem;
+  }
+  
+  .workflow-controls {
+    padding: 1.5rem;
+  }
+}
+
+/* Efectos especiales */
+.music-studio-complete::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 255, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  animation: backgroundPulse 12s infinite alternate;
+}
+
+@keyframes backgroundPulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+/* Animaciones de entrada mejoradas */
+.studio-section {
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efectos de hover mejorados */
+.studio-tab:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.studio-tab.active:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Scrollbar personalizado */
+.music-studio-complete::-webkit-scrollbar {
+  width: 10px;
+}
+
+.music-studio-complete::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.music-studio-complete::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 5px;
+}
+
+.music-studio-complete::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}

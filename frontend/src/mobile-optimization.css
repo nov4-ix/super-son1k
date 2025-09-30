@@ -1,0 +1,455 @@
+/**
+ * 📱 Son1kVers3 - Optimización Móvil y Tablet
+ * Estilos específicos para dispositivos móviles y tablets
+ */
+
+/* Variables para breakpoints */
+:root {
+  --mobile-small: 320px;
+  --mobile-medium: 375px;
+  --mobile-large: 425px;
+  --tablet-small: 768px;
+  --tablet-large: 1024px;
+  --desktop-small: 1200px;
+}
+
+/* Optimizaciones generales para móviles */
+@media (max-width: 768px) {
+  /* Header optimizado para móviles */
+  .app-header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .app-logo {
+    text-align: center;
+  }
+  
+  .app-logo-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .app-logo-text .app-version {
+    font-size: 0.8rem;
+  }
+  
+  /* Navegación optimizada para móviles */
+  .app-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0;
+  }
+  
+  .nav-btn {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.8rem;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: center;
+    min-height: 60px;
+  }
+  
+  .nav-icon {
+    font-size: 1.2rem;
+  }
+  
+  .nav-label {
+    font-size: 0.7rem;
+  }
+  
+  /* Contenido principal optimizado */
+  .app-main {
+    padding: 1rem;
+    min-height: calc(100vh - 200px);
+  }
+  
+  /* Servicios de estado más compactos */
+  .service-status {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* Footer optimizado */
+  .app-footer {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .footer-info p {
+    font-size: 0.8rem;
+    margin: 0.3rem 0;
+  }
+}
+
+/* Optimizaciones para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .app-header {
+    padding: 1.5rem;
+  }
+  
+  .app-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .nav-btn {
+    padding: 1rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .app-main {
+    padding: 1.5rem;
+  }
+}
+
+/* Optimizaciones específicas para pantallas pequeñas */
+@media (max-width: 480px) {
+  /* Header ultra compacto */
+  .app-header {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  .app-logo-text h1 {
+    font-size: 1.2rem;
+  }
+  
+  .app-logo-text .app-version {
+    font-size: 0.7rem;
+  }
+  
+  /* Navegación en grid 2x4 */
+  .app-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem;
+  }
+  
+  .nav-btn {
+    padding: 0.6rem 0.3rem;
+    font-size: 0.7rem;
+    min-height: 50px;
+  }
+  
+  .nav-icon {
+    font-size: 1rem;
+  }
+  
+  .nav-label {
+    font-size: 0.6rem;
+  }
+  
+  /* Contenido principal ultra compacto */
+  .app-main {
+    padding: 0.8rem;
+  }
+  
+  /* Controles de usuario optimizados */
+  .user-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .user-profile {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.6rem;
+  }
+  
+  .user-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .login-btn,
+  .admin-btn,
+  .logout-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Optimizaciones para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  .app-header {
+    padding: 0.5rem;
+  }
+  
+  .app-logo-text h1 {
+    font-size: 1rem;
+  }
+  
+  .nav-btn {
+    padding: 0.5rem 0.2rem;
+    font-size: 0.6rem;
+    min-height: 45px;
+  }
+  
+  .nav-icon {
+    font-size: 0.9rem;
+  }
+  
+  .nav-label {
+    font-size: 0.5rem;
+  }
+  
+  .app-main {
+    padding: 0.5rem;
+  }
+}
+
+/* Optimizaciones para orientación landscape en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-header {
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+  }
+  
+  .app-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  
+  .nav-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+    min-height: 35px;
+  }
+  
+  .app-main {
+    padding: 0.5rem;
+    min-height: calc(100vh - 120px);
+  }
+}
+
+/* Optimizaciones para tablets en landscape */
+@media (min-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
+  .app-header {
+    padding: 1rem 2rem;
+  }
+  
+  .app-nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-btn {
+    padding: 0.8rem 1rem;
+  }
+  
+  .app-main {
+    padding: 1rem 2rem;
+  }
+}
+
+/* Optimizaciones para componentes específicos en móviles */
+@media (max-width: 768px) {
+  /* Nexus Interface móvil */
+  .nexus-interface {
+    padding: 1rem;
+  }
+  
+  .nexus-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .nexus-card {
+    padding: 1rem;
+  }
+  
+  /* DAW Editor móvil */
+  .daw-editor {
+    padding: 1rem;
+  }
+  
+  .daw-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .daw-timeline {
+    height: 200px;
+  }
+  
+  /* Community Hub móvil */
+  .community-hub {
+    padding: 1rem;
+  }
+  
+  .community-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Floating Player móvil */
+  .floating-player {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+  }
+  
+  .player-controls {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .player-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .player-title {
+    font-size: 0.8rem;
+  }
+  
+  .player-artist {
+    font-size: 0.7rem;
+  }
+}
+
+/* Optimizaciones para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nexus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .community-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .daw-toolbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* Optimizaciones de rendimiento para móviles */
+@media (max-width: 768px) {
+  /* Reducir animaciones en móviles para mejor rendimiento */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Desactivar efectos de hover en móviles */
+  .nav-btn:hover,
+  .login-btn:hover,
+  .admin-btn:hover,
+  .logout-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Optimizar efectos de glow para móviles */
+  .app::before {
+    opacity: 0.3;
+  }
+  
+  /* Reducir efectos de blur para mejor rendimiento */
+  .app-header {
+    backdrop-filter: none;
+  }
+}
+
+/* Optimizaciones de accesibilidad para móviles */
+@media (max-width: 768px) {
+  /* Aumentar área de toque para botones */
+  .nav-btn,
+  .login-btn,
+  .admin-btn,
+  .logout-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mejorar contraste en pantallas pequeñas */
+  .nav-btn.active {
+    background: rgba(0, 255, 0, 0.3);
+    border: 2px solid var(--primary-color);
+  }
+  
+  /* Aumentar tamaño de fuente para mejor legibilidad */
+  .nav-label {
+    font-weight: bold;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+}
+
+/* Optimizaciones para pantallas de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .app-logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  .status-indicator {
+    border-width: 1px;
+  }
+}
+
+/* Optimizaciones para modo oscuro en móviles */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  .app {
+    background: #000000;
+  }
+  
+  .app-header {
+    background: #0a0a0a;
+  }
+  
+  .nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+  
+  .nav-btn.active {
+    background: rgba(0, 255, 0, 0.3);
+    color: #00ff00;
+  }
+}
+
+/* Optimizaciones para lectores de pantalla */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .app::before {
+    animation: none;
+  }
+}
+
+/* Optimizaciones para impresión */
+@media print {
+  .app-header,
+  .app-footer,
+  .floating-player,
+  .user-controls {
+    display: none;
+  }
+  
+  .app-main {
+    padding: 0;
+  }
+  
+  .app {
+    background: white;
+    color: black;
+  }
+}

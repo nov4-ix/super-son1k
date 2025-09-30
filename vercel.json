@@ -2,6 +2,13 @@
   "version": 2,
   "builds": [
     {
+      "src": "backend/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -11,8 +18,52 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "backend/main.py"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "frontend/$1"
     }
-  ]
+  ],
+  "functions": {
+    "backend/main.py": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "JWT_SECRET_KEY": "son1kvers3_enhanced_production_secret_key_2024_vercel_secure",
+    "JWT_ALGORITHM": "HS256",
+    "JWT_ACCESS_TOKEN_EXPIRE_MINUTES": "60",
+    "DATABASE_URL": "sqlite:///./son1kvers3.db",
+    "HUGGINGFACE_API_KEY": "hf_your_key_here",
+    "OLLAMA_BASE_URL": "https://ollama.son1kvers3.com",
+    "OLLAMA_MODEL": "qwen2.5:7b",
+    "CODEX_PATH": "./CODEX_MAESTRO-2.1_ATLAS.html",
+    "SOVITS_MODEL_PATH": "/tmp/models/sovits/",
+    "BARK_MODEL_PATH": "/tmp/models/bark/",
+    "VOICE_CLONING_ENABLED": "true",
+    "NOVA_POST_ENABLED": "true",
+    "SOCIAL_MEDIA_ANALYSIS": "true",
+    "GHOST_STUDIO_ENABLED": "true",
+    "AUDIO_ANALYSIS_ENABLED": "true",
+    "ANALYTICS_ENABLED": "true",
+    "METRICS_COLLECTION": "true",
+    "DAW_EDITOR_ENABLED": "true",
+    "AUDIO_EXPORT_ENABLED": "true",
+    "CORS_ORIGINS": "https://son1kvers3.com,https://www.son1kvers3.com,https://enhanced.son1kvers3.com,https://v2.son1kvers3.com,https://son1kvers3-enhanced.vercel.app,http://localhost:3000,http://127.0.0.1:3000",
+    "ALLOWED_HOSTS": "son1kvers3.com,www.son1kvers3.com,enhanced.son1kvers3.com,v2.son1kvers3.com,son1kvers3-enhanced.vercel.app,localhost,127.0.0.1",
+    "UPLOAD_DIR": "/tmp/uploads/",
+    "OUTPUT_DIR": "/tmp/output/",
+    "LOGS_DIR": "/tmp/logs/",
+    "MODELS_DIR": "/tmp/models/",
+    "HOST": "0.0.0.0",
+    "PORT": "8000",
+    "DEBUG": "false",
+    "HEALTH_CHECK_ENABLED": "true",
+    "METRICS_ENABLED": "true",
+    "VERCEL_ENVIRONMENT": "production"
+  }
 }
+

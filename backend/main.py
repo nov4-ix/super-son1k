@@ -28,10 +28,11 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# CORS middleware
+# CORS middleware - Configuración dinámica
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:8000"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -43,9 +44,19 @@ app.include_router(community_router)
 # Importar e incluir nuevos sistemas
 from waves_integration import waves_router
 from store_system import store_router
+from nova_post_enhanced_endpoints import router as nova_post_router
+from pixel_assistant_endpoints import router as pixel_router
+from content_moderation_endpoints import router as moderation_router
+from admin_dashboard import router as admin_router
+from auth_endpoints import router as auth_router
 
 app.include_router(waves_router)
 app.include_router(store_router)
+app.include_router(nova_post_router)
+app.include_router(pixel_router)
+app.include_router(moderation_router)
+app.include_router(admin_router)
+app.include_router(auth_router)
 
 # Importar el procesador del CODEX
 from codex_processor import init_codex_processor
@@ -88,11 +99,85 @@ async def root():
 
 @app.get("/health")
 async def health_check():
+    """Health check básico"""
     return {
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "2.0.0"
     }
+
+@app.get("/health/detailed")
+async def detailed_health_check():
+    """Health check detallado con verificación de servicios"""
+    health_status = {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "version": "2.0.0",
+        "services": {},
+        "environment": {},
+        "performance": {}
+    }
+    
+    # Verificar servicios críticos
+    try:
+        # Verificar base de datos de comunidad
+        from community_endpoints import get_db_connection
+        conn = get_db_connection()
+        conn.execute("SELECT 1")
+        conn.close()
+        health_status["services"]["community_db"] = "healthy"
+    except Exception as e:
+        health_status["services"]["community_db"] = f"unhealthy: {str(e)}"
+        health_status["status"] = "degraded"
+    
+    # Verificar directorios
+    required_dirs = ["uploads", "output", "logs", "models"]
+    for dir_name in required_dirs:
+        dir_path = os.getenv(f"{dir_name.upper()}_DIR", f"./{dir_name}")
+        if os.path.exists(dir_path) and os.access(dir_path, os.W_OK):
+            health_status["services"][f"{dir_name}_dir"] = "healthy"
+        else:
+            health_status["services"][f"{dir_name}_dir"] = "unhealthy"
+            health_status["status"] = "degraded"
+    
+    # Verificar variables de entorno críticas
+    critical_env_vars = ["JWT_SECRET_KEY", "CORS_ORIGINS"]
+    for var in critical_env_vars:
+        if os.getenv(var):
+            health_status["environment"][var] = "set"
+        else:
+            health_status["environment"][var] = "missing"
+            health_status["status"] = "degraded"
+    
+    # Verificar memoria y recursos
+    import psutil
+    memory = psutil.virtual_memory()
+    health_status["performance"] = {
+        "memory_usage_percent": memory.percent,
+        "memory_available_gb": round(memory.available / (1024**3), 2),
+        "cpu_count": psutil.cpu_count()
+    }
+    
+    return health_status
+
+@app.get("/health/ready")
+async def readiness_check():
+    """Kubernetes readiness probe"""
+    try:
+        # Verificar que todos los servicios críticos están listos
+        from community_endpoints import get_db_connection
+        conn = get_db_connection()
+        conn.execute("SELECT 1")
+        conn.close()
+        
+        return {"status": "ready", "timestamp": datetime.now().isoformat()}
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Service not ready: {str(e)}")
+
+@app.get("/health/live")
+async def liveness_check():
+    """Kubernetes liveness probe"""
+    return {"status": "alive", "timestamp": datetime.now().isoformat()}
 
 # API endpoints
 @app.get("/api/status")
