@@ -1,0 +1,49 @@
+{
+  "name": "son1kvers3-enhanced-backend",
+  "description": "Son1kVers3 Enhanced v2.0 Backend API",
+  "keywords": ["music", "ai", "voice-cloning", "daw", "analytics"],
+  "website": "https://son1kvers3.com",
+  "repository": "https://github.com/nov4-ix/son1kvers3-enhanced",
+  "success_url": "/health",
+  "env": {
+    "NODE_ENV": "production",
+    "JWT_SECRET_KEY": "son1kvers3_enhanced_production_secret_key_2024",
+    "JWT_ALGORITHM": "HS256",
+    "JWT_ACCESS_TOKEN_EXPIRE_MINUTES": "60",
+    "DATABASE_URL": "sqlite:///./son1kvers3.db",
+    "OLLAMA_BASE_URL": "http://localhost:11434",
+    "OLLAMA_MODEL": "qwen2.5:7b",
+    "SOVITS_MODEL_PATH": "./models/sovits/",
+    "BARK_MODEL_PATH": "./models/bark/",
+    "VOICE_CLONING_ENABLED": "true",
+    "NOVA_POST_ENABLED": "true",
+    "SOCIAL_MEDIA_ANALYSIS": "true",
+    "GHOST_STUDIO_ENABLED": "true",
+    "AUDIO_ANALYSIS_ENABLED": "true",
+    "ANALYTICS_ENABLED": "true",
+    "METRICS_COLLECTION": "true",
+    "DAW_EDITOR_ENABLED": "true",
+    "AUDIO_EXPORT_ENABLED": "true",
+    "CORS_ORIGINS": "https://son1kvers3.com,https://www.son1kvers3.com,https://son1kvers3-enhanced.vercel.app",
+    "ALLOWED_HOSTS": "son1kvers3.com,www.son1kvers3.com,son1kvers3-enhanced.vercel.app",
+    "UPLOAD_DIR": "./uploads/",
+    "OUTPUT_DIR": "./output/",
+    "LOGS_DIR": "./logs/",
+    "HOST": "0.0.0.0",
+    "PORT": "8000",
+    "DEBUG": "false",
+    "HEALTH_CHECK_ENABLED": "true",
+    "METRICS_ENABLED": "true"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
