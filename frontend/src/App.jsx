@@ -38,6 +38,7 @@ import GhostStudio from './components/GhostStudio';
 import ALVAESymbol from './components/ALVAESymbol';
 import LoreGallery from './components/LoreGallery';
 import CodexViewer from './components/CodexViewer';
+import SubscriptionPlans from './components/SubscriptionPlans';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -243,6 +244,10 @@ function App() {
         return <CommunityHub />;
       case 'admin':
         return <AdminDashboard onClose={() => setCurrentView('nexus')} isAuthenticated={user?.role === 'admin'} />;
+      case 'planes':
+        return <SubscriptionPlans currentUser={user} onPlanSelect={(plan, cycle) => console.log('Plan selected:', plan, cycle)} />;
+      case 'nexus-portal':
+        return <NexusInterface />;
       default:
         return <NexusInterface />;
     }
@@ -347,7 +352,9 @@ function App() {
             { id: 'album-art', label: 'Album Art', icon: '🎨' },
             { id: 'analytics', label: 'Analytics', icon: '📈' },
             { id: 'archivo', label: 'El Archivo', icon: '📚' },
-            { id: 'community', label: 'Santuario', icon: '⚔️' }
+            { id: 'planes', label: 'Planes', icon: '💳' },
+            { id: 'community', label: 'Santuario', icon: '⚔️' },
+            { id: 'nexus-portal', label: 'Portal Nexus', icon: '🎮' }
           ].map(item => (
             <button
               key={item.id}

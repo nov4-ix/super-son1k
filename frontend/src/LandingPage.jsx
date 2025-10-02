@@ -196,6 +196,13 @@ const LandingPage = () => {
               </button>
               
               <button 
+                className="nexus-cta"
+                onClick={() => window.location.href = '/nexus'}
+              >
+                🎮 Modo Nexus
+              </button>
+              
+              <button 
                 className="secondary-cta"
                 onClick={() => setCurrentSection('universe')}
               >
