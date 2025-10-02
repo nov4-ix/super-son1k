@@ -32,6 +32,7 @@ import FloatingPixelAssistant from './components/FloatingPixelAssistant';
 import Son1kVers3Logo from './components/Son1kVers3Logo';
 import NovaPostPilot from './components/NovaPostPilot';
 import CloneStation from './components/CloneStation';
+import GhostStudioPro from './components/GhostStudioPro';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -218,7 +219,7 @@ function App() {
       case 'social':
         return <SocialInterface services={services} />;
       case 'ghost':
-        return <GhostStudioComplete services={services} />;
+        return <GhostStudioPro onClose={() => setCurrentView('nexus')} />;
       case 'daw-pro':
         return <ProfessionalDAW services={services} />;
       case 'mastering':

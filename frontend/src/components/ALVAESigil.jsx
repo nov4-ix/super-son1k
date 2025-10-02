@@ -190,25 +190,25 @@ const ALVAESigil = ({
               <div className="level-details">
                 <div className="level-name">{levelInfo.name}</div>
                 <div className="vibration-state">{levelInfo.vibration}</div>
-              </div>
+      </div>
             )}
-          </div>
+      </div>
         )}
 
-        {/* Partículas de energía */}
+      {/* Partículas de energía */}
         {isActive && (
           <div className="energy-particles">
             {[...Array(6)].map((_, i) => (
-              <div 
-                key={i} 
-                className="particle" 
-                style={{ 
+          <div 
+            key={i} 
+            className="particle"
+            style={{
                   '--delay': `${i * 0.2}s`,
                   '--color': levelInfo.color 
-                }}
-              />
-            ))}
-          </div>
+            }}
+          />
+        ))}
+      </div>
         )}
       </div>
 

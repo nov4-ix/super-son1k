@@ -106,9 +106,9 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
       {/* Contenido principal de la ubicación */}
       <div className={`location-content ${isTransitioning ? 'transitioning' : ''}`}>
         {/* Imagen de fondo de la ubicación */}
-        <div 
+          <div
           className="location-background"
-          style={{
+            style={{
             '--primary-color': currentLocationData.colors[0],
             '--secondary-color': currentLocationData.colors[1],
             '--accent-color': currentLocationData.colors[2]
@@ -146,15 +146,15 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
             <div className="location-character">
               <h4>Narrativa</h4>
               <p>{currentLocationData.character}</p>
-            </div>
-            
+                </div>
+                
             <div className="location-mood">
               <span className="mood-indicator" style={{ color: currentLocationData.colors[0] }}>
                 {currentLocationData.mood}
-              </span>
-            </div>
-          </div>
-
+                      </span>
+                  </div>
+                </div>
+                
           {/* Controles de interacción */}
           <div className="location-controls">
             <button className="explore-btn">
@@ -170,8 +170,8 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
               Crear Aquí
             </button>
           </div>
-        </div>
-
+                </div>
+                
         {/* Elementos interactivos específicos de cada ubicación */}
         <div className="location-interactive">
           {activeLocation === 'nexus' && (
@@ -179,9 +179,9 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
               <div className="energy-cables">
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="cable" style={{ '--delay': `${i * 0.2}s` }} />
-                ))}
-              </div>
-            </div>
+                    ))}
+                  </div>
+                </div>
           )}
           
           {activeLocation === 'terminal' && (
@@ -206,8 +206,8 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
               <div className="piano-silhouette">
                 <div className="piano-keys"></div>
                 <div className="cosmic-energy"></div>
-              </div>
-            </div>
+                  </div>
+                </div>
           )}
           
           {activeLocation === 'resistance' && (
@@ -218,9 +218,9 @@ const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) =>
               </div>
             </div>
           )}
-        </div>
-      </div>
-
+              </div>
+            </div>
+            
       {/* Indicador de transición */}
       {isTransitioning && (
         <div className="transition-overlay">
