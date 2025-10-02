@@ -1,0 +1,46 @@
+# 💳 Stripe Configuration - Son1kVers3
+# Copia este archivo como .env.local en frontend/ y .env en backend/
+
+# ========================================
+# FRONTEND ENVIRONMENT VARIABLES
+# ========================================
+# Archivo: frontend/.env.local
+
+REACT_APP_STRIPE_PUBLIC_KEY=pk_test_REEMPLAZA_CON_TU_CLAVE_PUBLICA
+REACT_APP_API_URL=http://localhost:8000
+
+# ========================================
+# BACKEND ENVIRONMENT VARIABLES  
+# ========================================
+# Archivo: backend/.env
+
+STRIPE_SECRET_KEY=sk_test_REEMPLAZA_CON_TU_CLAVE_SECRETA
+STRIPE_WEBHOOK_SECRET=whsec_REEMPLAZA_CON_TU_WEBHOOK_SECRET
+
+# ========================================
+# VERCEL ENVIRONMENT VARIABLES
+# ========================================
+# Configurar en Vercel Dashboard → Settings → Environment Variables
+
+# REACT_APP_STRIPE_PUBLIC_KEY = pk_test_tu_clave_publica
+# STRIPE_SECRET_KEY = sk_test_tu_clave_secreta  
+# STRIPE_WEBHOOK_SECRET = whsec_tu_webhook_secret
+
+# ========================================
+# INSTRUCCIONES
+# ========================================
+
+# 1. Ve a https://dashboard.stripe.com/apikeys
+# 2. Copia tu Publishable key (pk_test_...)
+# 3. Copia tu Secret key (sk_test_...)
+# 4. Ve a https://dashboard.stripe.com/webhooks
+# 5. Crea webhook con URL: https://tu-dominio.vercel.app/api/stripe/webhook
+# 6. Copia el Webhook secret (whsec_...)
+# 7. Reemplaza los valores en este archivo
+# 8. Renombra a .env.local (frontend) y .env (backend)
+
+# PRODUCTOS A CREAR EN STRIPE:
+# Son1kVers3 Pro - $24.99/mes, $249.99/año
+# Son1kVers3 Premium - $49.99/mes, $499.99/año  
+# Son1kVers3 Enterprise - $199.99/mes, $1,999.99/año
+# Starter Package - $99.99 (pago único)

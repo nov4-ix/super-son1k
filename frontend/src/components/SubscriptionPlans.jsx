@@ -5,10 +5,15 @@
 
 import React, { useState } from 'react';
 import './SubscriptionPlans.css';
+import StripeCheckout from './StripeCheckout';
+import stripeService from '../services/StripeService';
 
 const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
   const [selectedPlan, setSelectedPlan] = useState(currentUser?.tier || 'free');
   const [billingCycle, setBillingCycle] = useState('monthly'); // monthly, yearly
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState(null);
+  const [isCreditsCheckout, setIsCreditsCheckout] = useState(false);
 
   // Definición de planes con precios basados en análisis de costos
   const subscriptionPlans = {
@@ -160,6 +165,31 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
     }
   };
 
+  const handlePurchase = (planId) => {
+    if (planId === 'free') {
+      // Plan gratuito no requiere pago
+      alert('El plan gratuito ya está activo. ¡Comienza a crear música!');
+      return;
+    }
+    
+    const plan = subscriptionPlans[planId];
+    setCheckoutPlan(plan);
+    setIsCreditsCheckout(false);
+    setShowCheckout(true);
+  };
+
+  const handleCreditsPackage = () => {
+    setCheckoutPlan(starterPackage);
+    setIsCreditsCheckout(true);
+    setShowCheckout(true);
+  };
+
+  const closeCheckout = () => {
+    setShowCheckout(false);
+    setCheckoutPlan(null);
+    setIsCreditsCheckout(false);
+  };
+
   const getDiscountPercentage = () => {
     return billingCycle === 'yearly' ? 17 : 0; // 17% descuento anual
   };
@@ -234,7 +264,10 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
             <span className="value-badge">{starterPackage.value}</span>
           </div>
           
-          <button className="package-buy-btn">
+          <button 
+            className="package-buy-btn"
+            onClick={handleCreditsPackage}
+          >
             🚀 Comprar Paquete Inicial
           </button>
         </div>
@@ -318,10 +351,10 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
                 borderColor: plan.color,
                 color: selectedPlan === planId ? '#000000' : plan.color
               }}
+              onClick={() => handlePurchase(planId)}
             >
               {currentUser?.tier === planId ? 'Plan Actual' : 
-               selectedPlan === planId ? 'Seleccionado' : 
-               planId === 'free' ? 'Comenzar' : 'Seleccionar'}
+               planId === 'free' ? 'Comenzar Gratis' : 'Suscribirse'}
             </button>
           </div>
         ))}
@@ -369,6 +402,18 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
           </div>
         </div>
       </div>
+
+      {/* Modal de Stripe Checkout */}
+      {showCheckout && checkoutPlan && (
+        <StripeCheckout
+          isOpen={showCheckout}
+          onClose={closeCheckout}
+          planId={isCreditsCheckout ? 'starter' : selectedPlan}
+          billingCycle={billingCycle}
+          isCreditsPackage={isCreditsCheckout}
+          planDetails={checkoutPlan}
+        />
+      )}
     </div>
   );
 };
