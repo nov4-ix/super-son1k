@@ -56,7 +56,7 @@ import ProfessionalDAW from './components/ProfessionalDAW';
 import AlbumArtGenerator from './components/AlbumArtGenerator';
 
 function App() {
-  // FORZAR SIEMPRE LANDING - NO IMPORTA QUE
+  // FORZAR SIEMPRE LANDING PAGE
   const [currentMode, setCurrentMode] = useState('landing');
   const [currentView, setCurrentView] = useState('nexus'); // Vista por defecto en modo nexus
   const [services, setServices] = useState({});
@@ -200,7 +200,7 @@ function App() {
   const renderNexusMode = () => {
     switch (currentView) {
       case 'nexus':
-        return <NexusPortal />;
+        return <NexusInterface />;
       case 'daw':
         return <ResistanceDAW />;
       case 'creator':
@@ -212,7 +212,7 @@ function App() {
       case 'clone-station':
         return <CloneStation onClose={() => setCurrentView('nexus')} />;
       case 'nova-post':
-        return <NovaPostPilot onClose={() => setCurrentView('nexus')} />;
+        return <NovaPostPilot onClose={() => setCurrentView('home')} />;
       case 'analytics':
         return <AnalyticsInterface services={services} />;
       case 'social':
@@ -257,13 +257,17 @@ function App() {
     );
   }
 
-  // FORZAR que siempre vaya a landing primero
+  // FORZAR que siempre vaya a landing primero - CORREGIDO
   if (currentMode === 'landing') {
     return <LandingPage />;
   }
   
   if (currentMode === 'classic') {
     return <ClassicApp />;
+  }
+  
+  if (currentMode === 'nexus') {
+    return <NexusInterface />;
   }
 
   // Modo Nexus con interfaz completa
