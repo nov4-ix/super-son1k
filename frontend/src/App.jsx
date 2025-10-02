@@ -56,7 +56,8 @@ import ProfessionalDAW from './components/ProfessionalDAW';
 import AlbumArtGenerator from './components/AlbumArtGenerator';
 
 function App() {
-  const [currentMode, setCurrentMode] = useState('landing'); // SIEMPRE empezar en landing
+  // FORZAR SIEMPRE LANDING - NO IMPORTA QUE
+  const [currentMode, setCurrentMode] = useState('landing');
   const [currentView, setCurrentView] = useState('nexus'); // Vista por defecto en modo nexus
   const [services, setServices] = useState({});
   const [isInitialized, setIsInitialized] = useState(false);
@@ -73,15 +74,19 @@ function App() {
     stealth: false
   });
 
-  // Detectar el modo basado en la URL
+  // Detectar el modo basado en la URL - FORZAR LANDING
   useEffect(() => {
+    // Limpiar cualquier estado previo
+    localStorage.removeItem('son1k_mode');
+    localStorage.removeItem('current_mode');
+    
     const path = window.location.pathname;
     if (path === '/classic') {
       setCurrentMode('classic');
     } else if (path === '/nexus') {
       setCurrentMode('nexus');
     } else {
-      // Por defecto siempre ir a landing page
+      // SIEMPRE ir a landing page por defecto
       setCurrentMode('landing');
     }
   }, []);
@@ -260,9 +265,13 @@ function App() {
     );
   }
 
-  // Para landing y classic, renderizar directamente
-  if (currentMode === 'landing' || currentMode === 'classic') {
-    return renderCurrentMode();
+  // FORZAR que siempre vaya a landing primero
+  if (currentMode === 'landing') {
+    return <LandingPage />;
+  }
+  
+  if (currentMode === 'classic') {
+    return <ClassicApp />;
   }
 
   // Modo Nexus con interfaz completa
