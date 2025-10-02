@@ -54,8 +54,8 @@ import ProfessionalDAW from './components/ProfessionalDAW';
 import AlbumArtGenerator from './components/AlbumArtGenerator';
 
 function App() {
-  const [currentMode, setCurrentMode] = useState('landing'); // 'landing', 'classic', 'nexus'
-  const [currentView, setCurrentView] = useState('nexus');
+  const [currentMode, setCurrentMode] = useState('landing'); // SIEMPRE empezar en landing
+  const [currentView, setCurrentView] = useState('nexus'); // Vista por defecto en modo nexus
   const [services, setServices] = useState({});
   const [isInitialized, setIsInitialized] = useState(false);
   const [user, setUser] = useState(null);
@@ -79,6 +79,7 @@ function App() {
     } else if (path === '/nexus') {
       setCurrentMode('nexus');
     } else {
+      // Por defecto siempre ir a landing page
       setCurrentMode('landing');
     }
   }, []);
