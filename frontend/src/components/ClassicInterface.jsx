@@ -26,11 +26,14 @@ const ClassicInterface = () => {
     extension: 'offline'
   });
   
-  // Estados de knobs (igual que en el HTML)
+  // Estados de knobs de producción (que influyen en el prompt)
   const [knobs, setKnobs] = useState({
-    expresividad: 75,
-    creatividad: 60,
-    precision: 85
+    expresividad: 75,  // Mood y estado de ánimo
+    rareza: 40,        // Qué tanto cambiar del original
+    trash: 30,         // Sonido saturado de mezcla
+    grunge: 25,        // Instrumentos con distorsión
+    creatividad: 60,   // Nivel creativo
+    precision: 85      // Precisión técnica
   });
   
   const [isGenerating, setIsGenerating] = useState(false);
@@ -53,7 +56,7 @@ const ClassicInterface = () => {
     }));
   };
 
-  // Generar prompt inteligente
+  // Generar prompt inteligente con perillas de producción
   const generateSmartPrompt = async () => {
     const baseText = document.getElementById('letraCancion')?.value || '';
     
@@ -63,21 +66,55 @@ const ClassicInterface = () => {
     }
 
     try {
-      showToast('🧠 Generando prompt inteligente...', 'info');
+      showToast('🧠 Generando prompt con perillas de producción...', 'info');
       
-      // Simular generación de prompt inteligente
-      const smartPrompts = [
-        `Create an epic ${knobs.creatividad > 70 ? 'experimental' : 'melodic'} track inspired by: "${baseText}". Style: cyberpunk electronic with emotional depth, tempo around ${100 + knobs.expresividad}bpm, ${knobs.precision > 50 ? 'precise' : 'loose'} production.`,
-        `Generate a ${knobs.expresividad > 60 ? 'highly expressive' : 'subtle'} composition based on: "${baseText}". Blend organic and synthetic elements, ${knobs.creatividad > 50 ? 'innovative' : 'traditional'} arrangement, professional mixing.`,
-        `Compose a powerful musical piece from: "${baseText}". Incorporate ${knobs.precision > 70 ? 'detailed' : 'atmospheric'} production, ${knobs.expresividad > 80 ? 'intense emotional' : 'balanced'} performance, modern sound design.`
-      ];
+      // Construir prompt basado en perillas
+      let enhancedPrompt = `Create a track based on: "${baseText}"`;
       
-      const selectedPrompt = smartPrompts[Math.floor(Math.random() * smartPrompts.length)];
+      // Aplicar expresividad (mood y estado de ánimo)
+      if (knobs.expresividad > 70) {
+        enhancedPrompt += ', highly expressive and emotional performance';
+      } else if (knobs.expresividad > 40) {
+        enhancedPrompt += ', moderate emotional expression';
+      } else {
+        enhancedPrompt += ', subtle and controlled expression';
+      }
+      
+      // Aplicar rareza (qué tanto cambiar del original)
+      if (knobs.rareza > 70) {
+        enhancedPrompt += ', completely reimagined with experimental and unconventional elements';
+      } else if (knobs.rareza > 40) {
+        enhancedPrompt += ', with creative variations and some unexpected elements';
+      } else {
+        enhancedPrompt += ', staying close to traditional style and structure';
+      }
+      
+      // Aplicar trash (sonido saturado de mezcla)
+      if (knobs.trash > 70) {
+        enhancedPrompt += ', heavily saturated and compressed mix with aggressive processing';
+      } else if (knobs.trash > 40) {
+        enhancedPrompt += ', with some saturation and punch in the mix';
+      } else {
+        enhancedPrompt += ', with clean and polished production';
+      }
+      
+      // Aplicar grunge (instrumentos con distorsión)
+      if (knobs.grunge > 70) {
+        enhancedPrompt += ', featuring heavily distorted and gritty instruments';
+      } else if (knobs.grunge > 40) {
+        enhancedPrompt += ', with some distortion and edge on instruments';
+      } else {
+        enhancedPrompt += ', with clean and pristine instrument tones';
+      }
+      
+      // Añadir creatividad y precisión
+      enhancedPrompt += `, ${knobs.creatividad > 60 ? 'innovative' : 'traditional'} arrangement`;
+      enhancedPrompt += `, ${knobs.precision > 70 ? 'detailed and precise' : 'atmospheric'} production`;
       
       setTimeout(() => {
-        document.getElementById('letraCancion').value = selectedPrompt;
-        setCurrentPrompt(selectedPrompt);
-        showToast('✅ Prompt inteligente generado', 'success');
+        document.getElementById('letraCancion').value = enhancedPrompt;
+        setCurrentPrompt(enhancedPrompt);
+        showToast('✅ Prompt generado con perillas de producción', 'success');
       }, 1500);
       
     } catch (error) {
@@ -398,10 +435,11 @@ La resistencia que me hace renacer
         </div>
         
         <div className="space-y-6">
-          {/* Controles de Expresión con knobs 3D */}
+          {/* Perillas de Producción (influyen directamente en el prompt) */}
           <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
-            <h3 className="text-lg font-bold text-center mb-6">CONTROLES DE EXPRESIÓN</h3>
-            <div className="grid grid-cols-3 gap-6 mb-8">
+            <h3 className="text-lg font-bold text-center mb-6">PERILLAS DE PRODUCCIÓN</h3>
+            <p className="text-center text-zinc-400 mb-6 text-sm">Estas perillas influyen directamente en el prompt enviado a Suno</p>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div className="text-center">
                 <div className="knob-container">
                   <div className="knob" style={{'--rotation': `${(knobs.expresividad / 100) * 270 - 135}deg`}}>
@@ -440,20 +478,59 @@ La resistencia que me hace renacer
               
               <div className="text-center">
                 <div className="knob-container">
-                  <div className="knob" style={{'--rotation': `${(knobs.precision / 100) * 270 - 135}deg`}}>
+                  <div className="knob" style={{'--rotation': `${(knobs.rareza / 100) * 270 - 135}deg`}}>
                     <div className="knob-indicator"></div>
                   </div>
                   <input
                     type="range"
                     min="0"
                     max="100"
-                    value={knobs.precision}
-                    onChange={(e) => handleKnobChange('precision', e.target.value)}
+                    value={knobs.rareza}
+                    onChange={(e) => handleKnobChange('rareza', e.target.value)}
                     className="knob-input"
                   />
                 </div>
-                <p className="text-sm mt-2 text-zinc-400">Precisión</p>
-                <p className="text-xs text-neon font-mono">{knobs.precision}%</p>
+                <p className="text-sm mt-2 text-zinc-400">Rareza</p>
+                <p className="text-xs text-neon font-mono">{knobs.rareza}%</p>
+                <p className="text-xs text-zinc-500">Cambio del original</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="knob-container">
+                  <div className="knob" style={{'--rotation': `${(knobs.trash / 100) * 270 - 135}deg`}}>
+                    <div className="knob-indicator"></div>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={knobs.trash}
+                    onChange={(e) => handleKnobChange('trash', e.target.value)}
+                    className="knob-input"
+                  />
+                </div>
+                <p className="text-sm mt-2 text-zinc-400">Trash</p>
+                <p className="text-xs text-neon font-mono">{knobs.trash}%</p>
+                <p className="text-xs text-zinc-500">Sonido saturado</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="knob-container">
+                  <div className="knob" style={{'--rotation': `${(knobs.grunge / 100) * 270 - 135}deg`}}>
+                    <div className="knob-indicator"></div>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={knobs.grunge}
+                    onChange={(e) => handleKnobChange('grunge', e.target.value)}
+                    className="knob-input"
+                  />
+                </div>
+                <p className="text-sm mt-2 text-zinc-400">Grunge</p>
+                <p className="text-xs text-neon font-mono">{knobs.grunge}%</p>
+                <p className="text-xs text-zinc-500">Distorsión</p>
               </div>
             </div>
             
