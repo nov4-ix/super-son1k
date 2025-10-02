@@ -91,4 +91,7 @@ npm run build
 ║                  ✨ PROYECTO 100% FUNCIONAL ✨                             ║
 ║                  ESTADO: READY FOR PRODUCTION                              ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
+<<<<<<< HEAD
 
+=======
+>>>>>>> 440dc7fd36ee4b1a7a5a586baeb751db6163b136

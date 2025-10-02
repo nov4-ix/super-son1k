@@ -372,4 +372,7 @@ Para más información sobre el proyecto:
 **Fecha de corrección**: 2025-10-02  
 **Versión del proyecto**: 2.0.0  
 **Estado**: ✅ COMPLETAMENTE FUNCIONAL
+<<<<<<< HEAD
 
+=======
+>>>>>>> 440dc7fd36ee4b1a7a5a586baeb751db6163b136
