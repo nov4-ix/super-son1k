@@ -1,43 +1,19 @@
 /**
- * 🎵 Son1kVers3 - VERSIÓN NUCLEAR FINAL
- * FORZAR Landing Page - SIN NOVA POST PILOT
+ * 🎵 Son1kVers3 - VERSIÓN DEFINITIVA
+ * SOLO LANDING PAGE - SIN MÁS PROBLEMAS
  */
 
 import React from 'react';
 import './App.css';
 import LandingPage from './LandingPage';
-import ClassicInterface from './components/ClassicInterface';
-import NexusInterface from './components/NexusInterface';
 
 function App() {
-  const [currentMode, setCurrentMode] = React.useState('landing');
-
-  React.useEffect(() => {
-    const path = window.location.pathname;
-    console.log('🔍 Ruta actual:', path);
-    
-    if (path === '/classic') {
-      setCurrentMode('classic');
-    } else if (path === '/nexus') {
-      setCurrentMode('nexus');
-    } else {
-      setCurrentMode('landing');
-    }
-  }, []);
-
-  console.log('🎯 Modo actual:', currentMode);
-
-  // RENDERIZADO FORZADO
-  if (currentMode === 'classic') {
-    return <ClassicInterface />;
-  }
-  
-  if (currentMode === 'nexus') {
-    return <NexusInterface />;
-  }
-  
-  // POR DEFECTO SIEMPRE LANDING
-  return <LandingPage />;
+  // FORZAR SIEMPRE LANDING PAGE - SIN EXCEPCIONES
+  return (
+    <div className="app">
+      <LandingPage />
+    </div>
+  );
 }
 
 export default App;

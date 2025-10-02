@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
-import Son1kVers3MainLogo from './components/Son1kVers3MainLogo';
 import Son1kVers3Logo from './components/Son1kVers3Logo';
 
 const LandingPage = () => {
