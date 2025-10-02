@@ -10,7 +10,7 @@ import CodexViewer from './CodexViewer';
 import GhostStudio from './GhostStudio';
 import TheCreator from './TheCreator';
 import FloatingPixelAssistant from './FloatingPixelAssistant';
-import NovaPostPilot from './NovaPostPilot';
+// NovaPostPilot ELIMINADO A LA CHINGADA
 import CloneStation from './CloneStation';
 import DAWEditor from './DAWEditor';
 import ProfessionalDAW from './ProfessionalDAW';
@@ -308,7 +308,7 @@ La resistencia que me hace renacer
       case 'codex':
         return <CodexViewer />;
       case 'nova-post':
-        return <NovaPostPilot onClose={() => setCurrentSection('home')} />;
+        return <div className="p-8 text-center"><h2 className="text-neon">Nova Post Pilot eliminado</h2></div>;
       case 'clone-station':
         return <CloneStation onClose={() => setCurrentSection('home')} />;
       case 'daw':
