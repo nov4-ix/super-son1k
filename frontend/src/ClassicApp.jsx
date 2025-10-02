@@ -1,11 +1,11 @@
 /**
  * 🎵 Son1kVers3 Classic - Aplicación Clásica
- * Interfaz basada en el archivo index.html original
- * Modo clásico para usuarios que buscan usar las herramientas directamente
+ * Interfaz completa con todas las funcionalidades del HTML original
+ * Faders, tipografía y estética mantenida en React funcional
  */
 
-import React, { useState, useEffect } from 'react';
-import './ClassicApp.css';
+import React from 'react';
+import ClassicInterface from './components/ClassicInterface';
 
 const ClassicApp = () => {
   const [currentSection, setCurrentSection] = useState('home');

@@ -1,0 +1,196 @@
+/**
+ * 🎵 Classic Interface - Estilos CSS
+ * Replica exacta del HTML estático con faders y tipografía original
+ */
+
+/* Variables del tema (igual que HTML) */
+.text-neon { color: #00FFE7 !important; }
+.bg-neon { background-color: #00FFE7 !important; }
+.border-neon { border-color: #00FFE7 !important; }
+.shadow-glow { box-shadow: 0 0 40px rgba(0,255,231,.25) !important; }
+.bg-haze { background-color: #0f111a !important; }
+.text-neon-purple { color: #8b5cf6 !important; }
+
+.tab-active { 
+  background: linear-gradient(45deg, #00FFE7, #8b5cf6);
+  color: #000;
+}
+
+/* Botones con focus visible */
+.btn:focus-visible {
+  outline: 2px solid #00FFE7;
+  outline-offset: 2px;
+}
+
+/* Status indicators (igual que HTML) */
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+.status-online { background-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
+.status-offline { background-color: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+.status-pending { background-color: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+
+/* Knobs 3D (igual que HTML) */
+.knob-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.knob {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 3px solid #333333;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 231, 0.2);
+  transition: all 0.3s ease;
+}
+
+.knob:hover {
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(0, 255, 231, 0.4);
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 3px;
+  height: 25px;
+  background: #00FFE7;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(var(--rotation, -135deg));
+  transform-origin: bottom center;
+  box-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+}
+
+.knob-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Navegación (igual que HTML) */
+.nav-tab {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-tab:hover {
+  color: #00FFE7;
+}
+
+.nav-tab.tab-active {
+  background: linear-gradient(45deg, #00FFE7, #8b5cf6);
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Secciones de contenido */
+.content-section {
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+/* Animaciones de toast */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Efectos de hover para botones */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Estilos específicos para faders y controles */
+.knob-container:hover .knob {
+  transform: scale(1.05);
+}
+
+.knob-container:active .knob {
+  transform: scale(0.95);
+}
+
+/* Efectos de glow para elementos activos */
+.bg-neon/10 {
+  background-color: rgba(0, 255, 231, 0.1);
+}
+
+.bg-neon/20 {
+  background-color: rgba(0, 255, 231, 0.2);
+}
+
+.border-neon/30 {
+  border-color: rgba(0, 255, 231, 0.3);
+}
+
+.hover\:bg-neon\/10:hover {
+  background-color: rgba(0, 255, 231, 0.1);
+}
+
+.hover\:bg-neon\/20:hover {
+  background-color: rgba(0, 255, 231, 0.2);
+}
+
+/* Responsive (igual que HTML) */
+@media (max-width: 768px) {
+  .knob-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .knob {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .knob-indicator {
+    height: 20px;
+    top: 6px;
+  }
+  
+  .nav-tab {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid.grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .flex.space-x-6 {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
