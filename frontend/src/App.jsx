@@ -29,6 +29,7 @@ import LoginModal from './components/LoginModal';
 import AdminDashboard from './components/AdminDashboard';
 import ALVAEBadge from './components/ALVAEBadge';
 import FloatingPixelAssistant from './components/FloatingPixelAssistant';
+import Son1kVers3Logo from './components/Son1kVers3Logo';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -257,10 +258,15 @@ function App() {
       {/* Header con navegación */}
       <header className="app-header">
         <div className="app-logo">
-          <img src="/logo.svg" alt="Son1kVers3" className="app-logo-img" />
+          <Son1kVers3Logo 
+            size="medium" 
+            animated={true} 
+            interactive={true}
+            variant="full"
+            onActivate={() => console.log('Logo activado!')}
+          />
           <div className="app-logo-text">
-            <h1>Son1kVers3 Enhanced</h1>
-            <span className="app-version">v2.0</span>
+            <span className="app-version">v2.0 Enhanced</span>
           </div>
         </div>
 

@@ -14,43 +14,50 @@ const ALVAEBadge = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
 
-  // Niveles de ALVAE
+  // Niveles de ALVAE - Sigilo Sonoro
+  // AL (Alma) + VA (Vibración) + E (Energía)
   const alvaeLevels = {
     0: { 
       name: 'Silencioso', 
-      color: '#666', 
-      description: 'Aún no ha activado su sigilo',
-      glow: 'rgba(102, 102, 102, 0.3)'
+      color: '#2a2a3e', 
+      description: 'Alma despertando - Sigilo dormante',
+      vibration: 'Alma despertando',
+      glow: 'rgba(42, 42, 62, 0.3)'
     },
     25: { 
       name: 'Susurro', 
-      color: '#888', 
-      description: 'Primeros pasos en la resistencia',
-      glow: 'rgba(136, 136, 136, 0.4)'
+      color: '#4a4a6e', 
+      description: 'Latido emergente - Primeras vibraciones',
+      vibration: 'Latido emergente',
+      glow: 'rgba(74, 74, 110, 0.4)'
     },
     50: { 
       name: 'Eco', 
-      color: '#aaa', 
-      description: 'Su voz comienza a resonar',
-      glow: 'rgba(170, 170, 170, 0.5)'
+      color: '#6a6a9e', 
+      description: 'Vibración consciente - Resonancia media',
+      vibration: 'Vibración consciente',
+      glow: 'rgba(106, 106, 158, 0.5)'
     },
     75: { 
       name: 'Resonancia', 
-      color: '#00ffff', 
-      description: 'Fuerte conexión con el universo',
-      glow: 'rgba(0, 255, 255, 0.6)'
+      color: '#8a8ace', 
+      description: 'Energía sincronizada - Maestría intermedia',
+      vibration: 'Energía sincronizada',
+      glow: 'rgba(138, 138, 206, 0.6)'
     },
     90: { 
       name: 'Armonía', 
-      color: '#ffd700', 
-      description: 'Sincronización perfecta',
-      glow: 'rgba(255, 215, 0, 0.7)'
+      color: '#aaaaff', 
+      description: 'Afinación vibracional completa',
+      vibration: 'Afinación vibracional completa',
+      glow: 'rgba(170, 170, 255, 0.7)'
     },
     100: { 
       name: 'Sinfonía', 
-      color: '#ff00ff', 
-      description: 'Maestro del sonido y la resistencia',
-      glow: 'rgba(255, 0, 255, 0.8)'
+      color: '#ccccff', 
+      description: 'Ser sonoro consciente - Totem digital activado',
+      vibration: 'Totem digital activado',
+      glow: 'rgba(204, 204, 255, 0.8)'
     }
   };
 

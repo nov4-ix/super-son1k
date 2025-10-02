@@ -1,616 +1,332 @@
-/* ALVAE Sigil - Sigilo Sonoro de Son1kVers3 */
+/**
+ * 🔺 ALVAE Sigil Styles
+ * Estilos para el Sigilo Sonoro - Geometría fractal reactiva
+ */
 
 .alvae-sigil {
   position: relative;
   display: inline-block;
-  cursor: pointer;
   user-select: none;
-  transition: all 0.3s ease;
-  font-family: 'Roboto Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.alvae-sigil:hover {
+/* Tamaños del sigilo */
+.alvae-sigil.small {
+  width: 60px;
+  height: 60px;
+}
+
+.alvae-sigil.medium {
+  width: 100px;
+  height: 100px;
+}
+
+.alvae-sigil.large {
+  width: 160px;
+  height: 160px;
+}
+
+/* Container principal */
+.sigil-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG del sigilo */
+.sigil-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(170, 170, 255, 0.3));
+  transition: all 0.3s ease;
+}
+
+/* Estados vibracionales */
+.alvae-sigil.silence .sigil-svg {
+  filter: drop-shadow(0 0 5px rgba(42, 42, 62, 0.5));
+}
+
+.alvae-sigil.whisper .sigil-svg {
+  filter: drop-shadow(0 0 8px rgba(74, 74, 110, 0.6));
+}
+
+.alvae-sigil.echo .sigil-svg {
+  filter: drop-shadow(0 0 12px rgba(106, 106, 158, 0.7));
+}
+
+.alvae-sigil.resonance .sigil-svg {
+  filter: drop-shadow(0 0 16px rgba(138, 138, 206, 0.8));
+}
+
+.alvae-sigil.harmony .sigil-svg {
+  filter: drop-shadow(0 0 20px rgba(170, 170, 255, 1));
+}
+
+/* Animaciones del sigilo */
+.sigil-aura {
+  animation: aura-pulse 4s ease-in-out infinite;
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+/* Triángulo principal */
+.main-triangle {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw-triangle 3s ease-in-out forwards;
+}
+
+@keyframes draw-triangle {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Fractales */
+.fractal {
+  opacity: 0;
+  animation: fade-in-fractal 2s ease-in-out forwards;
+}
+
+.fractal-0 { animation-delay: 1s; }
+.fractal-1 { animation-delay: 1.5s; }
+
+@keyframes fade-in-fractal {
+  to { opacity: 0.7; }
+}
+
+/* Nodos de conexión */
+.connection-node {
+  opacity: 0;
+  animation: node-appear 1s ease-in-out forwards;
+}
+
+.connection-node:nth-child(1) { animation-delay: 2s; }
+.connection-node:nth-child(2) { animation-delay: 2.2s; }
+.connection-node:nth-child(3) { animation-delay: 2.4s; }
+
+@keyframes node-appear {
+  0% { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Centro energético */
+.energy-core {
+  animation: core-pulse 2s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Rayo de energía */
+.energy-bolt {
+  opacity: 0;
+  animation: bolt-flash 3s ease-in-out infinite;
+}
+
+@keyframes bolt-flash {
+  0%, 90%, 100% { opacity: 0; }
+  5%, 85% { opacity: 1; }
+}
+
+/* Estado pulsante (reactivo al audio) */
+.alvae-sigil.pulsing .sigil-svg {
+  animation: audio-pulse 0.2s ease-out;
+}
+
+@keyframes audio-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Estado activo */
+.alvae-sigil.active {
   transform: scale(1.05);
 }
 
-.alvae-sigil:focus {
-  outline: 2px solid #ffd700;
-  outline-offset: 4px;
+.alvae-sigil.active .sigil-svg {
+  filter: drop-shadow(0 0 25px rgba(170, 170, 255, 0.8));
 }
 
-/* Tamaños */
-.alvae-small {
-  width: 80px;
-  height: 80px;
-}
-
-.alvae-medium {
-  width: 120px;
-  height: 120px;
-}
-
-.alvae-large {
-  width: 200px;
-  height: 200px;
-}
-
-.alvae-xlarge {
-  width: 300px;
-  height: 300px;
-}
-
-/* Círculo exterior - Alma (AL) */
-.alvae-circle {
+/* Información del nivel */
+.level-info {
   position: absolute;
-  top: 50%;
+  bottom: -30px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  color: #00bfff;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.circle-outer {
+.alvae-sigil:hover .level-info {
+  opacity: 1;
+}
+
+.level-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.level-name {
+  font-size: 10px;
+  color: #00bfff;
+  margin-top: 2px;
+}
+
+.vibration-state {
+  font-size: 8px;
+  color: #ff49c3;
+  font-style: italic;
+}
+
+/* Partículas de energía */
+.energy-particles {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: 3px solid #ffd700;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: 
-    0 0 20px rgba(255, 215, 0, 0.5),
-    inset 0 0 20px rgba(255, 215, 0, 0.1);
-}
-
-.circle-inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  border: 1px solid #ffd700;
-  border-radius: 50%;
-  background: transparent;
-  opacity: 0.6;
-}
-
-.circle-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: circle-pulse 3s ease-in-out infinite;
-}
-
-@keyframes circle-pulse {
-  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
-}
-
-/* Rayo central - Vibración (VA) */
-.alvae-lightning {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 60%;
-  z-index: 2;
-}
-
-.lightning-bolt {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.bolt-main {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 80%;
-  background: linear-gradient(180deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
-  border-radius: 4px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-}
-
-.bolt-branch {
-  position: absolute;
-  background: #ffd700;
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-}
-
-.bolt-branch-1 {
-  top: 20%;
-  left: 30%;
-  width: 4px;
-  height: 20%;
-  transform: rotate(45deg);
-}
-
-.bolt-branch-2 {
-  top: 40%;
-  right: 25%;
-  width: 4px;
-  height: 15%;
-  transform: rotate(-30deg);
-}
-
-.bolt-branch-3 {
-  bottom: 30%;
-  left: 25%;
-  width: 4px;
-  height: 18%;
-  transform: rotate(60deg);
-}
-
-.lightning-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(ellipse, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: lightning-glow 2s ease-in-out infinite;
-}
-
-@keyframes lightning-glow {
-  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-}
-
-/* Geometría fractal - Energía (E) */
-.alvae-fractals {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-}
-
-.fractal-triangle {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 1px solid #ffd700;
-  opacity: 0.4;
-  animation: fractal-rotate 10s linear infinite;
-}
-
-.fractal-1 {
-  top: 20%;
-  left: 20%;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 25px solid #ffd700;
-  animation-delay: 0s;
-}
-
-.fractal-2 {
-  top: 20%;
-  right: 20%;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 20px solid #ffd700;
-  animation-delay: 1s;
-}
-
-.fractal-3 {
-  bottom: 20%;
-  left: 20%;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 18px solid #ffd700;
-  animation-delay: 2s;
-}
-
-.fractal-4 {
-  bottom: 20%;
-  right: 20%;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 22px solid #ffd700;
-  animation-delay: 3s;
-}
-
-.fractal-5 {
-  top: 50%;
-  left: 10%;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 15px solid #ffd700;
-  animation-delay: 4s;
-}
-
-.fractal-6 {
-  top: 50%;
-  right: 10%;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 15px solid #ffd700;
-  animation-delay: 5s;
-}
-
-@keyframes fractal-rotate {
-  0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
-  50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
-  100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
-}
-
-/* Nodos conectivos */
-.alvae-nodes {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 4;
-}
-
-.node {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #ffd700;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  animation: node-pulse 2s ease-in-out infinite;
-}
-
-.node-1 { top: 15%; left: 50%; animation-delay: 0s; }
-.node-2 { top: 30%; left: 20%; animation-delay: 0.2s; }
-.node-3 { top: 30%; right: 20%; animation-delay: 0.4s; }
-.node-4 { top: 50%; left: 10%; animation-delay: 0.6s; }
-.node-5 { top: 50%; right: 10%; animation-delay: 0.8s; }
-.node-6 { bottom: 30%; left: 20%; animation-delay: 1s; }
-.node-7 { bottom: 30%; right: 20%; animation-delay: 1.2s; }
-.node-8 { bottom: 15%; left: 50%; animation-delay: 1.4s; }
-
-@keyframes node-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.5); opacity: 1; }
-}
-
-/* Conexiones entre nodos */
-.alvae-connections {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-}
-
-.connection {
-  position: absolute;
-  background: linear-gradient(90deg, transparent, #ffd700, transparent);
-  height: 1px;
-  opacity: 0.6;
-  animation: connection-flow 3s ease-in-out infinite;
-}
-
-.connection-1 {
-  top: 20%;
-  left: 30%;
-  width: 40%;
-  transform: rotate(15deg);
-  animation-delay: 0s;
-}
-
-.connection-2 {
-  top: 40%;
-  left: 15%;
-  width: 30%;
-  transform: rotate(-20deg);
-  animation-delay: 0.5s;
-}
-
-.connection-3 {
-  top: 60%;
-  left: 20%;
-  width: 35%;
-  transform: rotate(25deg);
-  animation-delay: 1s;
-}
-
-.connection-4 {
-  top: 30%;
-  right: 15%;
-  width: 30%;
-  transform: rotate(-15deg);
-  animation-delay: 1.5s;
-}
-
-.connection-5 {
-  top: 50%;
-  right: 20%;
-  width: 25%;
-  transform: rotate(30deg);
-  animation-delay: 2s;
-}
-
-.connection-6 {
-  top: 70%;
-  right: 25%;
-  width: 30%;
-  transform: rotate(-25deg);
-  animation-delay: 2.5s;
-}
-
-@keyframes connection-flow {
-  0%, 100% { opacity: 0.3; transform: scaleX(1); }
-  50% { opacity: 0.8; transform: scaleX(1.2); }
-}
-
-/* Efectos de energía */
-.alvae-energy-effects {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.energy-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #ffd700;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: energy-ring-expand 4s ease-in-out infinite;
-}
-
-.energy-ring-1 {
-  width: 120%;
-  height: 120%;
-  animation-delay: 0s;
-}
-
-.energy-ring-2 {
-  width: 140%;
-  height: 140%;
-  animation-delay: 1s;
-}
-
-.energy-ring-3 {
-  width: 160%;
-  height: 160%;
-  animation-delay: 2s;
-}
-
-@keyframes energy-ring-expand {
-  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
-  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-}
-
-.energy-pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: energy-pulse 2s ease-in-out infinite;
-}
-
-@keyframes energy-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; }
-}
-
-/* Partículas de energía */
-.alvae-particles {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 5;
+  pointer-events: none;
 }
 
 .particle {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: 2px;
-  background: #ffd700;
+  width: 3px;
+  height: 3px;
+  background: var(--color, #00bfff);
   border-radius: 50%;
-  animation: particle-orbit 6s linear infinite;
-  animation-delay: var(--particle-delay);
-  transform-origin: 0 0;
+  animation: particle-float 3s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
-@keyframes particle-orbit {
-  0% { 
-    transform: rotate(var(--particle-angle)) translateX(60px) rotate(0deg);
-    opacity: 0;
+.particle:nth-child(1) { top: 20%; left: 50%; }
+.particle:nth-child(2) { top: 50%; left: 80%; }
+.particle:nth-child(3) { top: 80%; left: 50%; }
+.particle:nth-child(4) { top: 50%; left: 20%; }
+.particle:nth-child(5) { top: 30%; left: 30%; }
+.particle:nth-child(6) { top: 70%; left: 70%; }
+
+@keyframes particle-float {
+  0%, 100% { 
+    opacity: 0; 
+    transform: translateY(0) scale(0.5); 
   }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { 
-    transform: rotate(var(--particle-angle)) translateX(60px) rotate(360deg);
-    opacity: 0;
+  50% { 
+    opacity: 1; 
+    transform: translateY(-10px) scale(1); 
   }
 }
 
-/* Texto ALVAE */
-.alvae-text {
+/* Tooltip */
+.sigil-tooltip {
   position: absolute;
-  bottom: -40px;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
+  background: rgba(11, 11, 13, 0.95);
+  border: 1px solid #00bfff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 11px;
+  color: #e7e7ea;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
+}
+
+.alvae-sigil:hover .sigil-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.sigil-tooltip h4 {
+  margin: 0 0 8px 0;
+  color: #ffcc00;
+  font-size: 12px;
   text-align: center;
-  z-index: 6;
 }
 
-.alvae-label {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  letter-spacing: 2px;
-  text-transform: uppercase;
+.sigil-tooltip p {
+  margin: 4px 0;
+  color: #00bfff;
 }
 
-.alvae-subtitle {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+.components {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #1d2330;
 }
 
-.soul-label,
-.vibration-label,
-.energy-label {
-  font-size: 0.8rem;
-  color: #ffd700;
-  opacity: 0.7;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.components div {
+  margin: 2px 0;
+  font-size: 10px;
+  color: #b9b9c2;
 }
 
-/* Indicadores de estado */
-.alvae-status {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  z-index: 6;
+.components strong {
+  color: #ff49c3;
 }
 
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.7rem;
-  color: #ffd700;
+/* Efectos hover */
+.alvae-sigil:hover {
+  transform: scale(1.02);
 }
 
-.indicator-label {
-  min-width: 60px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.8;
-}
-
-.indicator-bar {
-  width: 60px;
-  height: 4px;
-  background: rgba(255, 215, 0, 0.2);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.indicator-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #ffd700, #ffed4e);
-  border-radius: 2px;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
-}
-
-/* Estados interactivos */
-.alvae-sigil.interactive:hover .circle-glow {
-  animation-duration: 1s;
-}
-
-.alvae-sigil.interactive:hover .lightning-glow {
-  animation-duration: 1s;
-}
-
-.alvae-sigil.active .circle-outer {
-  box-shadow: 
-    0 0 30px rgba(255, 215, 0, 0.8),
-    inset 0 0 30px rgba(255, 215, 0, 0.2);
-}
-
-.alvae-sigil.active .bolt-main {
-  box-shadow: 0 0 25px rgba(255, 215, 0, 1);
-}
-
-.alvae-sigil.pulsating .circle-glow {
-  animation-duration: 0.5s;
-}
-
-.alvae-sigil.pulsating .lightning-glow {
-  animation-duration: 0.5s;
-}
-
-.alvae-sigil.sound-reactive .node {
-  animation-duration: calc(1s / var(--vibration-level, 1));
-}
-
-.alvae-sigil.sound-reactive .connection {
-  animation-duration: calc(2s / var(--energy-level, 1));
-}
-
-.alvae-sigil.sound-reactive .fractal-triangle {
-  animation-duration: calc(5s / var(--fractal-level, 1));
+.alvae-sigil:hover .sigil-svg {
+  filter: drop-shadow(0 0 20px rgba(170, 170, 255, 0.6));
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .alvae-text {
-    bottom: -30px;
+  .alvae-sigil.large {
+    width: 120px;
+    height: 120px;
   }
   
-  .alvae-label {
-    font-size: 1rem;
-  }
-  
-  .alvae-subtitle {
-    gap: 0.3rem;
-  }
-  
-  .soul-label,
-  .vibration-label,
-  .energy-label {
-    font-size: 0.7rem;
-  }
-  
-  .alvae-status {
-    top: -50px;
-  }
-  
-  .status-indicator {
-    font-size: 0.6rem;
-  }
-  
-  .indicator-label {
-    min-width: 50px;
-  }
-  
-  .indicator-bar {
-    width: 50px;
+  .sigil-tooltip {
+    font-size: 10px;
+    padding: 8px;
   }
 }
 
+/* Accesibilidad */
+.alvae-sigil:focus {
+  outline: 2px solid #00bfff;
+  outline-offset: 4px;
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: high) {
+  .alvae-sigil {
+    filter: contrast(1.5);
+  }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .alvae-sigil *,
+  .alvae-sigil *::before,
+  .alvae-sigil *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

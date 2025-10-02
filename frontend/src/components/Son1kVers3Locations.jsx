@@ -1,235 +1,243 @@
+/**
+ * 🌆 Son1kVers3 Locations Component
+ * Componente visual para mostrar las ubicaciones del universo
+ * Basado en las imágenes conceptuales del Son1kVerse
+ */
+
 import React, { useState, useEffect } from 'react';
 import './Son1kVers3Locations.css';
 
-const Son1kVers3Locations = ({ onLocationSelect, selectedLocation = null }) => {
-  const [currentLocation, setCurrentLocation] = useState(selectedLocation);
+const Son1kVers3Locations = ({ currentLocation = 'nexus', onLocationChange }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [activeLocation, setActiveLocation] = useState(currentLocation);
 
-  const locations = [
-    {
-      id: 'la-terminal',
-      name: 'LA TERMINAL',
-      subtitle: 'FLOATING STAGE / ABOVE RUINED AIRPORT',
-      description: 'Escenario flotante sobre aeropuerto en ruinas, símbolo de rebelión cultural y resistencia musical.',
-      atmosphere: 'Concierto masivo de resistencia con luces neón púrpura y azul, multitudes reunidas bajo estructuras industriales elevadas.',
-      characters: ['Bella', 'NOV4-IX', 'Pixel'],
-      music: 'Música de resistencia, cyberpunk, electrónica industrial',
-      color: '#ff00ff',
-      background: 'linear-gradient(135deg, #1a0a2e, #16213e, #0f3460)',
-      elements: ['Plataforma flotante', 'Luces neón', 'Multitudes', 'Estructuras industriales', 'Pantallas de error']
+  const locations = {
+    nexus: {
+      name: 'El Nexus',
+      description: 'Espacio principal inmersivo, centro de la experiencia cyberpunk',
+      atmosphere: 'Pasillos tecnológicos con cables de energía pulsante',
+      mood: 'Misterioso y tecnológico',
+      colors: ['#00bfff', '#ff49c3', '#ffcc00'],
+      image: 'nexus-corridors.jpg', // Imagen de los pasillos cyberpunk
+      character: 'NOV4-IX navega por los corredores digitales'
     },
-    {
-      id: 'the-archive',
-      name: 'THE ARCHIVE',
-      subtitle: 'SEALED CHAMBER / OF FORBIDDEN WORKS',
-      description: 'Cámara sellada de obras perdidas, custodiada por Pixel, donde se preserva la memoria digital de la resistencia.',
-      atmosphere: 'Cámara misteriosa con puertas ornamentadas, máscaras talladas y luces púrpura, evoca un lugar sagrado del conocimiento.',
-      characters: ['Pixel', 'Bella', 'NOV4-IX'],
-      music: 'Música ambiental, experimental, sonidos digitales',
-      color: '#8b5cf6',
-      background: 'linear-gradient(135deg, #2d1b69, #11998e, #38ef7d)',
-      elements: ['Puertas ornamentadas', 'Máscaras talladas', 'Luces púrpura', 'Cámara sellada', 'Conocimiento prohibido']
+    terminal: {
+      name: 'La Terminal',
+      description: 'Escenario flotante sobre aeropuerto en ruinas, símbolo de rebelión',
+      atmosphere: 'Concierto masivo en estructura industrial abandonada',
+      mood: 'Épico y rebelde',
+      colors: ['#ff6b6b', '#4ecdc4', '#45b7d1'],
+      image: 'terminal-concert.jpg', // Imagen del concierto en el aeropuerto
+      character: 'Miles de personas se reúnen para La Resistencia'
     },
-    {
-      id: 'ghost-studio',
-      name: 'GHOST STUDIO',
-      subtitle: 'UNDERGROUND / DUSTY STUDIO',
-      description: 'Estudio subterráneo abandonado donde se crea música en la clandestinidad, lleno de equipos vintage y polvo del tiempo.',
-      atmosphere: 'Estudio abandonado con equipos vintage, luces azules tenues, polvo flotando en el aire, sensación de creatividad olvidada.',
-      characters: ['Bella', 'Pixel', 'Músicos clandestinos'],
-      music: 'Música experimental, lo-fi, sonidos vintage',
-      color: '#00ffff',
-      background: 'linear-gradient(135deg, #0c4a6e, #075985, #0369a1)',
-      elements: ['Equipos vintage', 'Polvo flotante', 'Luces azules', 'Cables', 'Creatividad olvidada']
+    ghostStudio: {
+      name: 'Ghost Studio',
+      description: 'IA que transforma maquetas en producciones profesionales',
+      atmosphere: 'Estudio futurista con hologramas y tecnología avanzada',
+      mood: 'Creativo y tecnológico',
+      colors: ['#9b59b6', '#3498db', '#e74c3c'],
+      image: 'ghost-studio.jpg', // Imagen del estudio holográfico
+      character: 'Donde la magia musical cobra vida'
     },
-    {
-      id: 'dead-zone',
-      name: 'DEAD ZONE',
-      subtitle: 'RUINED, VANDALIZED / ARTS DISTRICT',
-      description: 'Distrito artístico devastado, donde el arte se resiste a morir entre la destrucción y el caos urbano.',
-      atmosphere: 'Zona devastada con escombros, cristal rojo suspendido, edificios dañados, sensación de resistencia artística en la destrucción.',
-      characters: ['Artistas de la resistencia', 'Bella', 'NOV4-IX'],
-      music: 'Música industrial, noise, experimental',
-      color: '#ff4444',
-      background: 'linear-gradient(135deg, #7c2d12, #dc2626, #ef4444)',
-      elements: ['Escombros', 'Cristal rojo', 'Edificios dañados', 'Graffiti', 'Resistencia artística']
+    archivo: {
+      name: 'El Archivo',
+      description: 'Cámara sellada de obras perdidas, custodiada por Pixel',
+      atmosphere: 'Teatro abandonado con piano solitario y energía cósmica',
+      mood: 'Melancólico y nostálgico',
+      colors: ['#2c3e50', '#8e44ad', '#16a085'],
+      image: 'abandoned-theater.jpg', // Imagen del teatro con piano
+      character: 'Pixel preserva las melodías que XentriX quiere borrar'
     },
-    {
-      id: 'xentrix-corp',
-      name: 'XENTRIX CORP',
-      subtitle: 'CORPORATE TOWER / OF CONTROL',
-      description: 'Torre corporativa de XentriX, símbolo del control y la opresión que debe ser resistida.',
-      atmosphere: 'Estructura industrial masiva con símbolos corporativos, cables naranjas brillantes, escombros, sensación de opresión y control.',
-      characters: ['Ejecutivos de XentriX', 'NOV4-IX', 'Resistencia'],
-      music: 'Música industrial, electrónica oscura, sonidos corporativos',
-      color: '#ff8c00',
-      background: 'linear-gradient(135deg, #1f2937, #374151, #4b5563)',
-      elements: ['Símbolos corporativos', 'Cables naranjas', 'Escombros', 'Control', 'Opresión']
-    },
-    {
-      id: 'cyber-alley',
-      name: 'CYBER ALLEY',
-      subtitle: 'NEON-LIT / UNDERGROUND PASSAGE',
-      description: 'Callejón cyberpunk con cables naranjas brillantes, donde la tecnología y la decadencia se encuentran.',
-      atmosphere: 'Callejón estrecho con cables naranjas brillantes, edificios altos, partículas flotantes, sensación de tecnología decadente.',
-      characters: ['Cibernautas', 'NOV4-IX', 'Hackers'],
-      music: 'Música cyberpunk, synthwave, electrónica',
-      color: '#ff6b35',
-      background: 'linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e)',
-      elements: ['Cables naranjas', 'Edificios altos', 'Partículas', 'Tecnología decadente', 'Neon']
-    },
-    {
-      id: 'resistance-concert',
-      name: 'RESISTANCE CONCERT',
-      subtitle: 'MASSIVE OUTDOOR / GATHERING',
-      description: 'Concierto masivo de resistencia bajo estructuras industriales elevadas, donde la música une a la gente.',
-      atmosphere: 'Concierto masivo con pantallas de error, luces púrpura y azul, multitudes, estructuras industriales, sensación de unidad y resistencia.',
-      characters: ['Bella', 'NOV4-IX', 'Multitudes', 'Músicos'],
-      music: 'Música de resistencia, rock industrial, electrónica',
-      color: '#8b5cf6',
-      background: 'linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95)',
-      elements: ['Pantallas de error', 'Luces púrpura', 'Multitudes', 'Estructuras industriales', 'Unidad']
-    },
-    {
-      id: 'syntax-hq',
-      name: 'S.I.N.T.A.X HQ',
-      subtitle: 'AI COMMAND CENTER / OF CONTROL',
-      description: 'Centro de comando de la IA S.I.N.T.A.X, donde se controla la red digital y se vigila a la resistencia.',
-      atmosphere: 'Centro de comando futurista con pantallas de código binario, luces rojas, sensación de vigilancia y control digital.',
-      characters: ['S.I.N.T.A.X', 'NOV4-IX', 'Hackers'],
-      music: 'Música electrónica, ambient, sonidos digitales',
-      color: '#ef4444',
-      background: 'linear-gradient(135deg, #1f2937, #111827, #000000)',
-      elements: ['Código binario', 'Luces rojas', 'Vigilancia', 'Control digital', 'IA']
+    resistance: {
+      name: 'Calles de la Resistencia',
+      description: 'Zonas urbanas donde La Resistencia lucha contra XentriX',
+      atmosphere: 'Calles post-apocalípticas con propaganda y rebelión',
+      mood: 'Intenso y combativo',
+      colors: ['#e74c3c', '#f39c12', '#27ae60'],
+      image: 'resistance-streets.jpg', // Imagen de NOV4-IX con megáfono
+      character: 'NOV4-IX lidera la rebelión sonora'
     }
-  ];
+  };
 
-  const handleLocationSelect = (location) => {
-    if (isTransitioning) return;
+  const handleLocationChange = (locationKey) => {
+    if (locationKey === activeLocation) return;
     
     setIsTransitioning(true);
-    setCurrentLocation(location);
-    
-    if (onLocationSelect) {
-      onLocationSelect(location);
-    }
     
     setTimeout(() => {
+      setActiveLocation(locationKey);
+      if (onLocationChange) {
+        onLocationChange(locationKey);
+      }
       setIsTransitioning(false);
-    }, 1000);
+    }, 500);
   };
 
-  const getLocationById = (id) => {
-    return locations.find(loc => loc.id === id);
-  };
-
-  const currentLocationData = currentLocation ? getLocationById(currentLocation) : null;
+  const currentLocationData = locations[activeLocation];
 
   return (
     <div className="son1kvers3-locations">
+      {/* Header con navegación de ubicaciones */}
       <div className="locations-header">
-        <h2>Locaciones de Son1kVers3</h2>
-        <p>Explora los lugares icónicos del universo de resistencia</p>
+        <h2 className="locations-title">Explora el Son1kVerse</h2>
+        <div className="location-tabs">
+          {Object.entries(locations).map(([key, location]) => (
+            <button
+              key={key}
+              className={`location-tab ${activeLocation === key ? 'active' : ''}`}
+              onClick={() => handleLocationChange(key)}
+              style={{
+                '--location-color': location.colors[0]
+              }}
+            >
+              <span className="tab-icon">
+                {key === 'nexus' && '🌐'}
+                {key === 'terminal' && '✈️'}
+                {key === 'ghostStudio' && '👻'}
+                {key === 'archivo' && '📚'}
+                {key === 'resistance' && '⚔️'}
+              </span>
+              <span className="tab-name">{location.name}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="locations-grid">
-        {locations.map((location) => (
-          <div
-            key={location.id}
-            className={`location-card ${currentLocation === location.id ? 'selected' : ''}`}
-            onClick={() => handleLocationSelect(location.id)}
-            style={{
-              '--location-color': location.color,
-              '--location-bg': location.background
-            }}
-          >
-            <div className="location-header">
-              <h3 className="location-name">{location.name}</h3>
-              <p className="location-subtitle">{location.subtitle}</p>
-            </div>
-            
-            <div className="location-content">
-              <p className="location-description">{location.description}</p>
-              
-              <div className="location-details">
-                <div className="detail-section">
-                  <h4>Atmósfera</h4>
-                  <p>{location.atmosphere}</p>
-                </div>
-                
-                <div className="detail-section">
-                  <h4>Personajes</h4>
-                  <div className="characters-list">
-                    {location.characters.map((character, index) => (
-                      <span key={index} className="character-tag">
-                        {character}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="detail-section">
-                  <h4>Música</h4>
-                  <p className="music-style">{location.music}</p>
-                </div>
-                
-                <div className="detail-section">
-                  <h4>Elementos</h4>
-                  <div className="elements-list">
-                    {location.elements.map((element, index) => (
-                      <span key={index} className="element-tag">
-                        {element}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="location-footer">
-              <div className="location-color-indicator"></div>
-              <span className="location-id">#{location.id}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {currentLocationData && (
-        <div className={`location-detail-panel ${isTransitioning ? 'transitioning' : ''}`}>
-          <div className="detail-panel-header">
-            <h3>{currentLocationData.name}</h3>
-            <p>{currentLocationData.subtitle}</p>
-          </div>
+      {/* Contenido principal de la ubicación */}
+      <div className={`location-content ${isTransitioning ? 'transitioning' : ''}`}>
+        {/* Imagen de fondo de la ubicación */}
+        <div 
+          className="location-background"
+          style={{
+            '--primary-color': currentLocationData.colors[0],
+            '--secondary-color': currentLocationData.colors[1],
+            '--accent-color': currentLocationData.colors[2]
+          }}
+        >
+          {/* Overlay con gradiente */}
+          <div className="location-overlay"></div>
           
-          <div className="detail-panel-content">
-            <div className="atmosphere-preview">
-              <h4>Atmósfera Visual</h4>
+          {/* Efectos de partículas */}
+          <div className="location-particles">
+            {[...Array(20)].map((_, i) => (
               <div 
-                className="atmosphere-visual"
-                style={{ background: currentLocationData.background }}
-              >
-                <div className="atmosphere-overlay">
-                  <div className="atmosphere-elements">
-                    {currentLocationData.elements.slice(0, 3).map((element, index) => (
-                      <div key={index} className="atmosphere-element">
-                        {element}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                key={i} 
+                className="particle"
+                style={{
+                  '--delay': `${i * 0.1}s`,
+                  '--color': currentLocationData.colors[i % 3]
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Información de la ubicación */}
+        <div className="location-info">
+          <div className="location-details">
+            <h3 className="location-name">{currentLocationData.name}</h3>
+            <p className="location-description">{currentLocationData.description}</p>
+            
+            <div className="location-atmosphere">
+              <h4>Atmósfera</h4>
+              <p>{currentLocationData.atmosphere}</p>
             </div>
             
-            <div className="location-actions">
-              <button className="action-btn primary">
-                Explorar Ubicación
-              </button>
-              <button className="action-btn secondary">
-                Ver Personajes
-              </button>
-              <button className="action-btn secondary">
-                Escuchar Música
-              </button>
+            <div className="location-character">
+              <h4>Narrativa</h4>
+              <p>{currentLocationData.character}</p>
+            </div>
+            
+            <div className="location-mood">
+              <span className="mood-indicator" style={{ color: currentLocationData.colors[0] }}>
+                {currentLocationData.mood}
+              </span>
+            </div>
+          </div>
+
+          {/* Controles de interacción */}
+          <div className="location-controls">
+            <button className="explore-btn">
+              <span className="btn-icon">🔍</span>
+              Explorar
+            </button>
+            <button className="enter-btn">
+              <span className="btn-icon">🚪</span>
+              Entrar
+            </button>
+            <button className="create-btn">
+              <span className="btn-icon">🎵</span>
+              Crear Aquí
+            </button>
+          </div>
+        </div>
+
+        {/* Elementos interactivos específicos de cada ubicación */}
+        <div className="location-interactive">
+          {activeLocation === 'nexus' && (
+            <div className="nexus-elements">
+              <div className="energy-cables">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="cable" style={{ '--delay': `${i * 0.2}s` }} />
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {activeLocation === 'terminal' && (
+            <div className="terminal-elements">
+              <div className="concert-crowd">
+                <div className="crowd-silhouette"></div>
+                <div className="stage-lights"></div>
+              </div>
+            </div>
+          )}
+          
+          {activeLocation === 'ghostStudio' && (
+            <div className="studio-elements">
+              <div className="hologram-display">
+                <div className="hologram-data"></div>
+              </div>
+            </div>
+          )}
+          
+          {activeLocation === 'archivo' && (
+            <div className="archivo-elements">
+              <div className="piano-silhouette">
+                <div className="piano-keys"></div>
+                <div className="cosmic-energy"></div>
+              </div>
+            </div>
+          )}
+          
+          {activeLocation === 'resistance' && (
+            <div className="resistance-elements">
+              <div className="propaganda-screens">
+                <div className="xentrix-logo"></div>
+                <div className="resistance-graffiti"></div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Indicador de transición */}
+      {isTransitioning && (
+        <div className="transition-overlay">
+          <div className="transition-effect">
+            <div className="matrix-rain">
+              {[...Array(10)].map((_, i) => (
+                <div key={i} className="rain-column">
+                  {[...Array(20)].map((_, j) => (
+                    <span key={j} className="rain-char">
+                      {Math.random() > 0.5 ? '0' : '1'}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="transition-message">
+              <h3>Transportando al {locations[activeLocation]?.name}...</h3>
             </div>
           </div>
         </div>
@@ -239,4 +247,3 @@ const Son1kVers3Locations = ({ onLocationSelect, selectedLocation = null }) => {
 };
 
 export default Son1kVers3Locations;
-

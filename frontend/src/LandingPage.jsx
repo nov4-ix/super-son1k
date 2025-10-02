@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
+import Son1kVers3Logo from './components/Son1kVers3Logo';
 
 const LandingPage = () => {
   const [easterEggProgress, setEasterEggProgress] = useState(0);
@@ -139,7 +140,13 @@ const LandingPage = () => {
               className={`logo ${easterEggProgress > 0 ? 'activated' : ''}`}
               onClick={handleLogoClick}
             >
-              <div className="logo-icon">🎵</div>
+              <Son1kVers3Logo 
+                size="large" 
+                animated={true} 
+                interactive={true}
+                variant="full"
+                showText={false}
+              />
               <h1>Son1kVers3</h1>
               <p className="tagline">Herramientas Musicales con IA</p>
             </div>
