@@ -4,6 +4,8 @@
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/build",
   "public": true,
+  "functions": {},
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/classic",
