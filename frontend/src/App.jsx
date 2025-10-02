@@ -193,16 +193,8 @@ function App() {
   };
 
   const renderCurrentMode = () => {
-    switch (currentMode) {
-      case 'landing':
-        return <LandingPage />;
-      case 'classic':
-        return <ClassicApp />;
-      case 'nexus':
-        return renderNexusMode();
-      default:
-        return <LandingPage />;
-    }
+    // FORZAR SIEMPRE LANDING PAGE
+    return <LandingPage />;
   };
 
   const renderNexusMode = () => {
