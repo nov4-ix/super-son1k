@@ -40,6 +40,7 @@ import LoreGallery from './components/LoreGallery';
 import CodexViewer from './components/CodexViewer';
 import SubscriptionPlans from './components/SubscriptionPlans';
 import ResistanceDAW from './components/ResistanceDAW';
+import NexusPortal from './components/NexusPortal';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -202,7 +203,7 @@ function App() {
   const renderNexusMode = () => {
     switch (currentView) {
       case 'nexus':
-        return <NexusInterface />;
+        return <NexusPortal />;
       case 'daw':
         return <ResistanceDAW />;
       case 'creator':
@@ -240,9 +241,9 @@ function App() {
       case 'planes':
         return <SubscriptionPlans currentUser={user} onPlanSelect={(plan, cycle) => console.log('Plan selected:', plan, cycle)} />;
       case 'nexus-portal':
-        return <NexusInterface />;
+        return <NexusPortal />;
       default:
-        return <NexusInterface />;
+        return <NexusPortal />;
     }
   };
 
