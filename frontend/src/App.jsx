@@ -33,6 +33,7 @@ import Son1kVers3Logo from './components/Son1kVers3Logo';
 import NovaPostPilot from './components/NovaPostPilot';
 import CloneStation from './components/CloneStation';
 import GhostStudioPro from './components/GhostStudioPro';
+import TheCreator from './components/TheCreator';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -206,6 +207,8 @@ function App() {
             // Aquí se implementaría el guardado real
           }}
         />;
+      case 'creator':
+        return <TheCreator onClose={() => setCurrentView('nexus')} />;
       case 'music':
         return <MusicStudioComplete services={services} />;
       case 'voice':
@@ -327,10 +330,10 @@ function App() {
         <nav className="app-nav">
           {[
             { id: 'nexus', label: 'Nexus', icon: '🎮' },
-            { id: 'music', label: 'Music Studio', icon: '🎵' },
+            { id: 'creator', label: 'The Creator', icon: '🎵' },
+            { id: 'ghost', label: 'Ghost Studio', icon: '👻' },
             { id: 'clone-station', label: 'Clone Station', icon: '🎤' },
             { id: 'nova-post', label: 'Nova Post Pilot', icon: '🚀' },
-            { id: 'ghost', label: 'Ghost Studio', icon: '👻' },
             { id: 'daw', label: 'DAW Editor', icon: '🎛️' },
             { id: 'daw-pro', label: 'Pro DAW', icon: '🎚️' },
             { id: 'mastering', label: 'Mastering', icon: '🔊' },

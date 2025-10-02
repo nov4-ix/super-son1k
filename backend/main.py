@@ -58,6 +58,7 @@ from admin_dashboard import router as admin_router
 from auth_endpoints import router as auth_router
 from clone_station_endpoints import router as clone_station_router
 from ghost_studio_endpoints import router as ghost_studio_router
+from the_creator_endpoints import router as the_creator_router
 
 app.include_router(waves_router)
 app.include_router(store_router)
@@ -68,6 +69,7 @@ app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(clone_station_router)
 app.include_router(ghost_studio_router)
+app.include_router(the_creator_router)
 
 # Importar el procesador del CODEX
 from codex_processor import init_codex_processor

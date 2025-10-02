@@ -468,15 +468,35 @@ const GhostStudioPro = ({ onClose }) => {
         </div>
         
         {/* Presets de perillas */}
-        <div className="knob-presets">
-          <h4>Presets Rápidos</h4>
-          <div className="preset-buttons">
-            <button onClick={() => applyKnobPreset('clean')}>Clean</button>
-            <button onClick={() => applyKnobPreset('experimental')}>Experimental</button>
-            <button onClick={() => applyKnobPreset('vintage')}>Vintage</button>
-            <button onClick={() => applyKnobPreset('aggressive')}>Aggressive</button>
+          <div className="knob-presets">
+            <h4>Presets Rápidos</h4>
+            <div className="preset-buttons">
+              <button onClick={() => applyKnobPreset('clean')}>Clean</button>
+              <button onClick={() => applyKnobPreset('experimental')}>Experimental</button>
+              <button onClick={() => applyKnobPreset('vintage')}>Vintage</button>
+              <button onClick={() => applyKnobPreset('aggressive')}>Aggressive</button>
+            </div>
           </div>
-        </div>
+          
+          {/* Herramientas adicionales de Ghost Studio */}
+          <div className="ghost-tools">
+            <h4>Herramientas de IA</h4>
+            <div className="ghost-tool-buttons">
+              <button 
+                className="ghost-tool-btn"
+                onClick={generateRandomPrompt}
+              >
+                🎲 Prompt Aleatorio
+              </button>
+              <button 
+                className="ghost-tool-btn"
+                onClick={improveLyrics}
+                disabled={!analysisResult?.detected_lyrics}
+              >
+                ✨ Mejorar Letras
+              </button>
+            </div>
+          </div>
       </div>
 
       <button className="next-btn" onClick={() => setCurrentStep('generate')}>
@@ -524,6 +544,66 @@ const GhostStudioPro = ({ onClose }) => {
     
     if (presets[presetName]) {
       setArrangementKnobs(presets[presetName]);
+    }
+  };
+
+  // Generar prompt aleatorio para Ghost Studio
+  const generateRandomPrompt = async () => {
+    try {
+      const response = await fetch('/api/the-creator/random-prompt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          style: analysisResult?.genre || 'any',
+          creativity_level: 'high'
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        // Mostrar el prompt generado al usuario
+        alert(`Prompt Aleatorio Generado:\n\n${data.prompt}`);
+      }
+      
+    } catch (error) {
+      console.error('Error generando prompt aleatorio:', error);
+    }
+  };
+
+  // Mejorar letras detectadas en la maqueta
+  const improveLyrics = async () => {
+    if (!analysisResult?.detected_lyrics) return;
+    
+    try {
+      const response = await fetch('/api/the-creator/improve-lyrics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          original_lyrics: analysisResult.detected_lyrics,
+          improvements: [
+            'align_metrics',
+            'reduce_repetition',
+            'improve_cadence',
+            'enhance_rhyme_scheme'
+          ],
+          expressiveness: 75
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        // Mostrar letras mejoradas
+        alert(`Letras Mejoradas:\n\n${data.improved_lyrics}`);
+      }
+      
+    } catch (error) {
+      console.error('Error mejorando letras:', error);
     }
   };
 
