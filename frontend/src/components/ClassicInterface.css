@@ -140,23 +140,23 @@
 }
 
 /* Efectos de glow para elementos activos */
-.bg-neon/10 {
+.bg-neon-10 {
   background-color: rgba(0, 255, 231, 0.1);
 }
 
-.bg-neon/20 {
+.bg-neon-20 {
   background-color: rgba(0, 255, 231, 0.2);
 }
 
-.border-neon/30 {
+.border-neon-30 {
   border-color: rgba(0, 255, 231, 0.3);
 }
 
-.hover\:bg-neon\/10:hover {
+.hover-bg-neon-10:hover {
   background-color: rgba(0, 255, 231, 0.1);
 }
 
-.hover\:bg-neon\/20:hover {
+.hover-bg-neon-20:hover {
   background-color: rgba(0, 255, 231, 0.2);
 }
 
