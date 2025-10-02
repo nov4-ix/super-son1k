@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ProfessionalDAW.css';
+import './ArturiaKnobsOverride.css';
 import SSLChannelStrip from './SSLChannelStrip';
 import VocalProcessor from './VocalProcessor';
 import GraphicEQ from './GraphicEQ';
@@ -278,33 +279,42 @@ const ProfessionalDAW = () => {
   );
 
   return (
-    <div className="professional-daw">
+    <div className="professional-daw professional-daw-arturia">
       {/* Header del DAW */}
-      <div className="daw-header">
-        <div className="daw-title">
-          <h1>Son1kVers3 DAW Pro</h1>
-          <span className="daw-version">v2.0</span>
+      <div className="daw-header studio-header-arturia">
+        <div className="studio-title-arturia">
+          <div className="studio-logo-arturia">🎛️</div>
+          <div className="studio-name-arturia">
+            <h1>Professional DAW</h1>
+            <p>Estación de Trabajo Profesional</p>
+          </div>
+        </div>
+        <div className="lcd-display-arturia">
+          <div className="lcd-text-arturia">
+            DAW PRO v2.0<br/>
+            {isPlaying ? 'PLAYING' : 'STOPPED'}
+          </div>
         </div>
         <div className="daw-controls">
-          <button className="daw-btn new-project">New Project</button>
-          <button className="daw-btn open-project">Open</button>
-          <button className="daw-btn save-project">Save</button>
-          <button className="daw-btn export">Export</button>
+          <button className="daw-btn led-button-arturia">New Project</button>
+          <button className="daw-btn led-button-arturia">Open</button>
+          <button className="daw-btn led-button-arturia">Save</button>
+          <button className="daw-btn led-button-arturia">Export</button>
         </div>
       </div>
 
       {/* Transport Controls */}
       <div className="transport-controls">
         <div className="transport-left">
-          <button className="transport-btn rewind">⏮</button>
-          <button className="transport-btn play" onClick={togglePlay}>
-            {isPlaying ? '⏸' : '▶'}
+          <button className="transport-btn led-button-arturia">Rewind</button>
+          <button className="transport-btn led-button-arturia" onClick={togglePlay}>
+            {isPlaying ? 'Pause' : 'Play'}
           </button>
-          <button className="transport-btn stop">⏹</button>
-          <button className="transport-btn record" onClick={toggleRecord}>
-            {isRecording ? '⏹' : '⏺'}
+          <button className="transport-btn led-button-arturia">Stop</button>
+          <button className="transport-btn led-button-arturia" onClick={toggleRecord}>
+            {isRecording ? 'Stop' : 'Record'}
           </button>
-          <button className="transport-btn forward">⏭</button>
+          <button className="transport-btn led-button-arturia">Forward</button>
         </div>
         
         <div className="transport-center">

@@ -1,0 +1,442 @@
+/**
+ * 👻 Ghost Studio - Estética Hiperrealista Arturia
+ * Inspirado en Mini V, Jup-8 V, Tape MELLO-FI
+ * Diseño industrial elegante con elementos vintage
+ */
+
+.ghost-studio-arturia {
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid #333;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  color: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-studio-arturia::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #00bfff 20%, 
+    #ff6b35 50%, 
+    #00bfff 80%, 
+    transparent 100%);
+  opacity: 0.6;
+}
+
+/* Header con LCD Display */
+.studio-header-arturia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 16px 20px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 100%);
+  border-radius: 8px;
+  border: 1px solid #404040;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.studio-title-arturia {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.studio-logo-arturia {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(145deg, #00bfff, #0080cc);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3);
+}
+
+.studio-name-arturia h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.studio-name-arturia p {
+  font-size: 12px;
+  color: #888;
+  margin: 4px 0 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* LCD Display */
+.lcd-display-arturia {
+  background: #0a0a0a;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 12px 16px;
+  min-width: 200px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.lcd-display-arturia::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 0, 0.03) 2px,
+    rgba(0, 255, 0, 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+.lcd-text-arturia {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #00ff41;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+  line-height: 1.2;
+}
+
+/* Knobs Section */
+.knobs-section-arturia {
+  background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #404040;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.knobs-section-arturia h3 {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.knobs-grid-arturia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+/* Knob Container */
+.knob-container-arturia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 3D Knob */
+.knob-arturia {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, #4a4a4a, #2a2a2a 70%),
+    linear-gradient(145deg, #3a3a3a 0%, #1a1a1a 100%);
+  border: 2px solid #555;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.knob-arturia:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.knob-arturia:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Knob Indicator */
+.knob-indicator-arturia {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 16px;
+  background: linear-gradient(180deg, #ff6b35 0%, #cc5529 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
+  transform-origin: 50% 24px;
+}
+
+/* Knob Labels */
+.knob-label-arturia {
+  text-align: center;
+  min-height: 60px;
+}
+
+.knob-name-arturia {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.knob-value-arturia {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #00bfff;
+  text-shadow: 0 0 6px rgba(0, 191, 255, 0.4);
+  margin-bottom: 4px;
+}
+
+.knob-description-arturia {
+  display: block;
+  font-size: 10px;
+  color: #888;
+  line-height: 1.2;
+}
+
+/* Hidden Range Input */
+.knob-input-arturia {
+  position: absolute;
+  opacity: 0;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+}
+
+/* Buttons Section */
+.buttons-section-arturia {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* LED Button */
+.led-button-arturia {
+  background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 12px 20px;
+  color: #e0e0e0;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.led-button-arturia::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #666;
+  transition: all 0.2s ease;
+}
+
+.led-button-arturia:hover {
+  background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.led-button-arturia:hover::before {
+  background: #ff6b35;
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
+}
+
+.led-button-arturia.active {
+  background: linear-gradient(145deg, #00bfff 0%, #0080cc 100%);
+  color: #ffffff;
+  border-color: #00bfff;
+}
+
+.led-button-arturia.active::before {
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+/* Slider Section */
+.sliders-section-arturia {
+  background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #404040;
+}
+
+.slider-container-arturia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 200px;
+}
+
+/* Vertical Slider */
+.slider-arturia {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6px;
+  height: 120px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 3px;
+  border: 1px solid #333;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  writing-mode: bt-lr; /* IE */
+  -webkit-writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
+  direction: rtl;
+}
+
+.slider-arturia::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 24px;
+  background: linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.slider-arturia::-webkit-slider-thumb:hover {
+  background: linear-gradient(145deg, #5a5a5a 0%, #3a3a3a 100%);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.slider-arturia::-moz-range-thumb {
+  width: 16px;
+  height: 24px;
+  background: linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Texture Overlays */
+.metal-texture-arturia {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.02) 2px
+    );
+}
+
+.brushed-metal-arturia {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.03) 1px,
+      rgba(255, 255, 255, 0.03) 2px
+    );
+}
+
+/* Animations */
+@keyframes pulse-led {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.pulse-led {
+  animation: pulse-led 2s ease-in-out infinite;
+}
+
+@keyframes glow-knob {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 107, 53, 0.6); }
+  50% { box-shadow: 0 0 16px rgba(255, 107, 53, 0.8); }
+}
+
+.knob-indicator-arturia.active {
+  animation: glow-knob 1.5s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .knobs-grid-arturia {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .knob-arturia {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .buttons-section-arturia {
+    flex-direction: column;
+  }
+  
+  .led-button-arturia {
+    width: 100%;
+    text-align: center;
+  }
+}

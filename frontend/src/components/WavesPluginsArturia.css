@@ -1,0 +1,575 @@
+/**
+ * 🎛️ Waves Plugins - Estética Hiperrealista Arturia
+ * Inspirado en plugins de audio profesionales y hardware vintage
+ * Diseño de rack de estudio con elementos táctiles realistas
+ */
+
+.waves-plugin-arturia {
+  background: 
+    linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%),
+    radial-gradient(circle at 10% 20%, rgba(0, 191, 255, 0.05) 0%, transparent 50%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 2px solid #404040;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  color: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brushed Metal Texture */
+.waves-plugin-arturia::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.02) 2px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.01) 1px,
+      rgba(255, 255, 255, 0.01) 2px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.waves-plugin-arturia > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Plugin Header */
+.plugin-header-arturia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-radius: 8px;
+  border: 1px solid #555;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.plugin-branding-arturia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.plugin-logo-arturia {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(145deg, #ff6b35, #cc5529);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 
+    0 4px 8px rgba(255, 107, 53, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  border: 1px solid #ff8c66;
+}
+
+.plugin-name-arturia {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.plugin-model-arturia {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* Power/Bypass Switch */
+.power-switch-arturia {
+  position: relative;
+  width: 60px;
+  height: 32px;
+}
+
+.power-switch-arturia input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.power-slider-arturia {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border: 2px solid #555;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.power-slider-arturia:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 2px;
+  bottom: 2px;
+  background: linear-gradient(145deg, #666 0%, #444 100%);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+input:checked + .power-slider-arturia {
+  background: linear-gradient(145deg, #00bfff 0%, #0080cc 100%);
+  border-color: #00bfff;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 12px rgba(0, 191, 255, 0.4);
+}
+
+input:checked + .power-slider-arturia:before {
+  transform: translateX(28px);
+  background: linear-gradient(145deg, #ffffff 0%, #e0e0e0 100%);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Controls Grid */
+.controls-grid-arturia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Knob Control Enhanced */
+.knob-control-arturia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Professional 3D Knob */
+.knob-professional-arturia {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 20% 20%, #6a6a6a, #3a3a3a 40%, #2a2a2a 70%, #1a1a1a 100%),
+    linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+  border: 3px solid #666;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.knob-professional-arturia::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%),
+    linear-gradient(145deg, #3a3a3a 0%, #1a1a1a 100%);
+  border: 1px solid #555;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.knob-professional-arturia:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+  border-color: #777;
+}
+
+.knob-professional-arturia:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Knob Indicator Professional */
+.knob-indicator-professional-arturia {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 16px;
+  background: linear-gradient(180deg, #ff6b35 0%, #cc5529 50%, #ff6b35 100%);
+  border-radius: 2px;
+  box-shadow: 
+    0 0 8px rgba(255, 107, 53, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform-origin: 50% 24px;
+  z-index: 3;
+}
+
+/* Knob Labels Professional */
+.knob-label-professional-arturia {
+  text-align: center;
+  min-height: 60px;
+}
+
+.knob-name-professional-arturia {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.knob-value-professional-arturia {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #00bfff;
+  text-shadow: 0 0 6px rgba(0, 191, 255, 0.4);
+  margin-bottom: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.knob-unit-professional-arturia {
+  display: block;
+  font-size: 9px;
+  color: #888;
+  font-style: italic;
+}
+
+/* Vertical Fader */
+.fader-container-arturia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 200px;
+}
+
+.fader-track-arturia {
+  width: 8px;
+  height: 140px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 4px;
+  border: 1px solid #333;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.fader-handle-arturia {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  left: -6px;
+  background: linear-gradient(145deg, #5a5a5a 0%, #3a3a3a 100%);
+  border: 2px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.fader-handle-arturia:hover {
+  background: linear-gradient(145deg, #6a6a6a 0%, #4a4a4a 100%);
+  border-color: #777;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.fader-handle-arturia:active {
+  background: linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* EQ Curve Display */
+.eq-display-arturia {
+  background: #0a0a0a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px 0;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.eq-display-arturia::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(0, 255, 65, 0.1) 40px,
+      rgba(0, 255, 65, 0.1) 41px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      rgba(0, 255, 65, 0.05) 20px,
+      rgba(0, 255, 65, 0.05) 21px
+    );
+  pointer-events: none;
+}
+
+.eq-curve-arturia {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.eq-curve-arturia svg {
+  width: 100%;
+  height: 100%;
+}
+
+.eq-curve-path-arturia {
+  fill: none;
+  stroke: #00bfff;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(0, 191, 255, 0.6));
+}
+
+.eq-frequency-labels-arturia {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+/* Compressor Meter */
+.compressor-meter-arturia {
+  background: #0a0a0a;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 16px 0;
+  height: 80px;
+  position: relative;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.meter-scale-arturia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.meter-bar-arturia {
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    #ff0000 0%, 
+    #ff6b35 30%, 
+    #ffff00 60%, 
+    #00ff00 100%);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 
+    0 0 4px rgba(255, 107, 53, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.meter-indicator-arturia {
+  position: absolute;
+  right: -4px;
+  width: 16px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  transition: top 0.1s ease;
+}
+
+/* Preset Section */
+.preset-section-arturia {
+  background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+  border: 1px solid #404040;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.preset-selector-arturia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preset-dropdown-arturia {
+  flex: 1;
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #e0e0e0;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.preset-dropdown-arturia:hover {
+  background: linear-gradient(145deg, #444 0%, #333 100%);
+  border-color: #666;
+}
+
+.preset-buttons-arturia {
+  display: flex;
+  gap: 8px;
+}
+
+.preset-btn-arturia {
+  background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 6px 12px;
+  color: #e0e0e0;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.preset-btn-arturia:hover {
+  background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%);
+  border-color: #666;
+}
+
+/* Plugin Footer */
+.plugin-footer-arturia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+}
+
+.plugin-info-arturia {
+  font-size: 10px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.plugin-version-arturia {
+  font-size: 10px;
+  color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .controls-grid-arturia {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .knob-professional-arturia {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .fader-container-arturia {
+    height: 160px;
+  }
+  
+  .fader-track-arturia {
+    height: 100px;
+  }
+  
+  .eq-display-arturia {
+    height: 120px;
+  }
+}
+
+/* Animation Effects */
+@keyframes meter-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.meter-indicator-arturia.active {
+  animation: meter-pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes knob-glow {
+  0%, 100% { 
+    box-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
+  }
+  50% { 
+    box-shadow: 0 0 16px rgba(255, 107, 53, 0.9);
+  }
+}
+
+.knob-indicator-professional-arturia.processing {
+  animation: knob-glow 1s ease-in-out infinite;
+}

@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import './ClassicInterface.css';
+import './ArturiaKnobsOverride.css';
 import SubscriptionPlans from './SubscriptionPlans';
 import CodexViewer from './CodexViewer';
 import GhostStudio from './GhostStudio';
@@ -14,7 +15,6 @@ import FloatingPixelAssistant from './FloatingPixelAssistant';
 import CloneStation from './CloneStation';
 import DAWEditor from './DAWEditor';
 import ProfessionalDAW from './ProfessionalDAW';
-import SSLChannelStrip from './SSLChannelStrip';
 import AlbumArtGenerator from './AlbumArtGenerator';
 
 const ClassicInterface = () => {
@@ -352,8 +352,6 @@ La resistencia que me hace renacer
         return <DAWEditor onClose={() => setCurrentSection('home')} />;
       case 'pro-daw':
         return <ProfessionalDAW />;
-      case 'ssl':
-        return <SSLChannelStrip />;
       case 'album-art':
         return <AlbumArtGenerator />;
       default:
@@ -441,39 +439,43 @@ La resistencia que me hace renacer
             <p className="text-center text-zinc-400 mb-6 text-sm">Estas perillas influyen directamente en el prompt enviado a Suno</p>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div className="text-center">
-                <div className="knob-container">
-                  <div className="knob" style={{'--rotation': `${(knobs.expresividad / 100) * 270 - 135}deg`}}>
-                    <div className="knob-indicator"></div>
+                <div className="knob-container knob-container-arturia">
+                  <div className="knob knob-arturia" style={{'--rotation': `${(knobs.expresividad / 100) * 270 - 135}deg`}}>
+                    <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.expresividad / 100) * 270 - 135}deg)` }}></div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={knobs.expresividad}
+                      onChange={(e) => handleKnobChange('expresividad', e.target.value)}
+                      className="knob-input knob-input-arturia"
+                    />
                   </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={knobs.expresividad}
-                    onChange={(e) => handleKnobChange('expresividad', e.target.value)}
-                    className="knob-input"
-                  />
+                  <div className="knob-label knob-label-arturia">
+                    <span className="knob-name knob-name-arturia">EXPRESIVIDAD</span>
+                    <span className="knob-value knob-value-arturia">{knobs.expresividad}%</span>
+                  </div>
                 </div>
-                <p className="text-sm mt-2 text-zinc-400">Expresividad</p>
-                <p className="text-xs text-neon font-mono">{knobs.expresividad}%</p>
               </div>
               
               <div className="text-center">
-                <div className="knob-container">
-                  <div className="knob" style={{'--rotation': `${(knobs.creatividad / 100) * 270 - 135}deg`}}>
-                    <div className="knob-indicator"></div>
+                <div className="knob-container knob-container-arturia">
+                  <div className="knob knob-arturia" style={{'--rotation': `${(knobs.creatividad / 100) * 270 - 135}deg`}}>
+                    <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.creatividad / 100) * 270 - 135}deg)` }}></div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={knobs.creatividad}
+                      onChange={(e) => handleKnobChange('creatividad', e.target.value)}
+                      className="knob-input knob-input-arturia"
+                    />
                   </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={knobs.creatividad}
-                    onChange={(e) => handleKnobChange('creatividad', e.target.value)}
-                    className="knob-input"
-                  />
+                  <div className="knob-label knob-label-arturia">
+                    <span className="knob-name knob-name-arturia">CREATIVIDAD</span>
+                    <span className="knob-value knob-value-arturia">{knobs.creatividad}%</span>
+                  </div>
                 </div>
-                <p className="text-sm mt-2 text-zinc-400">Creatividad</p>
-                <p className="text-xs text-neon font-mono">{knobs.creatividad}%</p>
               </div>
               
               <div className="text-center">
@@ -756,16 +758,6 @@ La resistencia que me hace renacer
             </button>
           </div>
           
-          <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
-            <h3 className="text-neon font-bold mb-4">🔊 SSL Channel Strip</h3>
-            <p className="text-zinc-400 mb-4">Consola SSL profesional</p>
-            <button 
-              className="w-full bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition btn"
-              onClick={() => setCurrentSection('ssl')}
-            >
-              Abrir SSL
-            </button>
-          </div>
           
           <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
             <h3 className="text-neon font-bold mb-4">🎨 Album Art Generator</h3>

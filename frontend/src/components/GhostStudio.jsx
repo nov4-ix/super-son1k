@@ -5,6 +5,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import './GhostStudio.css';
+import './GhostStudioArturia.css';
+import './ArturiaKnobsOverride.css';
 import TranslationService from '../services/TranslationService';
 
 const GhostStudio = ({ services }) => {
@@ -130,14 +132,18 @@ const GhostStudio = ({ services }) => {
   // Generar sugerencia de arreglo basada en análisis
   const generateArrangementSuggestion = () => {
     const arrangements = [
-      'Add orchestral strings for emotional depth',
-      'Include heavy distorted guitars for rock energy',
-      'Layer ambient synth pads for atmospheric texture',
-      'Add punchy electronic drums for modern feel',
-      'Include brass section for dynamic impact',
-      'Layer vocal harmonies for richness',
-      'Add bass drops for electronic emphasis',
-      'Include acoustic elements for organic feel'
+      'Agregar cuerdas orquestales para profundidad emocional',
+      'Incluir guitarras distorsionadas pesadas para energía rock',
+      'Superponer pads de sintetizador ambiental para textura atmosférica',
+      'Agregar batería electrónica punchy para sensación moderna',
+      'Incluir sección de vientos para impacto dinámico',
+      'Superponer armonías vocales para riqueza',
+      'Agregar bass drops para énfasis electrónico',
+      'Incluir elementos acústicos para sensación orgánica',
+      'Añadir bajo eléctrico profundo para fundación rítmica',
+      'Incorporar sintetizadores analógicos para calidez vintage',
+      'Agregar efectos de delay para crear ambiente',
+      'Incluir samples de vinilo para textura nostálgica'
     ];
     
     return arrangements[Math.floor(Math.random() * arrangements.length)];
@@ -151,17 +157,24 @@ const GhostStudio = ({ services }) => {
     }));
   };
 
-  // Generar prompt aleatorio creativo
+  // Generar prompt aleatorio creativo en español
   const generateRandomPrompt = () => {
     const creativePrompts = [
-      'A haunting melody that echoes through abandoned cyberpunk streets',
-      'Explosive energy with distorted guitars and pounding drums',
-      'Ethereal ambient soundscape with mysterious undertones',
-      'Aggressive electronic beats with industrial influences',
-      'Melancholic piano ballad with orchestral arrangements',
-      'High-energy dance track with infectious rhythms',
-      'Dark atmospheric piece with cinematic elements',
-      'Uplifting anthem with soaring melodies and rich harmonies'
+      'Una melodía inquietante que resuena por calles cyberpunk abandonadas',
+      'Energía explosiva con guitarras distorsionadas y batería potente',
+      'Paisaje sonoro etéreo y ambiental con matices misteriosos',
+      'Beats electrónicos agresivos con influencias industriales',
+      'Balada melancólica de piano con arreglos orquestales',
+      'Track de baile de alta energía con ritmos contagiosos',
+      'Pieza atmosférica oscura con elementos cinematográficos',
+      'Himno edificante con melodías elevadas y armonías ricas',
+      'Rock energético con guitarra eléctrica y batería potente',
+      'Reggaeton moderno con bajo profundo y sintetizadores',
+      'Jazz suave con saxofón y piano relajante',
+      'Cumbia colombiana tradicional con acordeón',
+      'Salsa brava con trompetas y percusión latina',
+      'Bachata sensual con guitarra y bongos',
+      'Trap urbano con hi-hats rápidos y 808s'
     ];
     
     const randomPrompt = creativePrompts[Math.floor(Math.random() * creativePrompts.length)];
@@ -310,10 +323,21 @@ const GhostStudio = ({ services }) => {
   };
 
   return (
-    <div className="ghost-studio">
-      <div className="ghost-studio-header">
-        <h1>👻 Ghost Studio</h1>
-        <p>Herramienta Central de Son1kVers3 - Analizador Inteligente y Generador de Arreglos</p>
+    <div className="ghost-studio ghost-studio-arturia">
+      <div className="ghost-studio-header studio-header-arturia">
+        <div className="studio-title-arturia">
+          <div className="studio-logo-arturia">👻</div>
+          <div className="studio-name-arturia">
+            <h1>Ghost Studio</h1>
+            <p>Analizador Inteligente • Generador de Arreglos</p>
+          </div>
+        </div>
+        <div className="lcd-display-arturia">
+          <div className="lcd-text-arturia">
+            GHOST STUDIO v2.1<br/>
+            {isAnalyzing ? 'ANALYZING...' : 'READY'}
+          </div>
+        </div>
       </div>
 
       <div className="ghost-studio-content">
@@ -430,91 +454,83 @@ const GhostStudio = ({ services }) => {
         )}
 
         {/* Knobs característicos */}
-        <div className="knobs-section">
+        <div className="knobs-section knobs-section-arturia">
           <h3>🎛️ Knobs Característicos</h3>
-          <div className="knobs-grid">
-            <div className="knob-container">
-              <div className="knob-wrapper">
-                <div className="knob" style={{ '--rotation': `${(knobs.expresividad / 100) * 270 - 135}deg` }}>
-                  <div className="knob-indicator"></div>
-                </div>
+          <div className="knobs-grid knobs-grid-arturia">
+            <div className="knob-container knob-container-arturia">
+              <div className="knob knob-arturia" style={{ '--rotation': `${(knobs.expresividad / 100) * 270 - 135}deg` }}>
+                <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.expresividad / 100) * 270 - 135}deg)` }}></div>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={knobs.expresividad}
                   onChange={(e) => handleKnobChange('expresividad', e.target.value)}
-                  className="knob-input"
+                  className="knob-input knob-input-arturia"
                 />
               </div>
-              <label className="knob-label">
-                <span className="knob-name">EXPRESIVIDAD</span>
-                <span className="knob-value">{knobs.expresividad}%</span>
-                <span className="knob-description">Mood y estado de ánimo</span>
-              </label>
+              <div className="knob-label knob-label-arturia">
+                <span className="knob-name knob-name-arturia">EXPRESIVIDAD</span>
+                <span className="knob-value knob-value-arturia">{knobs.expresividad}%</span>
+                <span className="knob-description knob-description-arturia">Mood y estado de ánimo</span>
+              </div>
             </div>
 
-            <div className="knob-container">
-              <div className="knob-wrapper">
-                <div className="knob" style={{ '--rotation': `${(knobs.trash / 100) * 270 - 135}deg` }}>
-                  <div className="knob-indicator"></div>
-                </div>
+            <div className="knob-container knob-container-arturia">
+              <div className="knob knob-arturia" style={{ '--rotation': `${(knobs.trash / 100) * 270 - 135}deg` }}>
+                <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.trash / 100) * 270 - 135}deg)` }}></div>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={knobs.trash}
                   onChange={(e) => handleKnobChange('trash', e.target.value)}
-                  className="knob-input"
+                  className="knob-input knob-input-arturia"
                 />
               </div>
-              <label className="knob-label">
-                <span className="knob-name">TRASH</span>
-                <span className="knob-value">{knobs.trash}%</span>
-                <span className="knob-description">Sonido saturado de mezcla</span>
-              </label>
+              <div className="knob-label knob-label-arturia">
+                <span className="knob-name knob-name-arturia">TRASH</span>
+                <span className="knob-value knob-value-arturia">{knobs.trash}%</span>
+                <span className="knob-description knob-description-arturia">Sonido saturado de mezcla</span>
+              </div>
             </div>
 
-            <div className="knob-container">
-              <div className="knob-wrapper">
-                <div className="knob" style={{ '--rotation': `${(knobs.grunge / 100) * 270 - 135}deg` }}>
-                  <div className="knob-indicator"></div>
-                </div>
+            <div className="knob-container knob-container-arturia">
+              <div className="knob knob-arturia" style={{ '--rotation': `${(knobs.grunge / 100) * 270 - 135}deg` }}>
+                <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.grunge / 100) * 270 - 135}deg)` }}></div>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={knobs.grunge}
                   onChange={(e) => handleKnobChange('grunge', e.target.value)}
-                  className="knob-input"
+                  className="knob-input knob-input-arturia"
                 />
               </div>
-              <label className="knob-label">
-                <span className="knob-name">GRUNGE</span>
-                <span className="knob-value">{knobs.grunge}%</span>
-                <span className="knob-description">Instrumentos con distorsión</span>
-              </label>
+              <div className="knob-label knob-label-arturia">
+                <span className="knob-name knob-name-arturia">GRUNGE</span>
+                <span className="knob-value knob-value-arturia">{knobs.grunge}%</span>
+                <span className="knob-description knob-description-arturia">Instrumentos con distorsión</span>
+              </div>
             </div>
 
-            <div className="knob-container">
-              <div className="knob-wrapper">
-                <div className="knob" style={{ '--rotation': `${(knobs.rareza / 100) * 270 - 135}deg` }}>
-                  <div className="knob-indicator"></div>
-                </div>
+            <div className="knob-container knob-container-arturia">
+              <div className="knob knob-arturia" style={{ '--rotation': `${(knobs.rareza / 100) * 270 - 135}deg` }}>
+                <div className="knob-indicator knob-indicator-arturia" style={{ transform: `translateX(-50%) rotate(${(knobs.rareza / 100) * 270 - 135}deg)` }}></div>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={knobs.rareza}
                   onChange={(e) => handleKnobChange('rareza', e.target.value)}
-                  className="knob-input"
+                  className="knob-input knob-input-arturia"
                 />
               </div>
-              <label className="knob-label">
-                <span className="knob-name">RAREZA</span>
-                <span className="knob-value">{knobs.rareza}%</span>
-                <span className="knob-description">Cambio del original</span>
-              </label>
+              <div className="knob-label knob-label-arturia">
+                <span className="knob-name knob-name-arturia">RAREZA</span>
+                <span className="knob-value knob-value-arturia">{knobs.rareza}%</span>
+                <span className="knob-description knob-description-arturia">Cambio del original</span>
+              </div>
             </div>
           </div>
         </div>
@@ -525,13 +541,13 @@ const GhostStudio = ({ services }) => {
           
           <div className="prompt-controls">
             <button 
-              className="prompt-btn random"
+              className="prompt-btn random led-button-arturia"
               onClick={generateRandomPrompt}
             >
               🎲 Prompt Random
             </button>
             <button 
-              className="prompt-btn generate"
+              className="prompt-btn generate led-button-arturia"
               onClick={generateOptimizedPrompt}
               disabled={!audioAnalysis}
             >

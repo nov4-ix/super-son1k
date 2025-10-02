@@ -27,9 +27,10 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
       color: '#888888',
       features: [
         '30 créditos incluidos (3 generaciones)',
-        'Ghost Studio básico',
+        'PHANTOM Engine (generación básica)',
+        'SPECTRAL Core (síntesis fundamental)',
+        'NEXUS v3.5 (modelo estándar)',
         'Duración máxima: 30 segundos',
-        'Modelo Suno básico',
         'Archivo limitado (0.1GB)',
         'Soporte comunitario'
       ],
@@ -38,7 +39,7 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         track_duration: 30,
         voice_clones: 0,
         storage_gb: 0.1,
-        models: ['suno_basic']
+        models: ['riffusion', 'nudo', 'suno_3.5']
       },
       popular: false
     },
@@ -54,9 +55,10 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         '500 créditos mensuales (50 generaciones)',
         'Ghost Studio completo',
         'Duración máxima: 2 minutos',
-        'Modelos: Suno + Riffusion',
+        'NEXUS v4.5 (modelo avanzado)',
+        'PHANTOM + SPECTRAL completos',
         'Clonación de voz (10 por mes)',
-        'The Creator con Qwen',
+        'The Creator con QWEN Neural',
         'Archivo: 5GB',
         'Soporte por email'
       ],
@@ -65,7 +67,7 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         track_duration: 120,
         voice_clones: 10,
         storage_gb: 5,
-        models: ['suno', 'riffusion']
+        models: ['suno_4.5', 'riffusion', 'nudo']
       },
       popular: false
     },
@@ -79,7 +81,8 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
       color: '#8b5cf6',
       features: [
         '2,000 créditos mensuales (200 generaciones)',
-        'Modelos: Suno + Riffusion + Nuro',
+        'NEXUS v5 (modelo premium)',
+        'PHANTOM Pro + SPECTRAL Advanced',
         'Generaciones simultáneas: 50',
         'Modo Nexus completo',
         'Clonación de voz avanzada (50/mes)',
@@ -96,7 +99,7 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         track_duration: 300,
         voice_clones: 50,
         storage_gb: 25,
-        models: ['suno', 'riffusion', 'nuro'],
+        models: ['suno_5', 'suno_4.5', 'riffusion', 'nudo'],
         simultaneous: 50
       },
       popular: true
@@ -111,7 +114,8 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
       color: '#FFC107',
       features: [
         '10,000 créditos mensuales (1,000 generaciones)',
-        'Todos los modelos + acceso anticipado',
+        'NEXUS v5 + todos los motores disponibles',
+        'Acceso anticipado a nuevos modelos',
         'Generaciones simultáneas: ilimitadas',
         'Entrenamiento personalizado de modelos',
         'White label personalizable (tu branding)',
@@ -130,7 +134,7 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         track_duration: -1,   // Ilimitado
         voice_clones: -1,     // Ilimitado
         storage_gb: 500,
-        models: ['all', 'early_access'],
+        models: ['suno_5', 'suno_4.5', 'riffusion', 'nudo', 'early_access'],
         simultaneous: -1,
         users: 10
       },
@@ -147,10 +151,10 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
     description: 'Paquete inicial para comenzar con potencia',
     features: [
       '7,500 créditos (750 generaciones)',
-      'Historial de registro de 30 días',
-      'Acceso al modelo Suno',
-      'Acceso al modelo Riffusion', 
-      'Acceso al modelo Nuro',
+        'Historial de registro de 30 días',
+        'Acceso al motor PHANTOM Pro (generación avanzada)',
+        'Acceso al motor SPECTRAL Advanced (síntesis neural)',
+        'Acceso al motor NEXUS v5 (composición IA)',
       '50 generaciones simultáneas a la vez',
       'Derechos de uso comercial de canciones',
       'Acceso anticipado a nuevas funciones',

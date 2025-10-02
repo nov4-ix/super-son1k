@@ -10,6 +10,8 @@ const FloatingPixelAssistant = ({ isVisible = true, onToggle }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+  const [connectionStatus, setConnectionStatus] = useState('Conectado');
   
   const pixelRef = useRef(null);
   const dragRef = useRef(null);
@@ -93,6 +95,26 @@ const FloatingPixelAssistant = ({ isVisible = true, onToggle }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isExpanded]);
 
+  // Verificar conexión de Pixel
+  useEffect(() => {
+    const checkConnection = () => {
+      try {
+        // Simular verificación de conexión
+        setIsOnline(true);
+        setConnectionStatus('Online');
+      } catch (error) {
+        setIsOnline(false);
+        setConnectionStatus('Desconectado');
+      }
+    };
+
+    // Verificar conexión cada 5 segundos
+    const connectionInterval = setInterval(checkConnection, 5000);
+    checkConnection(); // Verificar inmediatamente
+
+    return () => clearInterval(connectionInterval);
+  }, []);
+
   if (!isVisible) return null;
 
   return (
@@ -172,8 +194,8 @@ const FloatingPixelAssistant = ({ isVisible = true, onToggle }) => {
 
       {/* Indicador de estado */}
       <div className="pixel-status-indicator">
-        <div className="status-dot online"></div>
-        <span>Pixel Online</span>
+        <div className={`status-dot ${isOnline ? 'online' : 'offline'}`}></div>
+        <span>Pixel {connectionStatus}</span>
       </div>
 
       {/* Efectos visuales */}
