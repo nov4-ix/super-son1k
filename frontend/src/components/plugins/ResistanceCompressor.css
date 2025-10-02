@@ -1,0 +1,364 @@
+/**
+ * 🔥 Resistance Compressor - Estilos CSS
+ * Plugin de compresión con estética Son1kVers3
+ */
+
+.resistance-compressor {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  border-radius: 20px;
+  padding: 25px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  min-width: 400px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 40px rgba(255, 107, 107, 0.2);
+}
+
+.plugin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.plugin-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plugin-icon {
+  font-size: 1.5rem;
+}
+
+.plugin-title h3 {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Orbitron', monospace;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.plugin-power {
+  padding: 8px 16px;
+  border: 2px solid #ff6b6b;
+  border-radius: 20px;
+  background: transparent;
+  color: #ff6b6b;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.plugin-power.on {
+  background: #ff6b6b;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+.plugin-power.off {
+  opacity: 0.5;
+}
+
+.plugin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Controles principales */
+.main-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-group label {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.knob-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.resistance-knob {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 3px solid #ff6b6b;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(255, 107, 107, 0.3);
+  transition: all 0.3s ease;
+}
+
+.resistance-knob:hover {
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 107, 107, 0.5);
+  transform: scale(1.05);
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 20px;
+  background: #ff6b6b;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(var(--rotation, -135deg));
+  transform-origin: bottom center;
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+}
+
+.knob-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.control-value {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+/* Controles únicos de Resistance */
+.resistance-controls {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.character-slider,
+.glitch-slider {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.character-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.glitch-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.vintage-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.vintage-toggle label {
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vintage-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #ff6b6b;
+}
+
+/* Metering */
+.metering-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.meter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.meter-group label {
+  color: #888888;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.level-meter {
+  width: 12px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.meter-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 6px;
+  transition: height 0.1s ease;
+}
+
+.meter-fill.input {
+  background: linear-gradient(to top, #10b981, #00FFE7, #FFC107, #ff6b6b);
+}
+
+.meter-fill.output {
+  background: linear-gradient(to top, #10b981, #00FFE7, #FFC107, #ff6b6b);
+}
+
+.meter-fill.gr {
+  background: linear-gradient(to top, #ff6b6b, #ee5a24);
+}
+
+.meter-value {
+  color: #cccccc;
+  font-size: 0.7rem;
+  font-family: 'Courier New', monospace;
+}
+
+/* Controles finales */
+.final-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.makeup-slider,
+.mix-slider {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.makeup-slider::-webkit-slider-thumb,
+.mix-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #00FFE7;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+}
+
+/* Presets */
+.plugin-presets {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.preset-selector {
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.preset-selector:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resistance-compressor {
+    min-width: 300px;
+    padding: 20px;
+  }
+  
+  .main-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .resistance-knob {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .knob-indicator {
+    height: 16px;
+    top: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-controls {
+    grid-template-columns: 1fr;
+  }
+  
+  .metering-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .level-meter {
+    width: 100%;
+    height: 20px;
+  }
+  
+  .meter-fill {
+    width: auto;
+    height: 100% !important;
+    right: 0;
+  }
+}

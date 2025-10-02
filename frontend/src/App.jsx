@@ -39,6 +39,7 @@ import ALVAESymbol from './components/ALVAESymbol';
 import LoreGallery from './components/LoreGallery';
 import CodexViewer from './components/CodexViewer';
 import SubscriptionPlans from './components/SubscriptionPlans';
+import ResistanceDAW from './components/ResistanceDAW';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -203,16 +204,7 @@ function App() {
       case 'nexus':
         return <NexusInterface />;
       case 'daw':
-        return <DAWEditor 
-          onExport={(project) => {
-            console.log('Exportando proyecto:', project);
-            // Aquí se implementaría la exportación real
-          }}
-          onSave={(project) => {
-            console.log('Guardando proyecto:', project);
-            // Aquí se implementaría el guardado real
-          }}
-        />;
+        return <ResistanceDAW />;
       case 'creator':
         return <TheCreator onClose={() => setCurrentView('nexus')} />;
       case 'music':
@@ -344,7 +336,7 @@ function App() {
             { id: 'ghost', label: 'Ghost Studio', icon: '👻' },
             { id: 'clone-station', label: 'Clone Station', icon: '🎤' },
             { id: 'nova-post', label: 'Nova Post Pilot', icon: '🚀' },
-            { id: 'daw', label: 'DAW Editor', icon: '🎛️' },
+            { id: 'daw', label: 'Resistance DAW', icon: '🎛️' },
             { id: 'daw-pro', label: 'Pro DAW', icon: '🎚️' },
             { id: 'mastering', label: 'Mastering', icon: '🔊' },
             { id: 'effects', label: 'Effects', icon: '🎭' },
