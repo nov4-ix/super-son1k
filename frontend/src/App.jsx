@@ -1,17 +1,17 @@
 /**
- * 🎵 Son1kVers3 - VERSIÓN DEFINITIVA
- * SOLO LANDING PAGE - SIN MÁS PROBLEMAS
+ * 🎵 Son1kVers3 - DIRECTO AL FRONTEND CLÁSICO
+ * Sin Landing Page - Directo a las herramientas
  */
 
 import React from 'react';
 import './App.css';
-import LandingPage from './LandingPage';
+import ClassicInterface from './components/ClassicInterface';
 
 function App() {
-  // FORZAR SIEMPRE LANDING PAGE - SIN EXCEPCIONES
+  // DIRECTO AL FRONTEND CLÁSICO - SIN LANDING PAGE
   return (
     <div className="app">
-      <LandingPage />
+      <ClassicInterface />
     </div>
   );
 }
