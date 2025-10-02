@@ -15,6 +15,7 @@ import CloneStation from './CloneStation';
 import DAWEditor from './DAWEditor';
 import ProfessionalDAW from './ProfessionalDAW';
 import SSLChannelStrip from './SSLChannelStrip';
+import AlbumArtGenerator from './AlbumArtGenerator';
 
 const ClassicInterface = () => {
   const [currentSection, setCurrentSection] = useState('home');
@@ -316,6 +317,8 @@ La resistencia que me hace renacer
         return <ProfessionalDAW />;
       case 'ssl':
         return <SSLChannelStrip />;
+      case 'album-art':
+        return <AlbumArtGenerator />;
       default:
         return renderHomeSection();
     }
@@ -684,6 +687,17 @@ La resistencia que me hace renacer
               onClick={() => setCurrentSection('ssl')}
             >
               Abrir SSL
+            </button>
+          </div>
+          
+          <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
+            <h3 className="text-neon font-bold mb-4">🎨 Album Art Generator</h3>
+            <p className="text-zinc-400 mb-4">Genera portadas para tus canciones</p>
+            <button 
+              className="w-full bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition btn"
+              onClick={() => setCurrentSection('album-art')}
+            >
+              Generar Portadas
             </button>
           </div>
           
