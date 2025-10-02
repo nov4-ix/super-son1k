@@ -30,6 +30,8 @@ import AdminDashboard from './components/AdminDashboard';
 import ALVAEBadge from './components/ALVAEBadge';
 import FloatingPixelAssistant from './components/FloatingPixelAssistant';
 import Son1kVers3Logo from './components/Son1kVers3Logo';
+import NovaPostPilot from './components/NovaPostPilot';
+import CloneStation from './components/CloneStation';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
@@ -207,6 +209,10 @@ function App() {
         return <MusicStudioComplete services={services} />;
       case 'voice':
         return <IntuitiveVoiceCloner services={services} />;
+      case 'clone-station':
+        return <CloneStation onClose={() => setCurrentView('nexus')} />;
+      case 'nova-post':
+        return <NovaPostPilot onClose={() => setCurrentView('nexus')} />;
       case 'analytics':
         return <AnalyticsInterface services={services} />;
       case 'social':
@@ -321,7 +327,8 @@ function App() {
           {[
             { id: 'nexus', label: 'Nexus', icon: '🎮' },
             { id: 'music', label: 'Music Studio', icon: '🎵' },
-            { id: 'voice', label: 'Voice Lab', icon: '🎤' },
+            { id: 'clone-station', label: 'Clone Station', icon: '🎤' },
+            { id: 'nova-post', label: 'Nova Post Pilot', icon: '🚀' },
             { id: 'ghost', label: 'Ghost Studio', icon: '👻' },
             { id: 'daw', label: 'DAW Editor', icon: '🎛️' },
             { id: 'daw-pro', label: 'Pro DAW', icon: '🎚️' },
@@ -331,7 +338,7 @@ function App() {
             { id: 'eq', label: 'Graphic EQ', icon: '📊' },
             { id: 'album-art', label: 'Album Art', icon: '🎨' },
             { id: 'analytics', label: 'Analytics', icon: '📈' },
-            { id: 'social', label: 'Social', icon: '🚀' },
+            { id: 'archivo', label: 'El Archivo', icon: '📚' },
             { id: 'community', label: 'Santuario', icon: '⚔️' }
           ].map(item => (
             <button
