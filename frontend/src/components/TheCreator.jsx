@@ -41,12 +41,14 @@ const TheCreator = ({ onClose }) => {
     narrative: 'narrativa coherente'
   };
 
-  // Estilos musicales sugeridos
-  const musicalStyles = [
-    'Indie Rock', 'Electronic Pop', 'Hip-Hop', 'Reggaeton', 'Trap',
-    'Folk Acoustic', 'Jazz Fusion', 'Synthwave', 'Lo-Fi Hip-Hop',
-    'Alternative Rock', 'Dream Pop', 'Bedroom Pop', 'Ambient',
-    'Latin Pop', 'Bossa Nova', 'Funk', 'Soul', 'R&B'
+  // Ejemplos de inspiración (no limitantes)
+  const inspirationExamples = [
+    'Sintetizadores vintage con batería trap',
+    'Guitarra acústica con texturas ambient',
+    'Voces etéreas sobre beats de hip-hop',
+    'Piano jazz con elementos electrónicos',
+    'Cuerdas orquestales con bajo reggaeton',
+    'Sonidos lo-fi con armonías gospel'
   ];
 
   // Generar letras con Qwen

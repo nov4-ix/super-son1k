@@ -34,6 +34,10 @@ import NovaPostPilot from './components/NovaPostPilot';
 import CloneStation from './components/CloneStation';
 import GhostStudioPro from './components/GhostStudioPro';
 import TheCreator from './components/TheCreator';
+import GhostStudio from './components/GhostStudio';
+import ALVAESymbol from './components/ALVAESymbol';
+import LoreGallery from './components/LoreGallery';
+import CodexViewer from './components/CodexViewer';
 
 // Importar componentes de interfaces intuitivas con estética vintage console
 import IntuitiveMusicGenerator from './components/IntuitiveMusicGenerator';
