@@ -114,15 +114,16 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         'Todos los modelos + acceso anticipado',
         'Generaciones simultáneas: ilimitadas',
         'Entrenamiento personalizado de modelos',
-        'API completa con documentación',
-        'White label personalizable',
+        'White label personalizable (tu branding)',
         'Soporte 24/7 prioritario',
-        'Integración personalizada',
-        'Dashboard de administración',
-        'Múltiples usuarios (hasta 10)',
-        'Archivo: 500GB',
+        'Configuración personalizada de herramientas',
+        'Dashboard de administración avanzado',
+        'Múltiples usuarios (hasta 10 cuentas)',
+        'Archivo: 500GB de almacenamiento',
         'Derechos comerciales extendidos',
-        'SLA garantizado 99.9%'
+        'SLA garantizado 99.9% uptime',
+        'Onboarding personalizado',
+        'Consultoría de implementación'
       ],
       limits: {
         generations_month: -1, // Ilimitado
@@ -130,7 +131,8 @@ const SubscriptionPlans = ({ currentUser, onPlanSelect }) => {
         voice_clones: -1,     // Ilimitado
         storage_gb: 500,
         models: ['all', 'early_access'],
-        simultaneous: -1
+        simultaneous: -1,
+        users: 10
       },
       popular: false
     }

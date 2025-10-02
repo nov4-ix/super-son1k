@@ -191,11 +191,11 @@ class UserAccountsSystem:
                 'permissions': ['create', 'clone', 'community', 'nexus', 'analytics']
             },
             'enterprise': {
-                'monthly_fee': 99.99,
+                'monthly_fee': 199.99,
                 'expires_days': 365,
-                'features': ['unlimited_generation', 'all_tools', 'priority_support', 'custom_training', 'white_label', 'api_access'],
-                'limits': {'tracks_per_month': -1, 'track_duration': -1, 'voice_clones': -1},  # Ilimitado
-                'permissions': ['create', 'clone', 'analyze', 'export', 'train', 'api', 'white_label']
+                'features': ['unlimited_generation', 'all_tools', 'priority_support', 'custom_training', 'white_label', 'multi_user'],
+                'limits': {'tracks_per_month': -1, 'track_duration': -1, 'voice_clones': -1, 'users': 10},  # Ilimitado
+                'permissions': ['create', 'clone', 'analyze', 'export', 'train', 'white_label', 'multi_user']
             }
         }
         

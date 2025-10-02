@@ -586,7 +586,7 @@ def setup_stripe_products():
         },
         {
             'name': 'Son1kVers3 Enterprise',
-            'description': 'Plan Enterprise con 10,000 créditos mensuales',
+            'description': 'Plan Enterprise para estudios - 10,000 créditos mensuales, white label, múltiples usuarios',
             'prices': [
                 {'amount': 19999, 'interval': 'month', 'lookup_key': 'price_enterprise_monthly'},
                 {'amount': 199999, 'interval': 'year', 'lookup_key': 'price_enterprise_yearly'}

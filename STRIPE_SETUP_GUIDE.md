@@ -55,6 +55,7 @@ python3 stripe_integration.py
 #### **Producto 3: Son1kVers3 Enterprise**
 - **Precio mensual:** $199.99 USD (lookup_key: `price_enterprise_monthly`)
 - **Precio anual:** $1,999.99 USD (lookup_key: `price_enterprise_yearly`)
+- **Nota:** SIN API - Solo acceso a plataforma con características enterprise
 
 #### **Producto 4: Starter Package**
 - **Pago único:** $99.99 USD (lookup_key: `price_starter_package`)
