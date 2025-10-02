@@ -1,51 +1,43 @@
 /**
- * 🎵 Son1kVers3 - APLICACIÓN PRINCIPAL SIMPLIFICADA
- * FORZAR que funcione correctamente - SIN CONFUSIONES
+ * 🎵 Son1kVers3 - VERSIÓN NUCLEAR FINAL
+ * FORZAR Landing Page - SIN NOVA POST PILOT
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-
-// Importar SOLO lo esencial
 import LandingPage from './LandingPage';
 import ClassicInterface from './components/ClassicInterface';
 import NexusInterface from './components/NexusInterface';
 
 function App() {
-  // ESTADO SIMPLE - SIN CONFUSIONES
-  const [currentMode, setCurrentMode] = useState('landing'); // SIEMPRE empezar en landing
+  const [currentMode, setCurrentMode] = React.useState('landing');
 
-  // Detectar modo basado en URL
   React.useEffect(() => {
     const path = window.location.pathname;
+    console.log('🔍 Ruta actual:', path);
+    
     if (path === '/classic') {
       setCurrentMode('classic');
     } else if (path === '/nexus') {
       setCurrentMode('nexus');
     } else {
-      setCurrentMode('landing'); // SIEMPRE landing por defecto
+      setCurrentMode('landing');
     }
   }, []);
 
-  // RENDERIZADO SIMPLE - SIN CONFUSIONES
-  const renderApp = () => {
-    switch (currentMode) {
-      case 'landing':
-        return <LandingPage />;
-      case 'classic':
-        return <ClassicInterface />;
-      case 'nexus':
-        return <NexusInterface />;
-      default:
-        return <LandingPage />; // SIEMPRE landing por defecto
-    }
-  };
+  console.log('🎯 Modo actual:', currentMode);
 
-  return (
-    <div className="app">
-      {renderApp()}
-    </div>
-  );
+  // RENDERIZADO FORZADO
+  if (currentMode === 'classic') {
+    return <ClassicInterface />;
+  }
+  
+  if (currentMode === 'nexus') {
+    return <NexusInterface />;
+  }
+  
+  // POR DEFECTO SIEMPRE LANDING
+  return <LandingPage />;
 }
 
 export default App;
