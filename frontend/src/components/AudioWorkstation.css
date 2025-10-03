@@ -1,0 +1,542 @@
+/**
+ * 🎛️ Audio Workstation Styles
+ */
+
+/* Mixer */
+.audio-mixer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #e0e0e0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.mixer-header,
+.sequencer-header,
+.piano-header,
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.mixer-header h2,
+.sequencer-header h2,
+.piano-header h2,
+.library-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mixer-controls,
+.sequencer-controls,
+.piano-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.mixer-controls button,
+.sequencer-controls button,
+.piano-controls button,
+.library-filters button {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mixer-controls button:hover,
+.sequencer-controls button:hover,
+.piano-controls button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.mixer-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.mixer-channel {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mixer-channel:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channel-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+}
+
+.channel-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-mute,
+.btn-solo {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-mute.active {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.btn-solo.active {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+.channel-fader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 200px;
+  position: relative;
+}
+
+.fader-track {
+  width: 40px;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fader-level {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 20px;
+  transition: height 0.1s ease;
+}
+
+.fader-input {
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fader-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: #aaa;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.channel-pan {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.channel-pan label {
+  font-size: 11px;
+  color: #666;
+  font-weight: 600;
+}
+
+.channel-pan input {
+  width: 100%;
+}
+
+.channel-pan span {
+  font-size: 10px;
+  color: #aaa;
+  text-align: center;
+  font-weight: 700;
+}
+
+.channel-meter {
+  height: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meter-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, #10b981, #f59e0b, #ef4444);
+  transition: height 0.1s ease;
+}
+
+/* Beat Sequencer */
+.beat-sequencer {
+  background: linear-gradient(135deg, #2d1b69 0%, #1a1a2e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #e0e0e0;
+  margin-top: 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.sequencer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sequencer-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.instrument-label {
+  width: 80px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #aaa;
+}
+
+.steps-container {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.step:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.step.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.step.current {
+  border-color: #f59e0b;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Piano Roll */
+.piano-roll {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #e0e0e0;
+  margin-top: 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.piano-keyboard {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.octave {
+  display: flex;
+  position: relative;
+}
+
+.piano-key {
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+.piano-key.white {
+  width: 50px;
+  height: 200px;
+  background: linear-gradient(to bottom, #fff, #f0f0f0);
+  border: 1px solid #333;
+  border-radius: 0 0 8px 8px;
+  z-index: 1;
+}
+
+.piano-key.black {
+  width: 35px;
+  height: 130px;
+  background: linear-gradient(to bottom, #333, #000);
+  border: 1px solid #000;
+  border-radius: 0 0 6px 6px;
+  position: absolute;
+  z-index: 2;
+  margin-left: -17.5px;
+}
+
+.piano-key.white:nth-child(2) { left: 35px; }
+.piano-key.white:nth-child(4) { left: 70px; }
+.piano-key.white:nth-child(7) { left: 140px; }
+.piano-key.white:nth-child(9) { left: 175px; }
+.piano-key.white:nth-child(11) { left: 210px; }
+
+.piano-key.white:hover {
+  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+}
+
+.piano-key.black:hover {
+  background: linear-gradient(to bottom, #555, #222);
+}
+
+.piano-key.active {
+  transform: translateY(2px);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+}
+
+.piano-key.white.active {
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.piano-key.black.active {
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.piano-key span {
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+}
+
+.piano-key.black span {
+  color: #aaa;
+}
+
+/* Sample Library */
+.sample-library {
+  background: linear-gradient(135deg, #16213e 0%, #0f0c29 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #e0e0e0;
+  margin-top: 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.library-header input {
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  width: 300px;
+}
+
+.library-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.library-filters button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+.sample-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sample-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sample-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.sample-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.sample-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.sample-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.sample-icon {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sample-info {
+  flex: 1;
+}
+
+.sample-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.sample-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #666;
+}
+
+.sample-meta span {
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.sample-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sample-actions button {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sample-actions button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .mixer-channels {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .piano-keyboard {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mixer-channels {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .steps-container {
+    overflow-x: auto;
+  }
+
+  .library-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .library-header input {
+    width: 100%;
+  }
+}
