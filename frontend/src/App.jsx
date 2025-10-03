@@ -21,6 +21,16 @@ import TheCreator from './components/TheCreator';
 import SSLChannelStrip from './components/SSLChannelStrip';
 import SubscriptionPlans from './components/SubscriptionPlans';
 
+// Importar nuevos componentes
+import EnhancedDashboard from './components/EnhancedDashboard';
+import AILyricsEditor from './components/AILyricsEditor';
+import AICoverGenerator from './components/AICoverGenerator';
+import NotificationSystem from './components/NotificationSystem';
+import LiveChat from './components/LiveChat';
+import { ThemeProvider, ThemeToggle, ThemeCustomizer } from './components/ThemeSystem';
+import { ParticleBackground, FloatingNotes } from './components/ParticleEffects';
+import { AudioMixer, BeatSequencer, PianoRoll, SampleLibrary } from './components/AudioWorkstation';
+
 function App() {
   const [currentMode, setCurrentMode] = useState('classic'); // DIRECTO AL CLÁSICO
   const [currentTool, setCurrentTool] = useState('home');
@@ -61,6 +71,21 @@ function App() {
         return <SubscriptionPlans />;
       case 'nexus':
         return <NexusInterface />;
+      // Nuevos componentes
+      case 'dashboard':
+        return <EnhancedDashboard />;
+      case 'lyrics':
+        return <AILyricsEditor />;
+      case 'covers':
+        return <AICoverGenerator />;
+      case 'mixer':
+        return <AudioMixer />;
+      case 'sequencer':
+        return <BeatSequencer />;
+      case 'piano':
+        return <PianoRoll />;
+      case 'samples':
+        return <SampleLibrary />;
       default:
         return <ClassicInterface />;
     }
@@ -77,9 +102,20 @@ function App() {
 
   // Modo clásico con herramientas
   return (
-    <div className="app enhanced-version">
-      {/* Header de navegación mejorado */}
-      <header className="app-header-enhanced">
+    <ThemeProvider>
+      <div className="app enhanced-version">
+        {/* Efectos de fondo */}
+        <ParticleBackground density={30} />
+        <FloatingNotes />
+
+        {/* Componentes flotantes globales */}
+        <ThemeToggle />
+        <ThemeCustomizer />
+        <NotificationSystem />
+        <LiveChat />
+
+        {/* Header de navegación mejorado */}
+        <header className="app-header-enhanced">
         <div className="header-content">
           <div className="logo-section">
             <h1 className="app-title">SON1KVERS3</h1>
@@ -134,6 +170,48 @@ function App() {
               onClick={() => setCurrentTool('planes')}
             >
               💳 Planes
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'dashboard' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('dashboard')}
+            >
+              📊 Dashboard
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'lyrics' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('lyrics')}
+            >
+              ✍️ Letras IA
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'covers' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('covers')}
+            >
+              🎨 Covers IA
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'mixer' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('mixer')}
+            >
+              🎛️ Mixer
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'sequencer' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('sequencer')}
+            >
+              🥁 Beats
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'piano' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('piano')}
+            >
+              🎹 Piano
+            </button>
+            <button 
+              className={`tool-btn ${currentTool === 'samples' ? 'active' : ''}`}
+              onClick={() => setCurrentTool('samples')}
+            >
+              📚 Samples
             </button>
             <button 
               className="tool-btn nexus-btn"
@@ -232,7 +310,8 @@ function App() {
           min-height: calc(100vh - 80px);
         }
       `}</style>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 
