@@ -1,0 +1,148 @@
+/**
+ * ⚡ Saturator Pro Styles
+ */
+
+.saturator-pro {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%);
+  border-radius: 8px;
+  padding: 20px;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+}
+
+.saturator-main {
+  margin-top: 24px;
+}
+
+/* Tipos de Saturación */
+.saturation-types {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.type-btn {
+  padding: 16px;
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.type-btn:hover {
+  background: #242424;
+  transform: translateY(-2px);
+}
+
+.type-btn.active {
+  background: #2a2a2a;
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.type-icon {
+  font-size: 32px;
+}
+
+.type-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+/* Visualizador de Forma de Onda */
+.waveform-display {
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #333;
+}
+
+.waveform-display svg {
+  display: block;
+}
+
+.waveform-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #666;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Controles */
+.saturator-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Medidor de Armónicos */
+.harmonics-meter {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.meter-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.harmonics-bars {
+  display: flex;
+  gap: 8px;
+  height: 100px;
+  align-items: flex-end;
+}
+
+.harmonic-bar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.harmonic-bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.harmonic-label {
+  font-size: 10px;
+  color: #666;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .saturation-types {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .saturator-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .saturator-controls {
+    grid-template-columns: 1fr;
+  }
+}

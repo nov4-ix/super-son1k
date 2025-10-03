@@ -1,0 +1,652 @@
+/**
+ * 🎨 UX Enhancement System Styles
+ * Estilos avanzados para el sistema de mejora de experiencia de usuario
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Variables CSS para el sistema UX */
+:root {
+  --ux-primary-color: #6366f1;
+  --ux-secondary-color: #8b5cf6;
+  --ux-success-color: #10b981;
+  --ux-warning-color: #f59e0b;
+  --ux-error-color: #ef4444;
+
+  --ux-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ux-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ux-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  --ux-radius-sm: 0.375rem;
+  --ux-radius-md: 0.5rem;
+  --ux-radius-lg: 0.75rem;
+
+  --ux-transition-fast: 150ms ease-in-out;
+  --ux-transition-normal: 300ms ease-in-out;
+  --ux-transition-slow: 500ms ease-in-out;
+}
+
+/* Contenedor principal del sistema UX */
+.ux-enhancement-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: all var(--ux-transition-normal);
+}
+
+/* Modo tutorial activo */
+.ux-enhancement-container.tutorial-mode {
+  pointer-events: none;
+}
+
+.ux-enhancement-container.tutorial-mode .enhanced-content {
+  pointer-events: auto;
+  filter: blur(2px) brightness(0.7);
+}
+
+/* Drag & Drop visual feedback */
+.ux-enhancement-container.drag-over {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border: 2px dashed var(--ux-primary-color);
+  border-radius: var(--ux-radius-lg);
+  animation: dragPulse 2s ease-in-out infinite;
+}
+
+@keyframes dragPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.8;
+  }
+}
+
+/* Botón de ayuda */
+.help-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ux-primary-color);
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--ux-shadow-lg);
+  transition: all var(--ux-transition-fast);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-button:hover {
+  transform: scale(1.1);
+  background: var(--ux-secondary-color);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Indicador de archivos arrastrados */
+.dropped-files-preview {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: var(--ux-radius-lg);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.file-preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+  max-width: 120px;
+}
+
+.file-preview-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ux-radius-sm);
+  object-fit: cover;
+}
+
+.file-preview-item span {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.file-preview-item button {
+  background: var(--ux-error-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tutorial Overlay */
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--ux-transition-normal) ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tutorial-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.tutorial-content {
+  position: relative;
+  background: white;
+  border-radius: var(--ux-radius-lg);
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--ux-shadow-lg);
+  animation: slideIn var(--ux-transition-normal) ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.tutorial-header {
+  margin-bottom: 24px;
+}
+
+.tutorial-header h3 {
+  margin: 0 0 16px 0;
+  color: var(--ux-primary-color);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.tutorial-progress {
+  width: 100%;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ux-primary-color), var(--ux-secondary-color));
+  border-radius: 2px;
+  transition: width var(--ux-transition-normal);
+}
+
+.tutorial-body {
+  margin-bottom: 32px;
+}
+
+.tutorial-body p {
+  margin: 0;
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tutorial-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Botones del tutorial */
+.btn-primary, .btn-secondary, .btn-success, .btn-ghost {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--ux-radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--ux-transition-fast);
+  min-width: 100px;
+}
+
+.btn-primary {
+  background: var(--ux-primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: var(--ux-shadow-md);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background: var(--ux-success-color);
+  color: white;
+}
+
+.btn-success:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--ux-shadow-md);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #6b7280;
+  text-decoration: underline;
+}
+
+.btn-ghost:hover {
+  color: var(--ux-primary-color);
+}
+
+/* Modal de shortcuts */
+.shortcuts-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: fadeIn var(--ux-transition-normal);
+}
+
+.shortcuts-modal {
+  background: white;
+  border-radius: var(--ux-radius-lg);
+  padding: 32px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--ux-shadow-lg);
+  animation: slideIn var(--ux-transition-normal) ease-out;
+}
+
+.shortcuts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.shortcuts-header h3 {
+  margin: 0;
+  color: var(--ux-primary-color);
+  font-size: 24px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--ux-transition-fast);
+}
+
+.close-button:hover {
+  background: #f3f4f6;
+  color: var(--ux-error-color);
+}
+
+.shortcuts-content {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: var(--ux-radius-md);
+  border: 1px solid #e5e7eb;
+}
+
+.shortcut-key {
+  background: var(--ux-primary-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: var(--ux-radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.shortcut-action {
+  color: #374151;
+  font-size: 14px;
+  flex: 1;
+}
+
+/* Indicador de teclas presionadas */
+.pressed-keys-indicator {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 1000;
+}
+
+.key-indicator {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: var(--ux-radius-sm);
+  font-size: 12px;
+  animation: keyPress 0.3s ease-out;
+}
+
+@keyframes keyPress {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Elementos destacados en tutorial */
+.tutorial-highlight {
+  position: relative;
+  z-index: 1500;
+  animation: highlightPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 4px var(--ux-primary-color), 0 0 0 8px rgba(99, 102, 241, 0.3);
+  border-radius: var(--ux-radius-sm);
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px var(--ux-primary-color), 0 0 0 8px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--ux-secondary-color), 0 0 0 12px rgba(139, 92, 246, 0.2);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tutorial-content {
+    padding: 24px;
+    margin: 16px;
+  }
+
+  .tutorial-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary, .btn-secondary, .btn-success, .btn-ghost {
+    width: 100%;
+  }
+
+  .dropped-files-preview {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .file-preview-item {
+    flex-direction: row;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .shortcuts-modal {
+    padding: 24px;
+    margin: 16px;
+  }
+
+  .shortcuts-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Posicionamiento específico del tutorial */
+.position-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.position-top {
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 10vh;
+}
+
+.position-bottom {
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 10vh;
+}
+
+.position-left {
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 5vw;
+}
+
+.position-right {
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 5vw;
+}
+
+/* Animaciones adicionales */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Estados de carga y error */
+.ux-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.ux-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.ux-error {
+  border-color: var(--ux-error-color);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.ux-success {
+  border-color: var(--ux-success-color);
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Accesibilidad mejorada */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Soporte para tema oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ux-bg-color: #1f2937;
+    --ux-text-color: #f9fafb;
+    --ux-border-color: #374151;
+  }
+
+  .tutorial-content {
+    background: var(--ux-bg-color);
+    color: var(--ux-text-color);
+  }
+
+  .tutorial-body p {
+    color: #d1d5db;
+  }
+
+  .btn-secondary {
+    background: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+  }
+
+  .btn-secondary:hover {
+    background: #4b5563;
+  }
+
+  .shortcuts-modal {
+    background: var(--ux-bg-color);
+    color: var(--ux-text-color);
+  }
+
+  .shortcut-item {
+    background: #374151;
+    border-color: #4b5563;
+  }
+
+  .shortcut-action {
+    color: #d1d5db;
+  }
+}

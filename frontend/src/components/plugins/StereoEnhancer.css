@@ -1,0 +1,383 @@
+/**
+ * 🎧 Stereo Enhancer Styles
+ */
+
+.stereo-enhancer {
+  background: linear-gradient(180deg, #1a1a2a 0%, #0a0a1a 100%);
+  border-radius: 8px;
+  padding: 20px;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Plugin Header */
+.plugin-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #333;
+}
+
+.plugin-branding h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #4FACFE, #00F2FE);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.plugin-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.plugin-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+  font-weight: 600;
+}
+
+.mode-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-btn {
+  padding: 8px 16px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  background: #242424;
+  border-color: #444;
+}
+
+.mode-btn.active {
+  background: #2a2a2a;
+  border-color: #4FACFE;
+  color: #4FACFE;
+  box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+}
+
+.stereo-main {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+/* Visualizador de Campo Estéreo */
+.stereo-visualizer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stereo-field {
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stereo-field svg {
+  display: block;
+}
+
+.correlation-meter {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.correlation-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #FF006E 0%, #888 50%, #4FACFE 100%);
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.correlation-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #666;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.correlation-indicator {
+  position: absolute;
+  top: -4px;
+  width: 4px;
+  height: 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  transition: left 0.2s ease;
+  transform: translateX(-50%);
+}
+
+.phase-meter {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.phase-display {
+  margin-top: 8px;
+}
+
+.phase-indicator {
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.phase-indicator.ok {
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  border: 1px solid #00ff00;
+}
+
+.phase-indicator.warning {
+  background: rgba(255, 165, 0, 0.1);
+  color: #ffa500;
+  border: 1px solid #ffa500;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Controles */
+.stereo-controls {
+  flex: 1.5;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-content: start;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-group label {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.knob-container {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.knob {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 3px solid #4FACFE;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(79, 172, 254, 0.3);
+  transition: all 0.3s ease;
+}
+
+.knob:hover {
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(79, 172, 254, 0.5);
+  transform: scale(1.05);
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 3px;
+  height: 25px;
+  background: #4FACFE;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+  box-shadow: 0 0 8px rgba(79, 172, 254, 0.6);
+}
+
+.knob-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.param-value {
+  font-size: 14px;
+  color: #4FACFE;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+}
+
+.knob.large {
+  width: 90px;
+  height: 90px;
+}
+
+.param-value.large {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.meter-label {
+  font-size: 11px;
+  color: #666;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Opciones */
+.stereo-options {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid #1a1a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phase-btn {
+  padding: 12px 24px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 12px;
+  color: #888;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phase-btn:hover {
+  background: #242424;
+  border-color: #444;
+}
+
+.phase-btn.active {
+  background: #2a2a2a;
+  border-color: #ffa500;
+  color: #ffa500;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
+}
+
+.phase-btn span:first-child {
+  font-size: 20px;
+}
+
+.presets {
+  display: flex;
+  gap: 8px;
+}
+
+.presets button {
+  padding: 8px 16px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.presets button:hover {
+  background: #242424;
+  border-color: #4FACFE;
+  color: #4FACFE;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .stereo-main {
+    flex-direction: column;
+  }
+
+  .stereo-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stereo-options {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .presets {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .stereo-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .presets {
+    flex-wrap: wrap;
+  }
+}

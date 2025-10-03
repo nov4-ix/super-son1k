@@ -8,18 +8,22 @@ Generador de letras con recursos literarios y Qwen
 import asyncio
 import json
 import requests
-import random
 from typing import Dict, List, Optional
 import logging
+from performance_optimizer import performance_optimizer, optimize_ai_function, parallel_process
 
 logger = logging.getLogger(__name__)
 
 class TheCreatorService:
-    """Servicio completo de The Creator"""
+    """Servicio principal de The Creator"""
     
     def __init__(self):
+        super().__init__()  # Call parent constructor if exists
         self.qwen_api_url = "http://localhost:11434/api/generate"
         self.suno_api_url = "https://api.suno.ai/generate"
+        
+        # Initialize performance optimizer
+        self.perf_optimizer = performance_optimizer
         
         # Recursos literarios y sus descripciones
         self.literary_resources = {
@@ -296,6 +300,7 @@ class TheCreatorService:
         
         return prompt
     
+    @performance_optimizer.cache_ai_result('ai_results')
     async def _call_qwen_api(self, prompt: str) -> Optional[str]:
         """Llamar a la API de Qwen"""
         try:
@@ -349,6 +354,7 @@ class TheCreatorService:
             # Fallback básico
             return self._basic_spanish_to_english(spanish_text)
     
+    @performance_optimizer.cache_ai_result('ai_results')
     async def _generate_with_suno(self, prompt: str, config: Dict) -> Dict:
         """Generar música con Suno API"""
         try:

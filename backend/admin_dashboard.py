@@ -11,7 +11,7 @@ router = APIRouter(prefix="/api/admin", tags=["admin"])
 @router.get("/status")
 async def get_admin_status():
     """Estado del panel de administración"""
-        return {
+    return {
         "status": "active",
         "admin_panel": "ready",
         "security": "enabled"

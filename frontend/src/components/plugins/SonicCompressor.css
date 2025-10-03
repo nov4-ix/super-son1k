@@ -1,0 +1,304 @@
+/**
+ * 🔊 Sonic Compressor Styles
+ * Estilo CLA-76 profesional
+ */
+
+.sonic-compressor {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%);
+  border-radius: 8px;
+  padding: 20px;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+}
+
+.plugin-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #333;
+}
+
+.plugin-branding h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #4FACFE, #00F2FE);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.plugin-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preset-selector {
+  padding: 8px 16px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.comp-main-panel {
+  display: flex;
+  gap: 32px;
+}
+
+/* VU Meters */
+.comp-meters {
+  display: flex;
+  gap: 24px;
+}
+
+.meter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meter-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.vu-meter {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+  border-radius: 50%;
+  border: 3px solid #333;
+  position: relative;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.meter-scale {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scale-mark {
+  position: absolute;
+  font-size: 9px;
+  color: #666;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.scale-mark:nth-child(1) { transform: rotate(-90deg) translateY(-45px) rotate(90deg); }
+.scale-mark:nth-child(2) { transform: rotate(-60deg) translateY(-45px) rotate(60deg); }
+.scale-mark:nth-child(3) { transform: rotate(-30deg) translateY(-45px) rotate(30deg); }
+.scale-mark:nth-child(4) { transform: rotate(0deg) translateY(-45px); }
+.scale-mark:nth-child(5) { transform: rotate(30deg) translateY(-45px) rotate(-30deg); }
+.scale-mark:nth-child(6) { transform: rotate(60deg) translateY(-45px) rotate(-60deg); }
+.scale-mark:nth-child(7) { transform: rotate(90deg) translateY(-45px) rotate(-90deg); }
+
+.meter-needle {
+  position: absolute;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, #4FACFE 0%, transparent 100%);
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-90deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px #4FACFE;
+}
+
+.gr-meter .meter-needle {
+  background: linear-gradient(180deg, #FF006E 0%, transparent 100%);
+  box-shadow: 0 0 10px #FF006E;
+}
+
+/* Controls */
+.comp-controls {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.knob-container {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 8px;
+}
+
+.knob {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, #3a3a3a, #1a1a1a);
+  border-radius: 50%;
+  border: 3px solid #444;
+  position: relative;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transition: transform 0.1s ease;
+}
+
+.knob-indicator {
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(180deg, #4FACFE, #00F2FE);
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px #4FACFE;
+}
+
+.knob-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.param-value {
+  font-size: 12px;
+  color: #4FACFE;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Ratio Selector */
+.ratio-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ratio-btn {
+  padding: 8px 16px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.ratio-btn:hover {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+.ratio-btn.active {
+  background: linear-gradient(135deg, #4FACFE, #00F2FE);
+  border-color: #4FACFE;
+  color: #000;
+  box-shadow: 0 0 12px rgba(79, 172, 254, 0.4);
+}
+
+/* Bottom Section */
+.comp-bottom {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 2px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mode-selector label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-btn {
+  padding: 8px 16px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, #8338EC, #FF006E);
+  border-color: #8338EC;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(131, 56, 236, 0.4);
+}
+
+.plugin-info {
+  font-size: 10px;
+  color: #666;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comp-main-panel {
+    flex-direction: column;
+  }
+
+  .comp-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .comp-meters {
+    justify-content: center;
+  }
+}

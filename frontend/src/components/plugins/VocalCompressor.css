@@ -1,0 +1,146 @@
+/**
+ * 🎤 Vocal Compressor Styles
+ */
+
+.vocal-compressor {
+  background: linear-gradient(180deg, #2a1a2a 0%, #1a0a1a 100%);
+  border-radius: 8px;
+  padding: 20px;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+}
+
+.vocal-comp-main {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+/* Visualizador */
+.compression-visualizer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.waveform-container {
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.waveform-container svg {
+  display: block;
+}
+
+.gr-meter-display {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.meter-bar-horizontal {
+  width: 100%;
+  height: 24px;
+  background: #0a0a0a;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 8px 0;
+  border: 1px solid #333;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4FACFE 0%, #FF006E 100%);
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px #FF006E;
+}
+
+.meter-value {
+  text-align: center;
+  font-size: 14px;
+  color: #FF006E;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Controles */
+.vocal-comp-controls {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Opciones */
+.vocal-comp-options {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid #2a1a2a;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.option-slider {
+  width: 200px;
+  height: 4px;
+  background: #2a1a2a;
+  border-radius: 2px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.option-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF006E, #8338EC);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(255, 0, 110, 0.4);
+}
+
+.option-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF006E, #8338EC);
+  cursor: pointer;
+  border: none;
+}
+
+.option-value {
+  font-size: 12px;
+  color: #FF006E;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+  margin-left: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .vocal-comp-main {
+    flex-direction: column;
+  }
+
+  .vocal-comp-controls {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vocal-comp-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vocal-comp-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

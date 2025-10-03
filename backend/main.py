@@ -60,6 +60,10 @@ from clone_station_endpoints import router as clone_station_router
 from stripe_integration import router as stripe_router
 from ghost_studio_endpoints import router as ghost_studio_router
 from the_creator_endpoints import router as the_creator_router
+from ux_enhancement_endpoints import router as ux_router
+from advanced_features_endpoints import router as advanced_router
+from integrations_endpoints import router as integrations_router
+from monitoring_endpoints import router as monitoring_router
 
 app.include_router(waves_router)
 app.include_router(store_router)
@@ -72,6 +76,10 @@ app.include_router(clone_station_router)
 app.include_router(stripe_router)
 app.include_router(ghost_studio_router)
 app.include_router(the_creator_router)
+app.include_router(ux_router)
+app.include_router(advanced_router)
+app.include_router(integrations_router)
+app.include_router(monitoring_router)
 
 # Importar el procesador del CODEX
 from codex_processor import init_codex_processor
@@ -108,7 +116,13 @@ async def root():
             "voice_cloning": "active",
             "nova_post_pilot": "active",
             "analytics": "active",
-            "stealth_system": "active"
+            "stealth_system": "active",
+            "ux_enhancement": "active",
+            "collaboration": "active",
+            "versioning": "active",
+            "marketplace": "active",
+            "integrations": "active",
+            "monitoring": "active"
         }
     }
 
