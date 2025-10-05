@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "name": "son1kvers3-nexus",
+  "name": "son1kvers3-enhanced",
   "builds": [
     {
-      "src": "frontend/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
@@ -16,17 +16,25 @@
       "dest": "/static/$1"
     },
     {
+      "src": "/classic",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/nexus",
+      "dest": "/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
   "env": {
-    "REACT_APP_API_BASE_URL": "https://your-backend-url.vercel.app",
     "NODE_ENV": "production"
   },
   "build": {
     "env": {
-      "GENERATE_SOURCEMAP": "false"
+      "GENERATE_SOURCEMAP": "false",
+      "CI": "false"
     }
   }
 }
