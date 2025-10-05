@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "son1kvers3-frontend",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/build/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "REACT_APP_API_URL": "@react_app_api_url",
+    "REACT_APP_ENVIRONMENT": "production",
+    "REACT_APP_VERCEL": "true"
+  }
+}
