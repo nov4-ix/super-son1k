@@ -48,5 +48,8 @@ passlib[bcrypt]==1.7.4
 pyjwt==2.10.1
 pycryptodome==3.23.0
 
+# Stripe Payment Processing
+stripe==7.0.0
+
 # Development
 pytest==7.4.3

@@ -56,6 +56,8 @@ from pixel_assistant_endpoints import router as pixel_router
 from content_moderation_endpoints import router as moderation_router
 from admin_dashboard import router as admin_router
 from auth_endpoints import router as auth_router
+from stripe_integration import router as stripe_router
+from admin_dashboard_external import router as admin_external_router
 
 app.include_router(waves_router)
 app.include_router(store_router)
@@ -64,6 +66,8 @@ app.include_router(pixel_router)
 app.include_router(moderation_router)
 app.include_router(admin_router)
 app.include_router(auth_router)
+app.include_router(stripe_router)
+app.include_router(admin_external_router)
 
 # Importar el procesador del CODEX
 from codex_processor import init_codex_processor
