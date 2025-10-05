@@ -47,10 +47,12 @@ Pillow==10.1.0
 python-magic==0.4.27
 ffmpeg-python==0.2.0
 
-# Social Media APIs
+# Social Media APIs & Scheduling
 tweepy==4.14.0
 instagram-basic-display==1.0.0
 youtube-api==1.0.0
+schedule==1.2.2
+openai>=1.0.0
 
 # Analytics
 pandas==2.1.3
@@ -77,5 +79,9 @@ sentry-sdk[fastapi]==1.38.0
 psutil==5.9.6
 
 # Security
-cryptography==41.0.8
+cryptography==42.0.8
 bcrypt==4.1.2
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pyjwt==2.10.1
+pycryptodome==3.23.0

@@ -34,5 +34,19 @@ numpy==1.24.3
 # File Processing
 Pillow==10.1.0
 
+# Social Media & Scheduling
+aiohttp==3.9.1
+tweepy==4.14.0
+schedule==1.2.2
+
+# AI & ML
+openai>=1.0.0
+
+# Additional Security & Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pyjwt==2.10.1
+pycryptodome==3.23.0
+
 # Development
 pytest==7.4.3
