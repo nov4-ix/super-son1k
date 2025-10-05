@@ -1,0 +1,649 @@
+/**
+ * 🔘 Unified Buttons - Botones Unificados y Proporcionales
+ * Asegura que todos los botones tengan proporciones consistentes y estética enterprise
+ */
+
+/* ===== BOTONES BASE UNIFICADOS ===== */
+button,
+.btn,
+.button,
+.pixel-btn,
+.led-button-arturia,
+.generate-btn,
+.create-btn,
+.submit-btn,
+.action-btn,
+.control-btn,
+.close-btn,
+.minimize-btn,
+.expand-btn,
+.send-btn,
+.export-btn,
+.generate-music-btn,
+.generate-lyrics-btn,
+.prompt-btn,
+.random-btn,
+.style-tag,
+.suggestion-btn,
+.topic-tag,
+.resource-tag,
+.export-btn,
+.random-theme-btn,
+.generate-prompt-btn,
+.random-prompt-btn,
+.improve-lyrics-btn,
+.generate-lyrics-btn,
+.random-theme-btn,
+.tab,
+.mode-btn,
+.advanced-btn,
+.toggle-slider,
+.slider-btn {
+  /* Dimensiones base */
+  min-height: 40px !important;
+  min-width: 80px !important;
+  padding: 12px 20px !important;
+  
+  /* Tipografía */
+  font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  letter-spacing: 0.3px !important;
+  
+  /* Estilo visual */
+  border: 2px solid transparent !important;
+  border-radius: 8px !important;
+  background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%) !important;
+  color: #ffffff !important;
+  
+  /* Interactividad */
+  cursor: pointer !important;
+  user-select: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  /* Layout */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  
+  /* Efectos */
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ===== ESTADOS HOVER ===== */
+button:hover,
+.btn:hover,
+.button:hover,
+.pixel-btn:hover,
+.led-button-arturia:hover,
+.generate-btn:hover,
+.create-btn:hover,
+.submit-btn:hover,
+.action-btn:hover,
+.control-btn:hover,
+.send-btn:hover,
+.export-btn:hover,
+.generate-music-btn:hover,
+.generate-lyrics-btn:hover,
+.prompt-btn:hover,
+.random-btn:hover,
+.style-tag:hover,
+.suggestion-btn:hover,
+.topic-tag:hover,
+.resource-tag:hover,
+.export-btn:hover,
+.random-theme-btn:hover,
+.generate-prompt-btn:hover,
+.random-prompt-btn:hover,
+.improve-lyrics-btn:hover,
+.generate-lyrics-btn:hover,
+.random-theme-btn:hover,
+.tab:hover,
+.mode-btn:hover,
+.advanced-btn:hover,
+.slider-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%) !important;
+}
+
+/* ===== ESTADOS ACTIVE ===== */
+button:active,
+.btn:active,
+.button:active,
+.pixel-btn:active,
+.led-button-arturia:active,
+.generate-btn:active,
+.create-btn:active,
+.submit-btn:active,
+.action-btn:active,
+.control-btn:active,
+.send-btn:active,
+.export-btn:active,
+.generate-music-btn:active,
+.generate-lyrics-btn:active,
+.prompt-btn:active,
+.random-btn:active,
+.style-tag:active,
+.suggestion-btn:active,
+.topic-tag:active,
+.resource-tag:active,
+.export-btn:active,
+.random-theme-btn:active,
+.generate-prompt-btn:active,
+.random-prompt-btn:active,
+.improve-lyrics-btn:active,
+.generate-lyrics-btn:active,
+.random-theme-btn:active,
+.tab:active,
+.mode-btn:active,
+.advanced-btn:active,
+.slider-btn:active {
+  transform: translateY(0) !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ===== ESTADOS DISABLED ===== */
+button:disabled,
+.btn:disabled,
+.button:disabled,
+.pixel-btn:disabled,
+.led-button-arturia:disabled,
+.generate-btn:disabled,
+.create-btn:disabled,
+.submit-btn:disabled,
+.action-btn:disabled,
+.control-btn:disabled,
+.send-btn:disabled,
+.export-btn:disabled,
+.generate-music-btn:disabled,
+.generate-lyrics-btn:disabled,
+.prompt-btn:disabled,
+.random-btn:disabled,
+.style-tag:disabled,
+.suggestion-btn:disabled,
+.topic-tag:disabled,
+.resource-tag:disabled,
+.export-btn:disabled,
+.random-theme-btn:disabled,
+.generate-prompt-btn:disabled,
+.random-prompt-btn:disabled,
+.improve-lyrics-btn:disabled,
+.generate-lyrics-btn:disabled,
+.random-theme-btn:disabled,
+.tab:disabled,
+.mode-btn:disabled,
+.advanced-btn:disabled,
+.slider-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  background: #666 !important;
+  box-shadow: none !important;
+}
+
+/* ===== VARIANTES DE COLOR ===== */
+
+/* Botones primarios (azul) */
+.btn-primary,
+.generate-music-btn,
+.generate-lyrics-btn,
+.send-btn,
+.submit-btn {
+  background: linear-gradient(145deg, #00bfff 0%, #0080cc 100%) !important;
+  color: #ffffff !important;
+  border-color: #00bfff !important;
+  box-shadow: 
+    0 4px 8px rgba(0, 191, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-primary:hover,
+.generate-music-btn:hover,
+.generate-lyrics-btn:hover,
+.send-btn:hover,
+.submit-btn:hover {
+  background: linear-gradient(145deg, #00a0cc 0%, #006699 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(0, 191, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Botones secundarios (rosa) */
+.btn-secondary,
+.prompt-btn,
+.improve-lyrics-btn,
+.generate-prompt-btn {
+  background: linear-gradient(145deg, #ff49c3 0%, #cc3a9b 100%) !important;
+  color: #ffffff !important;
+  border-color: #ff49c3 !important;
+  box-shadow: 
+    0 4px 8px rgba(255, 73, 195, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-secondary:hover,
+.prompt-btn:hover,
+.improve-lyrics-btn:hover,
+.generate-prompt-btn:hover {
+  background: linear-gradient(145deg, #e6399b 0%, #b32d7a 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(255, 73, 195, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Botones de éxito (verde) */
+.btn-success,
+.random-theme-btn,
+.random-prompt-btn {
+  background: linear-gradient(145deg, #00ff00 0%, #00cc00 100%) !important;
+  color: #000000 !important;
+  border-color: #00ff00 !important;
+  box-shadow: 
+    0 4px 8px rgba(0, 255, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-success:hover,
+.random-theme-btn:hover,
+.random-prompt-btn:hover {
+  background: linear-gradient(145deg, #00e600 0%, #00b300 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(0, 255, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Botones de advertencia (naranja) */
+.btn-warning,
+.style-tag,
+.suggestion-btn {
+  background: linear-gradient(145deg, #ff6b35 0%, #cc5529 100%) !important;
+  color: #ffffff !important;
+  border-color: #ff6b35 !important;
+  box-shadow: 
+    0 4px 8px rgba(255, 107, 53, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-warning:hover,
+.style-tag:hover,
+.suggestion-btn:hover {
+  background: linear-gradient(145deg, #e55a2b 0%, #b34421 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(255, 107, 53, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Botones de peligro (rojo) */
+.btn-danger,
+.close-btn {
+  background: linear-gradient(145deg, #ff4444 0%, #cc3333 100%) !important;
+  color: #ffffff !important;
+  border-color: #ff4444 !important;
+  box-shadow: 
+    0 4px 8px rgba(255, 68, 68, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-danger:hover,
+.close-btn:hover {
+  background: linear-gradient(145deg, #e63939 0%, #b32d2d 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(255, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Botones de información (cian) */
+.btn-info,
+.topic-tag,
+.resource-tag {
+  background: linear-gradient(145deg, #00ffff 0%, #00cccc 100%) !important;
+  color: #000000 !important;
+  border-color: #00ffff !important;
+  box-shadow: 
+    0 4px 8px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-info:hover,
+.topic-tag:hover,
+.resource-tag:hover {
+  background: linear-gradient(145deg, #00e6e6 0%, #00b3b3 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(0, 255, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ===== TAMAÑOS DE BOTONES ===== */
+
+/* Botones pequeños */
+.btn-sm,
+button.small,
+.pixel-btn.small {
+  min-height: 32px !important;
+  min-width: 60px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+}
+
+/* Botones grandes */
+.btn-lg,
+button.large,
+.generate-music-btn,
+.generate-lyrics-btn {
+  min-height: 48px !important;
+  min-width: 120px !important;
+  padding: 16px 24px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+/* Botones extra grandes */
+.btn-xl,
+button.xlarge {
+  min-height: 56px !important;
+  min-width: 140px !important;
+  padding: 20px 28px !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+/* ===== BOTONES ESPECIALES ===== */
+
+/* Botones de pestañas */
+.tab {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-width: 120px !important;
+  min-height: 48px !important;
+  padding: 12px 20px !important;
+  color: #b9b9c2 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.tab:hover {
+  background: rgba(255, 204, 0, 0.1) !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.tab.active {
+  background: rgba(255, 204, 0, 0.15) !important;
+  color: #ffcc00 !important;
+  border-bottom-color: #ffcc00 !important;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.3) !important;
+}
+
+/* Botones de control */
+.control-btn {
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 8px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  border: 1px solid #00ffff !important;
+  color: #00ffff !important;
+}
+
+.control-btn:hover {
+  background: rgba(0, 255, 255, 0.1) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5) !important;
+}
+
+/* Botones de toggle */
+.toggle-slider {
+  position: relative !important;
+  width: 60px !important;
+  height: 30px !important;
+  background: #333 !important;
+  border-radius: 30px !important;
+  border: 2px solid #555 !important;
+  cursor: pointer !important;
+  transition: 0.4s !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+  padding: 0 !important;
+  min-width: 60px !important;
+  min-height: 30px !important;
+}
+
+.toggle-slider:before {
+  content: "" !important;
+  position: absolute !important;
+  height: 22px !important;
+  width: 22px !important;
+  left: 2px !important;
+  bottom: 2px !important;
+  background: linear-gradient(145deg, #666, #444) !important;
+  border-radius: 50% !important;
+  transition: 0.4s !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+.toggle-slider:checked {
+  background: #00ffff !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4) !important;
+}
+
+.toggle-slider:checked:before {
+  transform: translateX(30px) !important;
+  background: linear-gradient(145deg, #fff, #ccc) !important;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6) !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .button,
+  .pixel-btn,
+  .led-button-arturia,
+  .generate-btn,
+  .create-btn,
+  .submit-btn,
+  .action-btn,
+  .control-btn,
+  .close-btn,
+  .minimize-btn,
+  .expand-btn,
+  .send-btn,
+  .export-btn,
+  .generate-music-btn,
+  .generate-lyrics-btn,
+  .prompt-btn,
+  .random-btn,
+  .style-tag,
+  .suggestion-btn,
+  .topic-tag,
+  .resource-tag,
+  .export-btn,
+  .random-theme-btn,
+  .generate-prompt-btn,
+  .random-prompt-btn,
+  .improve-lyrics-btn,
+  .generate-lyrics-btn,
+  .random-theme-btn,
+  .tab,
+  .mode-btn,
+  .advanced-btn,
+  .slider-btn {
+    min-height: 36px !important;
+    min-width: 70px !important;
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+  
+  .btn-lg,
+  button.large,
+  .generate-music-btn,
+  .generate-lyrics-btn {
+    min-height: 44px !important;
+    min-width: 100px !important;
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+  }
+  
+  .tab {
+    min-width: 100px !important;
+    min-height: 44px !important;
+    padding: 10px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  button,
+  .btn,
+  .button,
+  .pixel-btn,
+  .led-button-arturia,
+  .generate-btn,
+  .create-btn,
+  .submit-btn,
+  .action-btn,
+  .control-btn,
+  .close-btn,
+  .minimize-btn,
+  .expand-btn,
+  .send-btn,
+  .export-btn,
+  .generate-music-btn,
+  .generate-lyrics-btn,
+  .prompt-btn,
+  .random-btn,
+  .style-tag,
+  .suggestion-btn,
+  .topic-tag,
+  .resource-tag,
+  .export-btn,
+  .random-theme-btn,
+  .generate-prompt-btn,
+  .random-prompt-btn,
+  .improve-lyrics-btn,
+  .generate-lyrics-btn,
+  .random-theme-btn,
+  .tab,
+  .mode-btn,
+  .advanced-btn,
+  .slider-btn {
+    min-height: 32px !important;
+    min-width: 60px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  .btn-lg,
+  button.large,
+  .generate-music-btn,
+  .generate-lyrics-btn {
+    min-height: 40px !important;
+    min-width: 80px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+  
+  .tab {
+    min-width: 80px !important;
+    min-height: 40px !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ===== FOCUS STATES PARA ACCESIBILIDAD ===== */
+button:focus-visible,
+.btn:focus-visible,
+.button:focus-visible,
+.pixel-btn:focus-visible,
+.led-button-arturia:focus-visible,
+.generate-btn:focus-visible,
+.create-btn:focus-visible,
+.submit-btn:focus-visible,
+.action-btn:focus-visible,
+.control-btn:focus-visible,
+.close-btn:focus-visible,
+.minimize-btn:focus-visible,
+.expand-btn:focus-visible,
+.send-btn:focus-visible,
+.export-btn:focus-visible,
+.generate-music-btn:focus-visible,
+.generate-lyrics-btn:focus-visible,
+.prompt-btn:focus-visible,
+.random-btn:focus-visible,
+.style-tag:focus-visible,
+.suggestion-btn:focus-visible,
+.topic-tag:focus-visible,
+.resource-tag:focus-visible,
+.export-btn:focus-visible,
+.random-theme-btn:focus-visible,
+.generate-prompt-btn:focus-visible,
+.random-prompt-btn:focus-visible,
+.improve-lyrics-btn:focus-visible,
+.generate-lyrics-btn:focus-visible,
+.random-theme-btn:focus-visible,
+.tab:focus-visible,
+.mode-btn:focus-visible,
+.advanced-btn:focus-visible,
+.slider-btn:focus-visible {
+  outline: 2px solid #00ffff !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== ANIMACIONES SUAVES ===== */
+@keyframes buttonPress {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(1px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+button:active,
+.btn:active,
+.button:active,
+.pixel-btn:active,
+.led-button-arturia:active,
+.generate-btn:active,
+.create-btn:active,
+.submit-btn:active,
+.action-btn:active,
+.control-btn:active,
+.close-btn:active,
+.minimize-btn:active,
+.expand-btn:active,
+.send-btn:active,
+.export-btn:active,
+.generate-music-btn:active,
+.generate-lyrics-btn:active,
+.prompt-btn:active,
+.random-btn:active,
+.style-tag:active,
+.suggestion-btn:active,
+.topic-tag:active,
+.resource-tag:active,
+.export-btn:active,
+.random-theme-btn:active,
+.generate-prompt-btn:active,
+.random-prompt-btn:active,
+.improve-lyrics-btn:active,
+.generate-lyrics-btn:active,
+.random-theme-btn:active,
+.tab:active,
+.mode-btn:active,
+.advanced-btn:active,
+.slider-btn:active {
+  animation: buttonPress 0.1s ease-out !important;
+}
